@@ -1,0 +1,341 @@
+.wrap {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(320px, 1600px))[1];
+      grid-template-columns: repeat(1, minmax(320px, 1600px));
+  background-color: #111;
+}
+
+.wrap .nav {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: .5rem !important;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-grid-columns: min-content 1fr min-content;
+      grid-template-columns: -webkit-min-content 1fr -webkit-min-content;
+      grid-template-columns: min-content 1fr min-content;
+  -ms-grid-rows: min-content;
+      grid-template-rows: -webkit-min-content;
+      grid-template-rows: min-content;
+      grid-template-areas: "logo navigation account";
+}
+
+.wrap .nav.desktop {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+}
+
+.wrap .nav.desktop .logo {
+  position: relative;
+  grid-area: "logo";
+}
+
+.wrap .nav.desktop .logo svg {
+  width: 2.3rem;
+  height: 2.3rem;
+  -webkit-transition: .5s ease-in;
+  transition: .5s ease-in;
+}
+
+.wrap .nav.desktop .logo:hover svg {
+  -webkit-filter: brightness(0) saturate(100%) invert(49%) sepia(69%) saturate(6206%) hue-rotate(350deg) brightness(93%) contrast(87%);
+          filter: brightness(0) saturate(100%) invert(49%) sepia(69%) saturate(6206%) hue-rotate(350deg) brightness(93%) contrast(87%);
+}
+
+.wrap .nav.desktop nav {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-left: 1rem;
+  position: relative;
+  grid-area: "navigation";
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -ms-grid-columns: (min-content)[4];
+      grid-template-columns: repeat(4, -webkit-min-content);
+      grid-template-columns: repeat(4, min-content);
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  grid-auto-flow: row;
+  grid-gap: 1rem;
+}
+
+.wrap .nav.desktop nav a {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: #f4f4f4;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: .15rem;
+  -webkit-transition: .5s ease-in;
+  transition: .5s ease-in;
+}
+
+.wrap .nav.desktop nav a:hover {
+  -webkit-filter: brightness(0) saturate(100%) invert(49%) sepia(69%) saturate(6206%) hue-rotate(350deg) brightness(93%) contrast(87%);
+          filter: brightness(0) saturate(100%) invert(49%) sepia(69%) saturate(6206%) hue-rotate(350deg) brightness(93%) contrast(87%);
+}
+
+.wrap .nav.desktop .account {
+  position: relative;
+  grid-area: "account";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrap .nav.desktop .account .user:hover .sub {
+  display: block;
+  -webkit-animation: opacity .3s 1 ease-in-out;
+          animation: opacity .3s 1 ease-in-out;
+}
+
+.wrap .nav.desktop .account .avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: .5rem !important;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: -webkit-center;
+  border-radius: 100%;
+}
+
+.wrap .nav.desktop .account .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -o-object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.wrap .nav.desktop .account .sub {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 999;
+  background: #111;
+  border-top: 0.1rem solid #414141;
+  border-radius: 0 0 .5rem .5rem;
+  overflow: hidden;
+}
+
+.wrap .nav.desktop .account .sub a {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: .5rem 1rem !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.wrap .nav.desktop .account .sub a svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: .5rem !important;
+  -webkit-filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
+          filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
+}
+
+.wrap .nav.desktop .account .sub a .title {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  color: gray;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: .15rem;
+}
+
+.wrap .nav.desktop .account .sub a .title, .wrap .nav.desktop .account .sub a svg {
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+.wrap .nav.desktop .account .sub a:hover {
+  background-color: #313132;
+}
+
+.wrap .nav.desktop .account .sub a:hover .title {
+  color: #f4f4f4;
+}
+
+.wrap .nav.desktop .account .sub a:hover svg {
+  -webkit-filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(1%) hue-rotate(186deg) brightness(103%) contrast(100%);
+          filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(1%) hue-rotate(186deg) brightness(103%) contrast(100%);
+}
+
+.wrap .nav.desktop .account .sub button:hover {
+  background-color: #313132;
+}
+
+.wrap .nav.desktop .account .theme {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: .5rem !important;
+  margin-right: 1rem !important;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bolder;
+  border: none;
+  outline: none;
+  border-radius: .3rem;
+  border: 0.1rem solid #414141;
+  background: #111;
+}
+
+.wrap .nav.desktop .account .theme option {
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+  font-size: 1rem;
+  font-weight: bolder;
+}
+
+.wrap .nav.desktop .account .singin {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: .5rem !important;
+  position: relative;
+  font-size: 1rem;
+  border: 0.1rem solid #414141;
+  border-radius: .3rem;
+  letter-spacing: .15rem;
+}
+
+.wrap .nav.mobile {
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.wrap .nav.mobile a {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: .3rem !important;
+  position: relative;
+}
+
+.wrap .nav.mobile a svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  -webkit-filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
+          filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
+}
+
+.wrap .nav.bottom {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.wrap .nav.bottom a {
+  padding: .5rem !important;
+}
+
+.wrap .nav.bottom a svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  -webkit-filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
+          filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
+}
+
+@-webkit-keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/*# sourceMappingURL=Nav.module.css.map */

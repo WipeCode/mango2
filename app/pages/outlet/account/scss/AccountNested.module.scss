@@ -1,0 +1,33 @@
+.wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    animation: opacitytransform .3s ease-in-out;
+    // border: 1px solid red;
+
+    &.padding {
+        padding: 1rem !important;
+
+        .person {
+            margin-bottom: .5rem !important;
+            // border: 1px solid red;
+        }
+    }
+}
+
+@keyframes opacitytransform {
+    0% { 
+        transform: translateY(-1rem);
+        opacity: 0; 
+    }
+    100% { 
+        transform: translateY(0);
+        opacity: 1; 
+    }
+}
+
+@media screen and (max-width:450px) {
+    .wrap {
+        padding: 0 !important;
+    }
+}

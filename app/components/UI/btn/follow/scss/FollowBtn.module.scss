@@ -1,0 +1,36 @@
+$blue:#0095F6;
+$orange:#FF4B2B;
+$text_color:#f4f4f4;
+
+.isfollow,
+.notfollow {
+    width: 100%;
+    height: 100%;
+    padding: .5rem 1rem !important;
+    cursor: pointer;
+
+    border: none;
+    outline: none;
+    border-radius: .3rem;
+    border: .1rem solid transparent;
+
+    font-size: 1rem;
+    font-weight: bolder;
+    letter-spacing: .1rem;
+
+    &:active { transform: scale(0.95); }
+    &:focus { outline: none; }
+}
+
+.isfollow {
+    color: $text_color;
+    mix-blend-mode: difference;
+    border-color: gray;
+    background: transparent;
+}
+
+.notfollow {
+    color: $text_color;
+    border-color: $orange;
+    background: $orange;
+}

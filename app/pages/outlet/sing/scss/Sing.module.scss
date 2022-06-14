@@ -1,0 +1,267 @@
+$bg:#0f0f0f;
+$border:rgb(49, 49, 49);
+$shadow:rgba(0, 0, 0, 0.5);
+$link: rgb(161, 159, 159);
+$orange:#FF4B2B;
+$unit_color_text:rgb(75, 75, 75);
+
+$text_color:#f4f4f4;
+$darkBackground:#1a1a1e;
+$lightBackground:#ffffff;
+
+%flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+%flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin wh($width:100%, $height:100%, $position:relative) {
+    width: $width;
+    height: $height;
+    position: $position;
+}
+
+.wrap {
+    @include wh();
+    @extend %flex-row;
+    align-items: center;
+    justify-content: center;
+    animation: opacitytransform .3s ease-in-out;
+    // border: 1px solid blue;
+
+    &.dark {
+        .container { background: $darkBackground; }
+    }
+
+    &.light {
+        .container { background: $lightBackground; }
+    }
+
+    .container {
+        @include wh(fit-content, fit-content);
+        @extend %flex-row;
+
+        overflow: hidden;
+        border-radius: .5rem;
+        animation: opacity .3s 1 ease-in;
+        box-shadow: 0 .2rem .5rem rgba(0, 0, 0, 0.5);
+
+        &.singin { flex-direction: row-reverse }
+
+        p,
+        h1,
+        span { 
+            width: 100%;
+            color: $text_color;
+            mix-blend-mode: difference; 
+            text-align: center;
+            letter-spacing: .1rem;
+        }
+
+        h1 { font-size: 2.5rem; }
+
+        p { 
+            margin: 1rem 0 !important;
+            font-size: 1.3rem; 
+            text-align: center;
+            line-height: 1.5rem;
+        }
+
+        span { 
+            margin-top: .5rem !important;
+            font-size: 1rem; 
+        }
+    
+    
+        .link {
+            display: none;
+            width: 100%;
+            margin-top: 2rem !important;
+            padding-top: 1rem !important;
+
+            color: $link;
+            mix-blend-mode: normal;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: .1rem;
+            border-top: .1rem solid $border;
+        }
+
+        .sing,
+        .form {
+            width: 25rem;
+            position: relative;
+            padding: 2.5rem !important;
+        }
+
+        .sing {
+            min-height: 100%;
+            @extend %flex-column;
+            align-items: center;
+            justify-content: center;
+
+            background: #FF416C;
+            background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+            background: linear-gradient(to right, #FF4B2B, #FF416C);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 0 0;
+
+            h1, p { mix-blend-mode: normal; }
+        }
+
+        .form {
+            height: 100%;
+            @extend %flex-column;
+            justify-content: center;
+
+            .input {
+                margin-top: 1rem !important;
+                
+                input {
+                    width: 100%;
+                    padding: .7rem 1rem !important;
+                    margin: 1rem 0 !important;
+                    
+                    border: none;
+                    border: .1rem solid gray;
+                    border-radius: 2rem;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    background-color: #eee;
+
+                    &:invalid:not(:placeholder-shown) { outline-color: $orange; }
+                    &:invalid:not(:placeholder-shown) ~ span i { color: $orange; }
+
+                    &:-webkit-autofill,
+                    &:-webkit-autofill:hover,
+                    &:-webkit-autofill:focus {
+                        -webkit-box-shadow: 0 0 0px 100rem #eee inset;
+                        -webkit-text-fill-color: black;
+                    }
+                }
+
+                .pasword {
+                    width: 100%;
+
+                    input {
+                        margin-bottom: .3rem !important;
+                    }
+
+                    span {
+                        width: 100%;
+                        @extend %flex-row;
+                        align-items: center;
+                        justify-content: space-between;
+                        
+                        color: $unit_color_text;
+                        font-size: 1rem;
+                        font-weight: bold;
+                        text-align: left;
+
+                        i { font-style: normal; }
+                    }
+                }
+            }
+        }
+
+        .ghost,
+        button {
+            margin: 0 auto !important;
+            margin-top: 2rem !important;
+            padding: .8rem 2rem !important;
+
+            border-radius: 7rem;
+            border: .1rem solid transparent;
+
+            color: whitesmoke;
+            font-size: 1.2rem;
+            font-weight: bolder;
+            font-family: 'Raleway', sans-serif;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: .1rem;
+            transition: transform 80ms ease-in;
+
+            &:active { transform: scale(0.95); }
+            &:focus { outline: none; }
+        }
+
+        button {
+            border-color: $orange;
+            background: $orange;
+        }
+
+        .ghost { border-color: whitesmoke; }
+    }
+}
+
+@keyframes opacity {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes opacitytransform {
+    0% { 
+        transform: translateY(-1rem);
+        opacity: 0; 
+    }
+    100% { 
+        transform: translateY(0);
+        opacity: 1; 
+    }
+}
+
+@media screen and (max-width:800px) {
+    .container {
+        border-radius: 0 !important;
+
+        .sing,
+        .form {
+            width: 50%;
+        }
+    }
+}
+
+@media screen and (max-width:500px) {
+    .wrap {
+        .container {
+            width: 100% !important;
+            height: 100% !important;
+            position: relative !important;
+            background: transparent !important;
+            box-shadow: none !important;
+    
+            .form { 
+                width: 100% !important; 
+                height: 100% !important;
+                padding: 1rem 2rem !important;
+
+                .input {
+                    input {
+                        padding: .5rem 1rem !important;
+                    }
+                }
+            }
+    
+            .sing { display: none !important; }
+            .link { display: block !important; }
+    
+            h1 { font-size: 2rem !important; }
+
+            .ghost,
+            button { width: 100%; }
+
+            button { 
+                padding: .5rem !important;
+                font-size: 1rem !important; 
+            }
+        }
+    }
+}

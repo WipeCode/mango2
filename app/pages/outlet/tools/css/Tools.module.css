@@ -1,0 +1,143 @@
+@-webkit-keyframes opacitytransform {
+  0% {
+    -webkit-transform: translateY(-1rem);
+            transform: translateY(-1rem);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes opacitytransform {
+  0% {
+    -webkit-transform: translateY(-1rem);
+            transform: translateY(-1rem);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.wrap {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 1rem !important;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-animation: opacitytransform .3s ease-in-out;
+          animation: opacitytransform .3s ease-in-out;
+}
+
+.wrap.dark .extra .theme {
+  background-color: #1a1a1e;
+}
+
+.wrap.dark .extra .theme option {
+  color: #f4f4f4;
+}
+
+.wrap.light .extra .theme {
+  background-color: #ffffff;
+}
+
+.wrap.light .extra .theme option {
+  color: black;
+}
+
+.wrap .links {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.wrap .links a {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+}
+
+.wrap .links a svg {
+  -webkit-filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
+          filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
+}
+
+.wrap .extra {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  margin-top: 1rem !important;
+  padding: 1rem !important;
+  border-top: 0.1rem solid #313131;
+}
+
+.wrap .extra .theme {
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: .5rem !important;
+  margin-right: 1rem !important;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bolder;
+  border: none;
+  outline: none;
+  border-radius: .3rem;
+  border: 0.1rem solid #313131;
+}
+
+.wrap .extra .theme option {
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+  font-size: 1rem;
+  font-weight: bolder;
+}
+
+.wrap button {
+  border-top: 0.1rem solid #313131;
+}
+
+.wrap .links a,
+.wrap button {
+  padding: .5rem !important;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: .15rem;
+}
+
+.wrap svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: .5rem !important;
+}
+/*# sourceMappingURL=Tools.module.css.map */

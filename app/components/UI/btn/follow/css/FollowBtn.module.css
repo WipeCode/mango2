@@ -1,0 +1,39 @@
+.isfollow,
+.notfollow {
+  width: 100%;
+  height: 100%;
+  padding: .5rem 1rem !important;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: .3rem;
+  border: .1rem solid transparent;
+  font-size: 1rem;
+  font-weight: bolder;
+  letter-spacing: .1rem;
+}
+
+.isfollow:active,
+.notfollow:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.isfollow:focus,
+.notfollow:focus {
+  outline: none;
+}
+
+.isfollow {
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+  border-color: gray;
+  background: transparent;
+}
+
+.notfollow {
+  color: #f4f4f4;
+  border-color: #FF4B2B;
+  background: #FF4B2B;
+}
+/*# sourceMappingURL=FollowBtn.module.css.map */

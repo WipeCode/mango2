@@ -1,0 +1,482 @@
+$bg: #0f0f0f;
+$border:gray;
+$shadow:rgba(0, 0, 0, 0.5);
+$orange: #FF4B29;
+
+$text_color:#f4f4f4;
+$darkBackground:#1a1a1e;
+$lightBackground:#ffffff;
+
+%flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+%flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin wh($width:100%, $height:100%, $position:relative) {
+    width: $width;
+    height: $height;
+    position: $position;
+}
+
+.wrap {
+    @include wh();
+    padding: 1rem !important;
+
+    @extend %flex-column;
+    align-items: center;
+
+    animation: opacitytransform .3s ease-in-out;
+
+    &.dark {
+        .form,
+        .form .difficulty select { background: $darkBackground; }
+    }
+
+    &.light {
+        .form
+        .form .difficulty select { background: $lightBackground; }
+    }
+
+    fieldset { border: none; }
+
+    textarea {
+        font-weight: bold;
+        
+        &::-webkit-scrollbar { width: .3rem; }
+        &::-webkit-scrollbar-thumb {
+            background-color: black;
+            outline: none;
+            border-radius: 1rem;
+        }
+    }
+
+    .header {
+        margin: .5rem 0 1.5rem 0 !important;
+
+        color: $text_color;
+        mix-blend-mode: difference;
+
+        font-size: 2rem;
+        text-align: center;
+        line-height: 2.5rem;
+        letter-spacing: .15rem;
+    }
+
+    .form {
+        @include wh(max-content, fit-content);
+        padding: 1.5rem !important;
+        
+        @extend %flex-column;
+        align-items: center;
+        
+        border-radius: .5rem;
+        box-shadow: 0 .2rem .5rem $shadow;
+    }
+
+    .difficulty {
+        @include wh(100%, fit-content);
+        @extend %flex-row;
+        align-items: center;
+        margin-top: 1rem;
+
+        color: gray;
+        font-size: 1rem;
+        font-weight: bold;
+        letter-spacing: .1rem;
+
+        select {
+            margin-left: 1rem !important;
+            padding: .5rem !important;
+
+            border-radius: .3rem;
+            border: .1rem solid $border;
+
+            color: gray;
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: .1rem;
+
+            option {
+                font-size: 1rem;
+                font-weight: bold;
+                letter-spacing: .15rem;
+            }
+        }
+    }
+
+    .avatar {
+        @include wh(100%, fit-content);
+        
+        @extend %flex-column;
+        align-items: center;
+        justify-content: center;
+
+        .img {
+            @include wh(100%, 15rem);
+            border-radius: .5rem;
+            overflow: hidden;
+
+            img {
+                width: 100%; 
+                height: 100%;
+                object-fit: cover;
+                -o-object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        label {
+            margin-top: 1rem !important;
+            padding: .5rem;
+            
+            cursor: pointer;
+            border-radius: .3rem;
+            border: .1rem solid $border;
+
+            color: gray;
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: .1rem;
+            transition: .3s ease-out;
+
+            &:hover {
+                color: whitesmoke;
+                border-color: whitesmoke;
+            }
+        }
+
+        input { display: none; }
+    }
+
+    .item {
+        @include wh(100%, fit-content);
+        margin-top: 1rem !important;
+
+        label {
+            margin-bottom: .3rem !important;
+    
+            color: gray;
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: .1rem;
+        }
+
+        .input {
+            @extend %flex-column;
+            margin-top: 1rem !important;
+            
+            input {
+                width: 100%;
+                padding: .5rem !important;
+                
+                border: none;
+                border-radius: .3rem;
+                border: .1rem solid $border;
+                background: transparent;
+                
+                color: $text_color;
+                mix-blend-mode: difference;
+                font-size: 1rem;
+                letter-spacing: .1rem;
+
+                &:invalid:not(:placeholder-shown) { outline-color: $orange; }
+                &:invalid:not(:placeholder-shown) ~ span i { color: $orange; }
+            }
+
+            &.row {
+                flex-direction: row;
+                align-items: center;
+
+                input { 
+                    width: 5rem;
+                    margin-left: 1rem !important;
+                }
+            }
+
+            i {
+                margin-left: .5rem !important;
+
+                color: gray;
+                font-size: 1rem;
+                font-weight: bold;
+                font-style: normal;
+                letter-spacing: .1rem;
+            }
+        }
+
+        textarea {
+            @include wh(100%, 7rem);
+            padding: .5rem !important;
+
+            border: none;
+            border-radius: .3rem;
+            border: .1rem solid $border;
+            background: transparent;
+            
+            color: $text_color;
+            mix-blend-mode: difference;
+            font-size: 1rem;
+            font-weight: lighter;
+            letter-spacing: .1rem;
+        }
+    }
+
+    .title {
+        @include wh(100%, fit-content);
+        padding-bottom: .5rem;
+        @extend %flex-row;
+        align-items: center;
+        justify-content: center;
+        border-bottom: .1rem solid $border;
+
+        i {
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: .1rem;
+
+            &:first-child {
+                color: $orange;
+                transform: none;
+                mix-blend-mode: normal;
+                margin-right: .3rem !important;
+            }
+
+            &:last-child {
+                color: $text_color;
+                mix-blend-mode: difference;
+                font-style: normal;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .button {
+        margin: 0 auto !important;
+        margin-top: 1rem !important;
+        padding: .5rem 1rem !important;
+
+        border-radius: .3rem;
+        border: .1rem solid $border;
+        background: transparent;
+
+        color: gray;
+        font-size: 1rem;
+        font-weight: bold;
+        letter-spacing: .1rem;
+        transition: .3s ease-in-out;
+
+        cursor: pointer;
+
+        &:hover {
+            color: whitesmoke;
+            border-color: whitesmoke;
+        }
+    }
+
+    .ingredients {
+        @include wh(100%, fit-content);
+        margin-top: 2rem !important;
+
+        table {
+            @include wh(100%, fit-content);
+            margin-top: 1rem !important;
+            // border: 1px solid red;
+
+            th {
+                color: $text_color;
+                mix-blend-mode: difference;
+                font-size: 1rem;
+                font-weight: bold;
+                letter-spacing: .1rem;
+            }
+
+            select,
+            input {
+                padding: .5rem !important;
+
+                color: $text_color;
+                mix-blend-mode: difference;
+                font-size: 1rem;
+
+                border: none;
+                outline: none;
+                background-color: transparent;
+                border: .1rem solid $border;
+                border-radius: .3rem;
+            }
+
+            select { 
+                width: fit-content;
+                position: relative;
+                option {
+                    font-size: 1rem;
+                    font-weight: bold;
+                    letter-spacing: .1rem;
+                }
+            }
+
+            input {
+                &[type="search"] { position: relative; width: 25rem; }
+                &[type="number"] { position: relative; width: 5rem; }
+            }
+        }
+    }
+
+    .steps {
+        @include wh(100%, fit-content);
+        margin-top: 1rem !important;
+
+        .item_steps {
+            margin-top: 1rem !important;
+
+            p {
+                @include wh(100%, fit-content);
+                padding: .5rem 0 !important;
+                
+                @extend %flex-row;
+                align-items: center;
+                justify-content: space-between;
+
+                color: gray;
+                font-size: 1rem;
+                font-family: sans-serif;
+                text-transform: uppercase;
+                letter-spacing: .1rem;
+            }
+
+            textarea {
+                @include wh(100%, 7rem);
+                padding: .5rem !important;
+
+                border: none;
+                border-radius: .3rem;
+                border: .1rem solid $border;
+                background: transparent;
+                
+                color: $text_color;
+                mix-blend-mode: difference;
+                font-size: 1rem;
+                font-weight: lighter;
+                letter-spacing: .1rem;
+            }
+        }
+    }
+
+    .description {
+        @include wh(100%, fit-content);
+        margin-top: 1rem;
+
+        color: gray;
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+        letter-spacing: .1rem;
+    }
+
+    .delete {
+        @include wh(fit-content, fit-content);
+
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        
+        i {
+            padding: .2rem !important;
+            
+            color: gray;
+            font-size: 1rem;
+            font-weight: bold;
+            font-style: normal;
+            text-align: center;
+        }
+
+        &:hover i { color: whitesmoke; }
+    }
+
+    .save {
+        @include wh(100%, fit-content);
+        margin-top: 2rem !important;
+
+        button {
+            @include wh(100%, fit-content);
+            margin-top: 1rem !important;
+            padding: .5rem !important;
+
+            border: 0;
+            border: .1rem solid $border;
+            border-radius: .3rem;
+            background: transparent;
+
+            color: gray;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: .1rem;
+            transition: .3s ease-in-out;
+
+            cursor: pointer;
+
+            &:hover {
+                color: whitesmoke;
+                border-color: whitesmoke;
+            }
+
+            &.delete {
+                color: $orange;
+
+                &:hover {
+                    color: $orange;
+                    border-color: $orange;
+                }
+            }
+        }
+    }
+}
+
+@keyframes opacitytransform {
+    0% { 
+        transform: translateY(-1rem);
+        opacity: 0; 
+    }
+    100% { 
+        transform: translateY(0);
+        opacity: 1; 
+    }
+}
+
+@media screen and (max-width:450px) {
+    .wrap {
+        padding: 0 !important;
+
+        .header { display: none; }
+
+        .form {
+            width: 100%; 
+            height: 100%; 
+            background: transparent; 
+            box-shadow: none;
+        }
+
+        .ingredients {
+            overflow: hidden;
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                scrollbar-width: 0;
+                &::-webkit-scrollbar { width: 0; height: 0; }
+
+                input {
+                    &[type="search"] { position: relative; width: 10rem; }
+                }
+            }
+            // scrollbar-width: 0;
+            // &::-webkit-scrollbar { width: 0; }
+        }
+    }
+}

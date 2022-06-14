@@ -1,0 +1,109 @@
+$border:rgb(49, 49, 49);
+$text_color:#f4f4f4;
+$darkBackground:#1a1a1e;
+$lightBackground:#ffffff;
+
+@keyframes opacitytransform {
+    0% { 
+        transform: translateY(-1rem);
+        opacity: 0; 
+    }
+    100% { 
+        transform: translateY(0);
+        opacity: 1; 
+    }
+}
+
+.wrap {
+    width: 100%;
+    height: fit-content;
+    padding: 1rem !important;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    animation: opacitytransform .3s ease-in-out;
+
+    &.dark {
+        .extra .theme { 
+            background-color: $darkBackground; 
+            option { color: $text_color; }
+        }
+    }
+
+    &.light {
+        .extra .theme { 
+            background-color: $lightBackground;
+            option { color: black; }
+        }
+    }
+
+    .links {
+        width: 100%;
+        height: fit-content;
+
+        a {
+            width: 100%;
+            height: fit-content;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            color: $text_color;
+            mix-blend-mode: difference;
+
+            svg { filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%); }
+        }
+    }
+
+    .extra {
+        width: 100%;
+        height: fit-content;
+        position: relative;
+        margin-top: 1rem !important;
+        padding: 1rem !important;
+
+        border-top: .1rem solid $border;
+
+        .theme {
+            width: 100%;
+            height: max-content;
+            padding: .5rem !important;
+            margin-right: 1rem !important;
+
+            color: gray;
+            font-size: 1rem;
+            font-weight: bolder;
+
+            border: none;
+            outline: none;
+            border-radius: .3rem;
+            border: .1rem solid $border;
+
+            option {
+                color: $text_color;
+                mix-blend-mode: difference;
+                font-size: 1rem;
+                font-weight: bolder;
+            }
+        }
+    }
+
+    button { border-top: .1rem solid $border; }
+
+    .links a,
+    button {
+        padding: .5rem !important;
+
+        font-size: 1.1rem;
+        font-weight: bold;
+        letter-spacing: .15rem;
+    }
+
+    svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: .5rem !important;
+    }
+}

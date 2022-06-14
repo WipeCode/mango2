@@ -1,0 +1,131 @@
+@charset "UTF-8";
+.wrap {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.wrap .user {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrap .user p {
+  margin-right: .5rem !important;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .1rem;
+}
+
+.wrap .user .input {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.wrap .user .input input {
+  display: none;
+}
+
+.wrap .user .input input:checked ~ label {
+  color: #FF5A30;
+}
+
+.wrap .user .input input:not(:checked) ~ label:hover {
+  color: #FF5A30;
+}
+
+.wrap .user .input input:not(:checked) ~ label:hover ~ label {
+  color: #FF5A30;
+}
+
+.wrap .user .input label {
+  width: 2rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  cursor: pointer;
+  color: #C4C4C4;
+  font-size: 2rem;
+  -webkit-transition: color .3s ease-in-out;
+  transition: color .3s ease-in-out;
+}
+
+.wrap .user .input label::before {
+  content: '★';
+  line-height: 1rem;
+}
+
+.wrap .user .input label:hover ~ input:checked ~ label {
+  color: #FF5A30;
+}
+
+.wrap .user .input label:active {
+  position: relative;
+}
+
+@media screen and (max-width: 450px) {
+  .wrap {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .wrap .user {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+/*# sourceMappingURL=ToScoreCard.module.css.map */

@@ -1,0 +1,568 @@
+.wrap .difficulty, .wrap .title, .wrap .steps .item_steps p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.wrap, .wrap .form, .wrap .avatar, .wrap .item .input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 1rem !important;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-animation: opacitytransform .3s ease-in-out;
+          animation: opacitytransform .3s ease-in-out;
+}
+
+.wrap.dark .form,
+.wrap.dark .form .difficulty select {
+  background: #1a1a1e;
+}
+
+.wrap.light .form .form .difficulty select {
+  background: #ffffff;
+}
+
+.wrap fieldset {
+  border: none;
+}
+
+.wrap textarea {
+  font-weight: bold;
+}
+
+.wrap textarea::-webkit-scrollbar {
+  width: .3rem;
+}
+
+.wrap textarea::-webkit-scrollbar-thumb {
+  background-color: black;
+  outline: none;
+  border-radius: 1rem;
+}
+
+.wrap .header {
+  margin: .5rem 0 1.5rem 0 !important;
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 2.5rem;
+  letter-spacing: .15rem;
+}
+
+.wrap .form {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  padding: 1.5rem !important;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: .5rem;
+  -webkit-box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.wrap .difficulty {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 1rem;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .1rem;
+}
+
+.wrap .difficulty select {
+  margin-left: 1rem !important;
+  padding: .5rem !important;
+  border-radius: .3rem;
+  border: 0.1rem solid gray;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .1rem;
+}
+
+.wrap .difficulty select option {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .15rem;
+}
+
+.wrap .avatar {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.wrap .avatar .img {
+  width: 100%;
+  height: 15rem;
+  position: relative;
+  border-radius: .5rem;
+  overflow: hidden;
+}
+
+.wrap .avatar .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -o-object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.wrap .avatar label {
+  margin-top: 1rem !important;
+  padding: .5rem;
+  cursor: pointer;
+  border-radius: .3rem;
+  border: 0.1rem solid gray;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .1rem;
+  -webkit-transition: .3s ease-out;
+  transition: .3s ease-out;
+}
+
+.wrap .avatar label:hover {
+  color: whitesmoke;
+  border-color: whitesmoke;
+}
+
+.wrap .avatar input {
+  display: none;
+}
+
+.wrap .item {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  margin-top: 1rem !important;
+}
+
+.wrap .item label {
+  margin-bottom: .3rem !important;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .1rem;
+}
+
+.wrap .item .input {
+  margin-top: 1rem !important;
+}
+
+.wrap .item .input input {
+  width: 100%;
+  padding: .5rem !important;
+  border: none;
+  border-radius: .3rem;
+  border: 0.1rem solid gray;
+  background: transparent;
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+  font-size: 1rem;
+  letter-spacing: .1rem;
+}
+
+.wrap .item .input input:invalid:not(:placeholder-shown) {
+  outline-color: #FF4B29;
+}
+
+.wrap .item .input input:invalid:not(:placeholder-shown) ~ span i {
+  color: #FF4B29;
+}
+
+.wrap .item .input.row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrap .item .input.row input {
+  width: 5rem;
+  margin-left: 1rem !important;
+}
+
+.wrap .item .input i {
+  margin-left: .5rem !important;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+  font-style: normal;
+  letter-spacing: .1rem;
+}
+
+.wrap .item textarea {
+  width: 100%;
+  height: 7rem;
+  position: relative;
+  padding: .5rem !important;
+  border: none;
+  border-radius: .3rem;
+  border: 0.1rem solid gray;
+  background: transparent;
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+  font-size: 1rem;
+  font-weight: lighter;
+  letter-spacing: .1rem;
+}
+
+.wrap .title {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  padding-bottom: .5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-bottom: 0.1rem solid gray;
+}
+
+.wrap .title i {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .1rem;
+}
+
+.wrap .title i:first-child {
+  color: #FF4B29;
+  -webkit-transform: none;
+          transform: none;
+  mix-blend-mode: normal;
+  margin-right: .3rem !important;
+}
+
+.wrap .title i:last-child {
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.wrap .button {
+  margin: 0 auto !important;
+  margin-top: 1rem !important;
+  padding: .5rem 1rem !important;
+  border-radius: .3rem;
+  border: 0.1rem solid gray;
+  background: transparent;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .1rem;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  cursor: pointer;
+}
+
+.wrap .button:hover {
+  color: whitesmoke;
+  border-color: whitesmoke;
+}
+
+.wrap .ingredients {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  margin-top: 2rem !important;
+}
+
+.wrap .ingredients table {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  margin-top: 1rem !important;
+}
+
+.wrap .ingredients table th {
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .1rem;
+}
+
+.wrap .ingredients table select,
+.wrap .ingredients table input {
+  padding: .5rem !important;
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border: 0.1rem solid gray;
+  border-radius: .3rem;
+}
+
+.wrap .ingredients table select {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+}
+
+.wrap .ingredients table select option {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .1rem;
+}
+
+.wrap .ingredients table input[type="search"] {
+  position: relative;
+  width: 25rem;
+}
+
+.wrap .ingredients table input[type="number"] {
+  position: relative;
+  width: 5rem;
+}
+
+.wrap .steps {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  margin-top: 1rem !important;
+}
+
+.wrap .steps .item_steps {
+  margin-top: 1rem !important;
+}
+
+.wrap .steps .item_steps p {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  padding: .5rem 0 !important;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  color: gray;
+  font-size: 1rem;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+}
+
+.wrap .steps .item_steps textarea {
+  width: 100%;
+  height: 7rem;
+  position: relative;
+  padding: .5rem !important;
+  border: none;
+  border-radius: .3rem;
+  border: 0.1rem solid gray;
+  background: transparent;
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+  font-size: 1rem;
+  font-weight: lighter;
+  letter-spacing: .1rem;
+}
+
+.wrap .description {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  margin-top: 1rem;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: .1rem;
+}
+
+.wrap .delete {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.wrap .delete i {
+  padding: .2rem !important;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+  font-style: normal;
+  text-align: center;
+}
+
+.wrap .delete:hover i {
+  color: whitesmoke;
+}
+
+.wrap .save {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  margin-top: 2rem !important;
+}
+
+.wrap .save button {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  margin-top: 1rem !important;
+  padding: .5rem !important;
+  border: 0;
+  border: 0.1rem solid gray;
+  border-radius: .3rem;
+  background: transparent;
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  cursor: pointer;
+}
+
+.wrap .save button:hover {
+  color: whitesmoke;
+  border-color: whitesmoke;
+}
+
+.wrap .save button.delete {
+  color: #FF4B29;
+}
+
+.wrap .save button.delete:hover {
+  color: #FF4B29;
+  border-color: #FF4B29;
+}
+
+@-webkit-keyframes opacitytransform {
+  0% {
+    -webkit-transform: translateY(-1rem);
+            transform: translateY(-1rem);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes opacitytransform {
+  0% {
+    -webkit-transform: translateY(-1rem);
+            transform: translateY(-1rem);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .wrap {
+    padding: 0 !important;
+  }
+  .wrap .header {
+    display: none;
+  }
+  .wrap .form {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  .wrap .ingredients {
+    overflow: hidden;
+  }
+  .wrap .ingredients table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: 0;
+  }
+  .wrap .ingredients table::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  .wrap .ingredients table input[type="search"] {
+    position: relative;
+    width: 10rem;
+  }
+}
+/*# sourceMappingURL=Editor.module.css.map */
