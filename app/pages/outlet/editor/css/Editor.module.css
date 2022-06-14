@@ -84,6 +84,34 @@
           box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
 }
 
+.wrap .form input::-webkit-input-placeholder,
+.wrap .form textarea::-webkit-input-placeholder {
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.wrap .form input:-ms-input-placeholder,
+.wrap .form textarea:-ms-input-placeholder {
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.wrap .form input::-ms-input-placeholder,
+.wrap .form textarea::-ms-input-placeholder {
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.wrap .form input::placeholder,
+.wrap .form textarea::placeholder {
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 .wrap .difficulty {
   width: 100%;
   height: -webkit-fit-content;
@@ -299,6 +327,7 @@
   background: transparent;
   color: gray;
   font-size: 1rem;
+  mix-blend-mode: difference;
   font-weight: bold;
   letter-spacing: .1rem;
   -webkit-transition: .3s ease-in-out;
@@ -484,6 +513,7 @@
   border-radius: .3rem;
   background: transparent;
   color: gray;
+  mix-blend-mode: difference;
   font-size: 1rem;
   font-weight: bold;
   text-transform: uppercase;
@@ -500,6 +530,7 @@
 
 .wrap .save button.delete {
   color: #FF4B29;
+  mix-blend-mode: normal;
 }
 
 .wrap .save button.delete:hover {

@@ -204,7 +204,7 @@ export default function Editor() {
                                         >Edit article</button>
                                     :   <button 
                                             className={ css.add }
-                                            onClick={ () => onAddArticle(localId, steps, ingredients, img, name, description, difficulty, calories, minutes) }
+                                            onClick={ () => onAddArticle(localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) }
                                         >Add article</button>
                                 }
 
@@ -235,7 +235,7 @@ export default function Editor() {
                 );
             }
         },
-        [ img, loader, darkTheme ]
+        [ img, steps, ingredients, loader, darkTheme ]
     );
 
     return content;
@@ -301,24 +301,31 @@ function onChangeStatusArticle(id, isdraf, setIsPublic) {
 }
 
 function onEditArticle(localId, articleId, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients, navigate) {
-    if (articleId && typeof articleId === "number") {
-        setArticleById(
-            navigate,
-            localId, 
-            articleId, 
-            {
-                img:img, 
-                name:name, 
-                description:description, 
-                difficulty:difficulty, 
-                calories:calories, 
-                minutes:minutes, 
-                steps:steps, 
-                isdraft:isDraf, 
-                ingredients:ingredients
-            }
-        );
-    }
+    let filterStep = steps.filter(f => !!f);
+    let filterIngr = ingredients.filter(f => !!f["name"]);
+
+    if (name && 
+        calories>0 &&
+        minutes>0 && 
+        filterStep.length>1 && 
+        filterIngr.length>1) {
+            setArticleById(
+                navigate,
+                localId, 
+                articleId, 
+                {
+                    img:img, 
+                    name:name, 
+                    description:description, 
+                    difficulty:difficulty, 
+                    calories:calories, 
+                    minutes:minutes, 
+                    steps:filterStep, 
+                    isdraft:isDraf, 
+                    ingredients:filterIngr
+                }
+            );
+        }
 }
 
 function onDeleteArticle(articleId, localId, navigate) {
@@ -327,7 +334,7 @@ function onDeleteArticle(articleId, localId, navigate) {
     }
 }
 
-function onAddArticle(localId, steps, ingredients, img, name, description, difficulty, calories, minutes) {
+function onAddArticle(localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) {
     let filterStep = steps.filter(f => !!f);
     let filterIngr = ingredients.filter(f => !!f["name"]);
 
