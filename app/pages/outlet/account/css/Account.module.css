@@ -35,7 +35,7 @@
 
 .wrap.dark .user,
 .wrap.dark .modal .container {
-  background-color: #1a1a1e;
+  background-color: #0F0F0F;
 }
 
 .wrap.dark .modal .container .modal_name p {
@@ -202,7 +202,7 @@
   height: -moz-fit-content;
   height: fit-content;
   position: relative;
-  margin: 1.5rem 0 !important;
+  margin-top: 1.5rem !important;
   word-wrap: normal;
   word-break: keep-all;
   word-spacing: normal;
@@ -240,7 +240,7 @@
 .user button,
 .user a {
   width: 100%;
-  margin-top: 1rem !important;
+  margin-top: 1.5rem !important;
 }
 
 .content {

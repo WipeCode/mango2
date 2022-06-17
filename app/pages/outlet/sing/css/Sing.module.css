@@ -33,7 +33,7 @@
 }
 
 .wrap.dark .container {
-  background: #1a1a1e;
+  background: #111;
 }
 
 .wrap.light .container {
@@ -288,6 +288,12 @@
 }
 
 @media screen and (max-width: 500px) {
+  .wrap.dark {
+    background: repeating-radial-gradient(circle at 0% 0%, transparent 0, rgba(0, 0, 0, 0.2) 1px 4px, transparent 5px 8px) #101010 !important;
+  }
+  .wrap.light {
+    background: repeating-radial-gradient(circle at 0% 0%, transparent 0, rgba(0, 0, 0, 0.02) 1px 4px, transparent 5px 8px) #ffffff !important;
+  }
   .wrap .container {
     width: 100% !important;
     height: 100% !important;

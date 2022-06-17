@@ -10,7 +10,7 @@ import LogOutBtn from "../btn/logout/LogOutBtn.jsx";
 import BackBtn from "../btn/back/BackBtn.jsx";
 
 export default function TopNav() {
-    const { setLocalIsAuth, localIsAuth, localId, localAvatar } = useContext( LocalUserContext );
+    const { setLocalIsAuth, localIsAuth, setLocalId, localId, localAvatar } = useContext( LocalUserContext );
     const { isDesktop, IconName, GetIcon, setPageTitle, setPagesMath, darkTheme, setDarkTheme, onChangeTheme } = useContext( AppContext );
 
     const [ thisDesktop, setThisDesktop ] = useState(null);
@@ -62,6 +62,7 @@ export default function TopNav() {
                                     path={ path } 
                                     thisAuth={ thisAuth } 
                                     setLocalIsAuth={ setLocalIsAuth }
+                                    setLocalId={ setLocalId }
                                     localAvatar={ localAvatar } 
                                     IconName={ IconName } 
                                     GetIcon={ GetIcon }
@@ -86,7 +87,7 @@ export default function TopNav() {
     }
 }
 
-function Desktop({ onClickLink, path, thisAuth, localAvatar, setLocalIsAuth, IconName, GetIcon, darkTheme, setDarkTheme, onChangeTheme }) {
+function Desktop({ onClickLink, path, thisAuth, localAvatar, setLocalIsAuth, setLocalId, IconName, GetIcon, darkTheme, setDarkTheme, onChangeTheme }) {
     return (
         <div className={ [css.nav, css.desktop].join(" ") }>
             <Link 
@@ -162,6 +163,7 @@ function Desktop({ onClickLink, path, thisAuth, localAvatar, setLocalIsAuth, Ico
                                 IconName={ IconName } 
                                 GetIcon={ GetIcon } 
                                 setLocalIsAuth={ setLocalIsAuth }
+                                setLocalId={ setLocalId }
                             />
                         </div>
                     }

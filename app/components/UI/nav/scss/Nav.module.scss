@@ -1,5 +1,5 @@
 $text_color:#f4f4f4;
-$nav_backgroud: #111;
+$nav_backgroud:#111;
 $hover_background:#313132;
 
 .wrap {
@@ -9,15 +9,13 @@ $hover_background:#313132;
 
     display: grid;
     grid-template-columns: repeat(1, minmax(320px, 1600px));
-
     background-color: $nav_backgroud;
 
     .nav {
         width: 100%;
         height: fit-content;
-        padding: .5rem !important;
-        // padding-left: .5rem !important;
-        // border: 1px solid blue;
+        position: relative;
+        z-index: 999;
         
         display: grid;
         align-items: center;
@@ -25,13 +23,16 @@ $hover_background:#313132;
         grid-template-columns: min-content 1fr min-content;
         grid-template-rows: min-content;
         grid-template-areas: "logo navigation account";
+        // border: 1px solid blue;
 
         &.desktop {
             width: 100%;
             height: fit-content;
+            padding: 0 1rem !important;
             position: relative;
 
             .logo {
+                margin: .7rem 1.5rem .7rem 0 !important;
                 position: relative;
                 grid-area: "logo";
                 // border: 1px solid red;
@@ -52,7 +53,6 @@ $hover_background:#313132;
             nav {
                 width: 100%;
                 height: fit-content;
-                margin-left: 1rem;
                 position: relative;
                 grid-area: "navigation";
                 // border: 1px solid green;
@@ -69,11 +69,10 @@ $hover_background:#313132;
                     width: fit-content;
 
                     color: $text_color;
-                    font-size: 1.1rem;
-                    font-weight: bold;
+                    font-size: 1rem;
+                    font-weight: bolder;
                     letter-spacing: .15rem;
                     transition: .5s ease-in;
-                    // border: 1px solid blue;
 
                     &:hover {
                         filter: brightness(0) saturate(100%) invert(49%) sepia(69%) saturate(6206%) hue-rotate(350deg) brightness(93%) contrast(87%);
@@ -198,6 +197,7 @@ $hover_background:#313132;
                     position: relative;
 
                     font-size: 1rem;
+                    font-weight: bold;
                     border: .1rem solid rgb(65, 65, 65);
                     border-radius: .3rem;
                     letter-spacing: .15rem;
@@ -208,6 +208,7 @@ $hover_background:#313132;
         &.mobile {
             width: 100%;
             height: max-content;
+            padding: 0rem .5rem !important;
             position: relative;
 
             display: flex;
@@ -231,6 +232,7 @@ $hover_background:#313132;
         &.bottom {
             width: 100%;
             height: fit-content;
+            padding: .3rem 0 !important;
             position: relative;
 
             display: flex;

@@ -235,7 +235,7 @@ export default function Editor() {
                 );
             }
         },
-        [ img, steps, ingredients, loader, darkTheme ]
+        [ img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients, loader, darkTheme ]
     );
 
     return content;
@@ -308,24 +308,25 @@ function onEditArticle(localId, articleId, img, name, description, difficulty, c
         calories>0 &&
         minutes>0 && 
         filterStep.length>1 && 
-        filterIngr.length>1) {
-            setArticleById(
-                navigate,
-                localId, 
-                articleId, 
-                {
-                    img:img, 
-                    name:name, 
-                    description:description, 
-                    difficulty:difficulty, 
-                    calories:calories, 
-                    minutes:minutes, 
-                    steps:filterStep, 
-                    isdraft:isDraf, 
-                    ingredients:filterIngr
-                }
-            );
-        }
+        filterIngr.length>1) 
+    {
+        setArticleById(
+            navigate,
+            localId, 
+            articleId, 
+            {
+                img:img, 
+                name:name, 
+                description:description, 
+                difficulty:difficulty, 
+                calories:calories, 
+                minutes:minutes, 
+                steps:filterStep, 
+                isdraft:isDraf, 
+                ingredients:filterIngr
+            }
+        );
+    }
 }
 
 function onDeleteArticle(articleId, localId, navigate) {

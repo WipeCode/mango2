@@ -1,5 +1,5 @@
-$lightBackground:#edeef0;
-$darkBackground: #191919;
+$lightBackground:#e2e4e9;
+$darkBackground: #080808;
 
 .wrap {
     width: 100%;
@@ -14,7 +14,6 @@ $darkBackground: #191919;
 
     &.darkTheme {
         background: $darkBackground;
-        // background: repeating-radial-gradient(circle at 0% 0%, transparent 0, hsla(0, 0%, 0%, .2) 1px 4px, transparent 5px 8px) $darkBackground;
     }
 
     &.lightTheme {

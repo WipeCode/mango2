@@ -1,7 +1,7 @@
 $border:rgb(49, 49, 49);
 $text_color:#f4f4f4;
 $orange:#FF5A30;
-$darkBackground:#1a1a1e;
+$darkBackground:#0F0F0F;
 $lightBackground:#ffffff;
 
 %flex-row {
@@ -30,7 +30,9 @@ $lightBackground:#ffffff;
 
     &.dark {
         .user,
-        .modal .container { background-color: $darkBackground; }
+        .modal .container { 
+            background-color: $darkBackground;            
+        }
         .modal .container .modal_name p { color: $text_color; }
     }
 
@@ -151,7 +153,7 @@ $lightBackground:#ffffff;
         max-width: 30rem;
         height: fit-content;
         position: relative;
-        margin: 1.5rem 0 !important;
+        margin-top: 1.5rem !important;
 
         word-wrap: normal;
         word-break: keep-all;
@@ -189,7 +191,7 @@ $lightBackground:#ffffff;
     button,
     a {
         width: 100%;
-        margin-top: 1rem !important;
+        margin-top: 1.5rem !important;
     }
 }
 

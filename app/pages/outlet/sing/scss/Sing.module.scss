@@ -6,7 +6,7 @@ $orange:#FF4B2B;
 $unit_color_text:rgb(75, 75, 75);
 
 $text_color:#f4f4f4;
-$darkBackground:#1a1a1e;
+$darkBackground:#111;
 $lightBackground:#ffffff;
 
 %flex-row {
@@ -231,6 +231,14 @@ $lightBackground:#ffffff;
 
 @media screen and (max-width:500px) {
     .wrap {
+        &.dark {
+            background: repeating-radial-gradient(circle at 0% 0%, transparent 0, hsla(0, 0%, 0%, .2) 1px 4px, transparent 5px 8px) #101010 !important;
+        }
+
+        &.light {
+            background: repeating-radial-gradient(circle at 0% 0%, transparent 0, hsla(0, 0%, 0%, .02) 1px 4px, transparent 5px 8px) $lightBackground !important;
+        }
+
         .container {
             width: 100% !important;
             height: 100% !important;

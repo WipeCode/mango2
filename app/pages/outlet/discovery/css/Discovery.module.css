@@ -23,13 +23,13 @@
 .wrap.dark .top .search input,
 .wrap.dark .top .search .button,
 .wrap.dark .top .filter select {
-  background: #1a1a1e;
+  background: #080808;
 }
 
 .wrap.light .top .search input,
 .wrap.light .top .search .button,
 .wrap.light .top .filter select {
-  background: #ffffff;
+  background: #e2e4e9;
 }
 
 .wrap .top {

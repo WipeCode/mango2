@@ -10,7 +10,7 @@ import LogOutBtn from "../../../components/UI/btn/logout/LogOutBtn.jsx";
 export default function Tools() {
     const [ content, setContent ] = useState(null);
     const [ path, setPath ] = useState(null);
-    const { localIsAuth, setLocalIsAuth } = useContext(LocalUserContext);
+    const { localIsAuth, setLocalIsAuth, setLocalId } = useContext(LocalUserContext);
     const { setPageTitle, changePagesMath, IconName, GetIcon, darkTheme, setDarkTheme, onChangeTheme } = useContext(AppContext);
     
     const location = window.location.pathname;
@@ -53,7 +53,15 @@ export default function Tools() {
                             </select>
                         </div>
         
-                        { localIsAuth && <LogOutBtn IconName={ IconName } GetIcon={ GetIcon } setLocalIsAuth={ setLocalIsAuth }/> }
+                        { 
+                            localIsAuth && 
+                            <LogOutBtn 
+                                IconName={ IconName } 
+                                GetIcon={ GetIcon } 
+                                setLocalIsAuth={ setLocalIsAuth }
+                                setLocalId={ setLocalId }
+                            /> 
+                        }
                     </div>  
                 );
             }

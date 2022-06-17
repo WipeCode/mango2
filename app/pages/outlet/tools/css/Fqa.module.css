@@ -116,8 +116,6 @@
       -ms-flex-direction: column;
           flex-direction: column;
   border-radius: .5rem;
-  -webkit-box-shadow: 0 .2rem .5rem black;
-          box-shadow: 0 .2rem .5rem black;
 }
 
 .wrap .accordion .item {
@@ -223,6 +221,7 @@
   -webkit-hyphens: auto;
       -ms-hyphens: auto;
           hyphens: auto;
+  color: gray;
   word-wrap: normal;
   word-break: keep-all;
   word-spacing: normal;

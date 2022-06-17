@@ -55,7 +55,7 @@
         height: 3.5rem !important;
         position: relative;
 
-        --c: linear-gradient(currentColor 0 0);
+        --c: linear-gradient(#131313 0 0);
 
         background: 
             var(--c) 0    0,
@@ -78,7 +78,7 @@
             left:-1rem;
 
             border-radius: 50%;
-            background: currentColor;
+            background: #131313;
             animation:inherit;
             animation-name:loader-1;
         }

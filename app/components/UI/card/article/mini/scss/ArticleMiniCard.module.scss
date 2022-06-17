@@ -1,7 +1,8 @@
 $text_color:#f4f4f4;
-$text_color_date:rgb(75, 75, 75);
+$text_color_date:rgb(106, 106, 106);
 $orange:#FF5A30;
-$darkBackground:#1a1a1e;
+
+$darkBackground:#131313;
 $lightBackground:#ffffff;
 
 %flex-row {
@@ -56,8 +57,8 @@ $lightBackground:#ffffff;
 
     .img {
         width: 100%;
-        min-height: 25rem;
-        max-height: 25rem;
+        min-height: 20rem;
+        max-height: 20rem;
         position: relative;
 
         border-radius: .5rem .5rem 0 0;
@@ -79,7 +80,7 @@ $lightBackground:#ffffff;
         .score {
             @include wh(100%, fit-content, absolute);
             z-index: 50;
-            padding: .5rem 1rem !important;
+            padding: .5rem .8rem !important;
             bottom: 0;
 
             @extend %flex-row;
@@ -112,26 +113,35 @@ $lightBackground:#ffffff;
 
     .info {
         @include wh(100%, fit-content);
-        padding: 1rem !important;
+        padding: .5rem .8rem !important;
         
         p {
             font-weight: bolder;
-            letter-spacing: .1rem;
+            letter-spacing: .15rem;
             mix-blend-mode: difference;
         }
-        
-        .user { color: gray; }
-        .date { color: $text_color_date; }
+
+        .date { 
+            color: $text_color_date; 
+            font-size: .8rem; 
+        }
+
+        .user { 
+            color: gray;
+            font-size: 1rem; 
+        }
         
         .title {
-            margin: .5rem 0 !important;
-
+            margin: .2rem 0 !important;
+            
             color: $text_color;
             font-size: 1.3rem;
 
+            text-transform: uppercase;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
+            letter-spacing: .2rem;
         }
         
         &::after {

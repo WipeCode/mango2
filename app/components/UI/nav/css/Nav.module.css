@@ -18,7 +18,8 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  padding: .5rem !important;
+  position: relative;
+  z-index: 999;
   display: -ms-grid;
   display: grid;
   -webkit-box-align: center;
@@ -41,10 +42,12 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  padding: 0 1rem !important;
   position: relative;
 }
 
 .wrap .nav.desktop .logo {
+  margin: .7rem 1.5rem .7rem 0 !important;
   position: relative;
   grid-area: "logo";
 }
@@ -66,7 +69,6 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  margin-left: 1rem;
   position: relative;
   grid-area: "navigation";
   display: -ms-grid;
@@ -88,8 +90,8 @@
   width: -moz-fit-content;
   width: fit-content;
   color: #f4f4f4;
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: bolder;
   letter-spacing: .15rem;
   -webkit-transition: .5s ease-in;
   transition: .5s ease-in;
@@ -236,7 +238,6 @@
 
 .wrap .nav.desktop .account .theme option {
   color: #f4f4f4;
-  mix-blend-mode: difference;
   font-size: 1rem;
   font-weight: bolder;
 }
@@ -251,6 +252,7 @@
   padding: .5rem !important;
   position: relative;
   font-size: 1rem;
+  font-weight: bold;
   border: 0.1rem solid #414141;
   border-radius: .3rem;
   letter-spacing: .15rem;
@@ -261,6 +263,7 @@
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
+  padding: 0rem .5rem !important;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -294,6 +297,7 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  padding: .3rem 0 !important;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;

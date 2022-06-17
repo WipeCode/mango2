@@ -5,13 +5,14 @@ import css from "./css/LogOutBtn.module.css";
 /** Подключение компонентов */
 import { logOut } from "../../../../api/aUser.jsx";
 
-export default function LogOutBtn({IconName, GetIcon, setLocalIsAuth}) {
+export default function LogOutBtn({IconName, GetIcon, setLocalIsAuth, setLocalId}) {
     const navigate = useNavigate();
 
     const onLogOut = () => {
         if (logOut()) {
             setLocalIsAuth(false);
-            navigate("../articles", { replace: true });
+            setLocalId(null);
+            navigate("../articles");
         }
     }
 

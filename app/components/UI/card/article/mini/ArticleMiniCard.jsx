@@ -50,7 +50,7 @@ export default function ArticleMiniCard({ darkTheme, localId, localRole, article
                 );
             }
         },
-        [ darkTheme ]
+        [ darkTheme, localId, localRole ]
     );
 
     return content ? content : null;

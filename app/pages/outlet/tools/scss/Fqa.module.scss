@@ -92,7 +92,7 @@ $lightBackground:#ffffff;
         flex-direction: column;
                     
         border-radius: .5rem;
-        box-shadow: 0 .2rem .5rem black;
+        // box-shadow: 0 .2rem .5rem black;
                     
         .item {
             width: 100%;
@@ -178,6 +178,7 @@ $lightBackground:#ffffff;
                     
                     hyphens: auto;
                     
+                    color: gray;
                     word-wrap: normal;
                     word-break: keep-all;
                     word-spacing: normal;

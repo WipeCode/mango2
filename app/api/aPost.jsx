@@ -135,7 +135,29 @@ export function getPostsById(id=0) {
                 ismark:false,
             },
         ];
-    } else result = null;
+    } else if (id===12) {
+        result = [
+            {
+                id:18, 
+                user: {
+                    id:12,
+                    name:"WipeCode",
+                },
+                name:"Chicken and pineapple pizza",
+                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
+                score: {
+                    star1:0,
+                    star2:0,
+                    star3:0,
+                    star4:0,
+                    star5:0,
+                },
+                date:"12/12/2022 18:00",
+                ismark:false,
+            },
+        ];
+    }
+    else result = null;
 
     return result ? mapArticles(result) : result;
 }
@@ -292,10 +314,10 @@ export function getDraftsById(id=0) {
 }
 
 export function getArticleById(id=0, localId, setArticle, setLoader, navigate=null) {
-    console.log(`%caPost: getArticleById(id=${id}, localId=${localId})`, "background:#066BC6;color:white;padding:1rem;");
+    // console.log(`%caPost: getArticleById(id=${id}, localId=${localId})`, "background:#066BC6;color:white;padding:1rem;");
     axios.get(`https://api.ebene.ru/get/article?id=${id}&localId=${localId}`)
     .then(function(res) {
-        console.log(res);
+        // console.log(res);
         if (res["data"]["message"]) {
             setArticle(res["data"]["message"]);
             setLoader(false);
@@ -456,7 +478,7 @@ export function getNewArticles() {
                 name:"WipeCode",
             },
             name:"Chicken and pineapple pizza",
-            img:"https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fm=jpg",
+            img:"https://i.pinimg.com/originals/bd/ff/16/bdff16ac26af19f45669e6a137ab5914.jpg",
             score: {
                 star1:0,
                 star2:0,

@@ -227,7 +227,7 @@ function Steps({ steps }) {
                                 </p>
                             </span>
 
-                            <p>{ m }</p>
+                            <p className={ css.text }>{ m }</p>
                         </div>
                     );
                 })

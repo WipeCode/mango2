@@ -23,8 +23,8 @@
 
 @media screen and (max-width: 1500px) {
   .wrap .gridrow {
-    -ms-grid-columns: (1fr)[4];
-        grid-template-columns: repeat(4, 1fr);
+    -ms-grid-columns: (1fr)[5];
+        grid-template-columns: repeat(5, 1fr);
   }
 }
 

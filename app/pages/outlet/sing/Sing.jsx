@@ -6,11 +6,20 @@ import css from "./css/Sing.module.css";
 /** Подключение компоненты */
 import { LocalUserContext, AppContext } from "../../../context/Context.jsx";
 import { setLocalStorage } from "../../../api/localStorage.jsx";
+/** Подключение API */
+import { singIn, singUp } from "../../../api/aUser.jsx";
 
 export function Sing({ path, title, description, isSingIn }) {
     const navigate = useNavigate();
     const { darkTheme } = useContext(AppContext);
     const { setLocalId, setLocalRole, setLocalAvatar, setLocalName, setLocalEmail, setLocalIsAuth, setLocalDescription } = useContext(LocalUserContext);
+
+    const [ thisLocalId, setThisLocalId ] = useState(null);
+    const [ thisLocalRole, setThisLocalRole ] = useState(null);
+    const [ thisLocalName, setThisLocalName ] = useState(null);
+    const [ thisLocalEmail, setThisLocalEmail ] = useState(null);
+    const [ thisLocalAvatar, setThisLocalAvatar ] = useState(null);
+    const [ thisLocalDescription, setThisLocalDescription ] = useState(null);
 
     const [ content, setContent ] = useState(null);
     const [ name, setName ] = useState(null);
@@ -18,61 +27,56 @@ export function Sing({ path, title, description, isSingIn }) {
     const [ password, setPassword ] = useState(null);
     const [ count, setCount ] = useState(0);
 
-    const submit = (e, isSingIn) => {
+    const submit = (e) => {
         e.preventDefault();
 
-        if (!isSingIn && name && email && password) {
-            axios.post(`https://api.ebene.ru/post/singup`, {username:name, email:email, password:password})
-            .then(function(res) {
-                console.log(res);
-                if (res?.data?.message) {
-                    navigate("../singin");
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        if (isSingIn && email && password) {
+            singIn(
+                email, 
+                password, 
+                setThisLocalId, 
+                setThisLocalRole, 
+                setThisLocalName, 
+                setThisLocalEmail, 
+                setThisLocalAvatar, 
+                setThisLocalDescription
+            );
+        } else if (!isSingIn && name && email && password) {
+            singUp(
+                name,
+                email,
+                password,
+                navigate
+            );
         }
-        else {
-            axios.post(`https://api.ebene.ru/post/singin`, {email:email, password:password})
-            .then(function(res) {
-                // console.log(res);
-                if (res?.data?.message) {
-                    if (!res["data"]["message"]["img"]) res["data"]["message"]["img"] = res["data"]["message"]["img"] ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiCoHLktPNbzYjYcrFoYnlmxX5SfRKCIJQsA&usqp=CAU";
-                    
-                    setLocalAvatar(res["data"]["message"]["img"]);
-                    setLocalIsAuth(true);
-                    setLocalId(res["data"]["message"]["id"]);
-                    setLocalRole(res["data"]["message"]["role"]);
-                    setLocalName(res["data"]["message"]["name"]);
-                    setLocalEmail(res["data"]["message"]["email"]);
-                    setLocalDescription(res["data"]["message"]["description"]);
-                    
-                    setLocalStorage(
-                        {
-                            id:res["data"]["message"]["id"],
-                            role:res["data"]["message"]["role"],
-                            img:res["data"]["message"]["img"],
-                            name:res["data"]["message"]["name"],
-                            email:res["data"]["message"]["email"],
-                            email:res["data"]["message"]["description"],
-                        }
-                    );
-
-                    navigate("../news");
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        }
-
     }
-
+    
     const changePassword = (value) => {
         setPassword(value);
         setCount(value.length);
     }
+
+    useEffect(
+        () => {
+            if (thisLocalId &&
+                thisLocalRole &&
+                thisLocalName &&
+                thisLocalEmail &&
+                thisLocalAvatar) 
+            {
+                setLocalIsAuth(true);
+                setLocalId(thisLocalId);
+                setLocalRole(thisLocalRole);
+                setLocalName(thisLocalName);
+                setLocalEmail(thisLocalEmail);
+                setLocalAvatar(thisLocalAvatar);
+                setLocalDescription(thisLocalDescription);
+
+                navigate("../news");
+            }
+        },
+        [ thisLocalId, thisLocalRole, thisLocalName, thisLocalEmail, thisLocalAvatar ]
+    );
 
     useEffect(
         () => {
@@ -90,9 +94,18 @@ export function Sing({ path, title, description, isSingIn }) {
                                 <h1>{ title }</h1>
                                 <span>{ description }</span>
 
-                                <form onSubmit={ (e) => submit(e, isSingIn) }>
+                                <form onSubmit={ (e) => submit(e) }>
                                     <div className={ css.input }>
-                                        { !isSingIn && <input id="name" type="text" placeholder="Name" onChange={ (e) => setName(e.target.value) } required/> }
+                                        { 
+                                            !isSingIn && 
+                                            <input 
+                                                id="name" 
+                                                type="text" 
+                                                placeholder="Name" 
+                                                onChange={ (e) => setName(e.target.value) } 
+                                                required
+                                            /> 
+                                        }
                                         
                                         <input 
                                             id="email" 
@@ -129,7 +142,7 @@ export function Sing({ path, title, description, isSingIn }) {
                 );
             }
         },
-        [ path, darkTheme ]
+        [ name, email, password, path, darkTheme ]
     );
 
     return content;

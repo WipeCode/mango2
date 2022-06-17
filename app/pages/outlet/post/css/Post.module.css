@@ -31,11 +31,11 @@
 }
 
 .wrap.dark .header {
-  background-color: #212121;
+  background-color: #131313;
 }
 
 .wrap.dark .header .info {
-  background-color: #212121;
+  background-color: #131313;
 }
 
 .wrap.dark .header .img img {
@@ -48,7 +48,7 @@
 .wrap.dark .ingresients ul .items,
 .wrap.dark .ingresients ul .items .name,
 .wrap.dark .ingresients ul .items .unit {
-  background-color: #212121;
+  background-color: #131313;
 }
 
 .wrap.light .header {
@@ -148,6 +148,7 @@
   font-size: 2.5rem;
   font-weight: bolder;
   letter-spacing: .15rem;
+  line-height: 2.5rem;
 }
 
 .wrap .header .info .description {
@@ -294,7 +295,7 @@
   height: fit-content;
   position: relative;
   margin-top: 1rem !important;
-  padding: .5rem !important;
+  padding: .8rem !important;
   border-radius: .5rem;
 }
 
@@ -304,20 +305,9 @@
   height: -moz-min-content;
   height: min-content;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 .wrap .content .steps .step span p {
-  margin: 0 !important;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -356,7 +346,7 @@
 .wrap .content .steps .step span::after {
   content: "";
   width: 100%;
-  height: .1rem;
+  height: .05rem;
   position: absolute;
   right: 0;
   top: 50%;
@@ -367,19 +357,20 @@
   mix-blend-mode: difference;
 }
 
-.wrap .content .steps .step p {
-  margin-top: .5rem !important;
-  color: #f4f4f4;
-  mix-blend-mode: difference;
-  -webkit-hyphens: auto;
-      -ms-hyphens: auto;
-          hyphens: auto;
+.wrap .content .steps .step .text {
+  margin-top: 1rem !important;
   word-wrap: normal;
   word-break: keep-all;
   word-spacing: normal;
-  font-size: 1rem;
-  letter-spacing: .1rem;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
   overflow-wrap: break-word;
+  color: #f4f4f4;
+  mix-blend-mode: difference;
+  font-size: 1rem;
+  font-stretch: normal;
+  letter-spacing: .1rem;
 }
 
 .wrap .content .ingresients {
@@ -444,12 +435,22 @@
   padding-right: .5rem !important;
   color: gray;
   mix-blend-mode: difference;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
+  word-wrap: normal;
+  word-break: keep-all;
+  word-spacing: normal;
   -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+  overflow-wrap: break-word;
+  mix-blend-mode: difference;
   font-size: 1rem;
+  font-stretch: normal;
+  letter-spacing: .1rem;
+  text-transform: lowercase;
+}
+
+.wrap .content .ingresients ul .items p i.name::first-letter {
+  text-transform: uppercase;
 }
 
 .wrap .content .ingresients ul .items p i.unit {
@@ -500,6 +501,7 @@
 }
 
 .wrap .footer .user {
+  min-width: 20rem;
   margin-top: .5rem !important;
 }
 
@@ -614,7 +616,8 @@
     -webkit-filter: brightness(0) saturate(100%) invert(99%) sepia(94%) saturate(433%) hue-rotate(175deg) brightness(119%) contrast(88%);
             filter: brightness(0) saturate(100%) invert(99%) sepia(94%) saturate(433%) hue-rotate(175deg) brightness(119%) contrast(88%);
   }
-  .wrap .content {
+  .wrap .content,
+  .wrap .footer {
     padding: 0 1rem !important;
   }
 }
@@ -626,6 +629,9 @@
     -ms-grid-rows: auto;
         grid-template-rows: auto;
         grid-template-areas: "img" "info";
+  }
+  .wrap .header .info {
+    padding: 1.5rem 1rem !important;
   }
   .wrap .content {
     margin-top: 2rem !important;
@@ -640,15 +646,23 @@
     margin-top: 2rem !important;
     padding-right: 0 !important;
   }
+  .wrap .content .steps .step {
+    padding: 1rem !important;
+  }
   .wrap .content .ingresients {
     padding-left: 0 !important;
+  }
+  .wrap .content .ingresients ul .items::after {
+    height: .05rem;
   }
   .wrap .footer {
     width: 100%;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    padding: 0 1rem !important;
+  }
+  .wrap .footer .user {
+    min-width: 0;
   }
 }
 

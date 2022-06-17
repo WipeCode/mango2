@@ -30,7 +30,7 @@ export function getPathByBottomNav(localId, IconName, GetIcon) {
         discovery: { key:"discovery", to:"/discovery", title:"Discovery", icon:<GetIcon name={ IconName.discovery }/> },
     };
     /** Если пользователь авторизован */
-    if (+localId > 0) {
+    if (localId) {
         path = Object.assign(path, {
             news: { key:"news", to:"/news", title:"News", icon:<GetIcon name={ IconName.dis }/> },
             editor: { key:"editor", to:"/editor/new", title:"Add post", icon:<GetIcon name={ IconName.add }/> },

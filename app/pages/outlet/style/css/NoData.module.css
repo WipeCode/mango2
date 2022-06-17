@@ -74,7 +74,7 @@
   width: 3.5rem !important;
   height: 3.5rem !important;
   position: relative;
-  --c: linear-gradient(currentColor 0 0);
+  --c: linear-gradient(#131313 0 0);
   background: var(--c) 0 0, var(--c) 0 100%, var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 0, var(--c) 100% 100%;
   background-size: .8rem 50%;
   background-repeat: no-repeat;
@@ -91,7 +91,7 @@
   top: calc(50% - .4rem);
   left: -1rem;
   border-radius: 50%;
-  background: currentColor;
+  background: #131313;
   -webkit-animation: inherit;
           animation: inherit;
   -webkit-animation-name: loader-1;

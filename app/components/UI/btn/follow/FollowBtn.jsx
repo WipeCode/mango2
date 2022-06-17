@@ -5,29 +5,36 @@ import css from "./css/FollowBtn.module.css";
 import { setFollow } from "../../../../api/aUser.jsx";
 
 export default function FollowBtn({ localId, selectedId, isfollow, className=null }) {
-    const [ isFollow, setIsFollow ] = useState(null);
+    const [ thisIsFollow, setThisIsFollow ] = useState(null);
+    const [ content, setContent ] = useState(null);
 
     useEffect(
         () => {
-            setIsFollow( isfollow );
+            setThisIsFollow( isfollow );
         },
         [ isfollow ]
-    ); 
+    );
+
+    useEffect(
+        () => {
+            if (localId && +localId !== +selectedId) {
+                setContent(
+                    <button 
+                        onClick={ () => changeFollow() }
+                        className={ [thisIsFollow ? css.isfollow : css.notfollow, className].join(" ") }
+                    >
+                        { thisIsFollow === false ? "Follow" : "Following" }
+                    </button>
+                );
+            } else setContent(null);
+        },
+        [ thisIsFollow, localId ]
+    );
 
     function changeFollow() {
-        let f = !isFollow;
-        setFollow(localId, selectedId, f, setIsFollow);
-        // setIsFollow(f);
+        let f = !thisIsFollow;
+        setFollow(localId, selectedId, f, setThisIsFollow);
     }
 
-    if (+localId !== +selectedId) {
-        return (
-            <button 
-                onClick={ () => changeFollow() }
-                className={ [isFollow ? css.isfollow : css.notfollow, className].join(" ") }
-            >
-                { isFollow === false ? "Follow" : "Following"}
-            </button>
-        );
-    }
+    return content;
 }

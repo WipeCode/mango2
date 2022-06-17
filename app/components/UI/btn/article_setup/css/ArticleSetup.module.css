@@ -5,7 +5,7 @@
   height: fit-content;
   padding: .5rem !important;
   position: absolute;
-  z-index: 20;
+  z-index: 10 !important;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -177,10 +177,13 @@
 
 @media screen and (max-width: 450px) {
   .mark,
-  .ismark,
   .setup {
-    width: 2rem !important;
+    width: 1.7rem !important;
     height: 2rem !important;
+  }
+  .ismark {
+    width: 1.7rem !important;
+    height: 1.7rem !important;
   }
 }
 /*# sourceMappingURL=ArticleSetup.module.css.map */

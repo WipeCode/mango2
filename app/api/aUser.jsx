@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import { deleteLocalStorage } from "./localStorage.jsx";
 import { getScore } from './aPost.jsx';
+import { setLocalStorage } from "./localStorage.jsx";
 
 /* -------------------------------------------------------------------------- */
 /*                              CHECKING FUNCTION                             */
@@ -100,4 +101,51 @@ export function setUserPasswordById(password, newPassword, userId) {
 export function logOut() {
     deleteLocalStorage(["id", "name", "img", "email", "role"]);
     return true;
+}
+
+export function singUp(name, email, password, navigate) {
+    axios.post(`https://api.ebene.ru/post/singup`, {username:name, email:email, password:password})
+    .then(function(res) {
+        // console.log(res);
+        if (res?.data?.message) {
+            navigate("../singin");
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+
+export function singIn(email, password, setThisLocalId, setThisLocalRole, setThisLocalName, setThisLocalEmail, setThisLocalAvatar, setThisLocalDescription) {
+    axios.post(`https://api.ebene.ru/post/singin`, {email:email, password:password})
+    .then(function(res) {
+        // console.log(res);
+        if (res?.data?.message) {
+            if (!res["data"]["message"]["img"]) {
+                res["data"]["message"]["img"] = res["data"]["message"]["img"] 
+                                                ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiCoHLktPNbzYjYcrFoYnlmxX5SfRKCIJQsA&usqp=CAU";
+            }
+
+            setThisLocalAvatar(res["data"]["message"]["img"]);
+            setThisLocalId(res["data"]["message"]["id"]);
+            setThisLocalRole(res["data"]["message"]["role"]);
+            setThisLocalName(res["data"]["message"]["name"]);
+            setThisLocalEmail(res["data"]["message"]["email"]);
+            setThisLocalDescription(res["data"]["message"]["description"]);
+
+            setLocalStorage(
+                {
+                    id:res["data"]["message"]["id"],
+                    role:res["data"]["message"]["role"],
+                    img:res["data"]["message"]["img"],
+                    name:res["data"]["message"]["name"],
+                    email:res["data"]["message"]["email"],
+                    email:res["data"]["message"]["description"],
+                }
+            );
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
 }
