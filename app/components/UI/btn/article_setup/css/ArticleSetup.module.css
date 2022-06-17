@@ -1,24 +1,13 @@
 .wrap {
   width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   padding: .5rem !important;
   position: absolute;
   z-index: 10 !important;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .wrap.dark .setup ul {
@@ -30,26 +19,13 @@
 }
 
 .wrap .container {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .wrap .container .mark,
@@ -58,21 +34,11 @@
   height: 1.5rem;
   margin-left: .3rem !important;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  -webkit-transition: .2s ease-in-out;
   transition: .2s ease-in-out;
 }
 
@@ -81,10 +47,8 @@
   width: 100%;
   height: 100%;
   position: relative;
-  -webkit-transition: .2s ease-in-out;
   transition: .2s ease-in-out;
-  -webkit-filter: brightness(0) saturate(100%) invert(51%) sepia(5%) saturate(29%) hue-rotate(337deg) brightness(93%) contrast(93%);
-          filter: brightness(0) saturate(100%) invert(51%) sepia(5%) saturate(29%) hue-rotate(337deg) brightness(93%) contrast(93%);
+  filter: brightness(0) saturate(100%) invert(51%) sepia(5%) saturate(29%) hue-rotate(337deg) brightness(93%) contrast(93%);
 }
 
 .wrap .container .mark.ismark {
@@ -93,8 +57,7 @@
 }
 
 .wrap .container .mark.ismark svg {
-  -webkit-filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
-          filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
+  filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
 }
 
 .wrap .container .mark:hover {
@@ -102,8 +65,7 @@
 }
 
 .wrap .container .mark:hover svg {
-  -webkit-filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
-          filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
+  filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
 }
 
 .wrap .container .setup:hover ul {
@@ -115,29 +77,22 @@
 }
 
 .wrap .container .setup:hover .button svg {
-  -webkit-filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
-          filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
+  filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
 }
 
 .wrap .container .setup .button {
-  -webkit-transition: .2s ease-in-out;
   transition: .2s ease-in-out;
 }
 
 .wrap .container .setup ul {
-  width: -webkit-max-content;
-  width: -moz-max-content;
   width: max-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   display: none;
   position: absolute;
   top: 100%;
   right: 0;
   border-radius: .5rem;
-  -webkit-box-shadow: 0 .2rem .5rem black;
-          box-shadow: 0 .2rem .5rem black;
+  box-shadow: 0 .2rem .5rem black;
   overflow: hidden;
 }
 
@@ -147,7 +102,6 @@
   mix-blend-mode: difference;
   font-size: 1rem;
   letter-spacing: .1rem;
-  -webkit-transition: .2s ease-in;
   transition: .2s ease-in;
 }
 
@@ -158,7 +112,6 @@
   mix-blend-mode: difference;
   font-size: 1rem;
   letter-spacing: .1rem;
-  -webkit-transition: .2s ease-in;
   transition: .2s ease-in;
 }
 

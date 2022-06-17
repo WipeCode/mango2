@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 /** Подключение стилей */
+import noDataStyle from "../style/css/NoData.module.css";
 import css from "./css/Sing.module.css";
 /** Подключение компоненты */
 import { LocalUserContext, AppContext } from "../../../context/Context.jsx";
@@ -21,7 +22,8 @@ export function Sing({ path, title, description, isSingIn }) {
     const [ thisLocalAvatar, setThisLocalAvatar ] = useState(null);
     const [ thisLocalDescription, setThisLocalDescription ] = useState(null);
 
-    const [ content, setContent ] = useState(null);
+    const [ loader, setLoader ] = useState(false);
+
     const [ name, setName ] = useState(null);
     const [ email, setEmail ] = useState(null);
     const [ password, setPassword ] = useState(null);
@@ -29,11 +31,13 @@ export function Sing({ path, title, description, isSingIn }) {
 
     const submit = (e) => {
         e.preventDefault();
+        setLoader(true);
 
         if (isSingIn && email && password) {
             singIn(
                 email, 
-                password, 
+                password,
+                setLoader,
                 setThisLocalId, 
                 setThisLocalRole, 
                 setThisLocalName, 
@@ -46,6 +50,7 @@ export function Sing({ path, title, description, isSingIn }) {
                 name,
                 email,
                 password,
+                setLoader,
                 navigate
             );
         }
@@ -78,74 +83,75 @@ export function Sing({ path, title, description, isSingIn }) {
         [ thisLocalId, thisLocalRole, thisLocalName, thisLocalEmail, thisLocalAvatar ]
     );
 
-    useEffect(
-        () => {
-            if (path) {
-                setContent(
-                    <div className={ [css.wrap,darkTheme?css.dark:css.light].join(" ") }>
-                        <div className={ [css.container, isSingIn ? css.singin : null].join(" ") }>
-                            <div className={ css.sing }>
-                                <h1>{ path.header }</h1>
-                                <p>{ path.description }</p>
-                                <Link to={ path.to } title={ path.title } className={ css.ghost }>{ path.title }</Link>
-                            </div>
-            
-                            <div className={ css.form }>
-                                <h1>{ title }</h1>
-                                <span>{ description }</span>
-
-                                <form onSubmit={ (e) => submit(e) }>
-                                    <div className={ css.input }>
-                                        { 
-                                            !isSingIn && 
-                                            <input 
-                                                id="name" 
-                                                type="text" 
-                                                placeholder="Name" 
-                                                onChange={ (e) => setName(e.target.value) } 
-                                                required
-                                            /> 
-                                        }
-                                        
-                                        <input 
-                                            id="email" 
-                                            type="email" 
-                                            placeholder="Email"
-                                            autoComplete="email"
-                                            onChange={ (e) => setEmail(e.target.value) } 
-                                            required
-                                        />
-                                        
-                                        <label className={ css.pasword } htmlFor="password">
-                                            <input 
-                                                id="password" 
-                                                type="password" 
-                                                placeholder="Password" 
-                                                autoComplete={ isSingIn ? "current-password" : "new-password" }
-                                                minLength={isSingIn ? 1 : 6} 
-                                                maxLength={255} 
-                                                onChange={ (e) => changePassword(e.target.value) } 
-                                                required
-                                            />
-                                            
-                                            { !isSingIn && <span>Minimum 6 characters<i>{count}/255</i></span>}
-                                        </label>
-
-                                        <button className={ css.submit }>{ title }</button>
-                                    </div>
-                                </form>
-
-                                <Link to={ path.to } title={ path.title } className={ css.link }>{ path.title }</Link>
-                            </div>
-                        </div>
+    if (path) {
+        return (
+            <div className={ [css.wrap,darkTheme?css.dark:css.light].join(" ") }>
+                <div className={ [css.container, isSingIn ? css.singin : null].join(" ") }>
+                    <div className={ css.sing }>
+                        <h1>{ path.header }</h1>
+                        <p>{ path.description }</p>
+                        <Link to={ path.to } title={ path.title } className={ css.ghost }>{ path.title }</Link>
                     </div>
-                );
-            }
-        },
-        [ name, email, password, path, darkTheme ]
-    );
+    
+                    <div className={ css.form }>
+                        <h1>{ title }</h1>
+                        <span>{ description }</span>
 
-    return content;
+                        <form onSubmit={ (e) => submit(e) }>
+                            <div className={ css.input }>
+                                { 
+                                    !isSingIn && 
+                                    <input 
+                                        id="name" 
+                                        type="text" 
+                                        placeholder="Name" 
+                                        onChange={ (e) => setName(e.target.value) } 
+                                        required
+                                    /> 
+                                }
+                                
+                                <input 
+                                    id="email" 
+                                    type="email" 
+                                    placeholder="Email"
+                                    autoComplete="email"
+                                    onChange={ (e) => setEmail(e.target.value) } 
+                                    required
+                                />
+                                
+                                <label className={ css.pasword } htmlFor="password">
+                                    <input 
+                                        id="password" 
+                                        type="password" 
+                                        placeholder="Password" 
+                                        autoComplete={ isSingIn ? "current-password" : "new-password" }
+                                        minLength={isSingIn ? 1 : 6} 
+                                        maxLength={255} 
+                                        onChange={ (e) => changePassword(e.target.value) } 
+                                        required
+                                    />
+                                    
+                                    { !isSingIn && <span>Minimum 6 characters<i>{count}/255</i></span>}
+                                </label>
+
+                                {loader===false && <button className={ css.submit }>{ title }</button>}
+                                {
+                                    loader===true && 
+                                    <button className={ css.submit } disabled>
+                                        <div className={ noDataStyle.button_loader }>
+                                            <i></i><i></i><i></i>
+                                        </div>
+                                    </button>
+                                    }
+                            </div>
+                        </form>
+
+                        <Link to={ path.to } title={ path.title } className={ css.link }>{ path.title }</Link>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
 export function getPath(to, title, header, description) {

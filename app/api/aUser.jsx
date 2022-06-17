@@ -103,11 +103,12 @@ export function logOut() {
     return true;
 }
 
-export function singUp(name, email, password, navigate) {
+export function singUp(name, email, password, setLoader, navigate) {
     axios.post(`https://api.ebene.ru/post/singup`, {username:name, email:email, password:password})
     .then(function(res) {
         // console.log(res);
         if (res?.data?.message) {
+            setLoader(false);
             navigate("../singin");
         }
     })
@@ -116,7 +117,7 @@ export function singUp(name, email, password, navigate) {
     });
 }
 
-export function singIn(email, password, setThisLocalId, setThisLocalRole, setThisLocalName, setThisLocalEmail, setThisLocalAvatar, setThisLocalDescription) {
+export function singIn(email, password, setLoader, setThisLocalId, setThisLocalRole, setThisLocalName, setThisLocalEmail, setThisLocalAvatar, setThisLocalDescription) {
     axios.post(`https://api.ebene.ru/post/singin`, {email:email, password:password})
     .then(function(res) {
         // console.log(res);
@@ -143,6 +144,8 @@ export function singIn(email, password, setThisLocalId, setThisLocalRole, setThi
                     email:res["data"]["message"]["description"],
                 }
             );
+
+            setLoader(false);
         }
     })
     .catch(error => {

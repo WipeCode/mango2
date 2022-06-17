@@ -1,14 +1,7 @@
 .wrap .top .search, .wrap .top .filter {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  align-items: center;
 }
 
 .wrap {
@@ -16,8 +9,7 @@
   height: 100%;
   position: relative;
   padding: 1rem !important;
-  -webkit-animation: opacitytransform .3s ease-in-out;
-          animation: opacitytransform .3s ease-in-out;
+  animation: opacitytransform .3s ease-in-out;
 }
 
 .wrap.dark .top .search input,
@@ -34,8 +26,6 @@
 
 .wrap .top {
   width: 100%;
-  height: -webkit-max-content;
-  height: -moz-max-content;
   height: max-content;
   position: relative;
   border-bottom: 0.1rem solid #313131;
@@ -45,13 +35,9 @@
 
 .wrap .top .search {
   width: 100%;
-  height: -webkit-max-content;
-  height: -moz-max-content;
   height: max-content;
   position: relative;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .wrap .top .search input,
@@ -69,13 +55,11 @@
   outline: none;
   border: 0.15rem solid #313131;
   border-radius: .5rem 0 0 .5rem;
-  -webkit-transition: .3s ease-in-out;
   transition: .3s ease-in-out;
 }
 
 .wrap .top .search input:focus ~ .button svg {
-  -webkit-filter: brightness(0) saturate(100%) invert(54%) sepia(69%) saturate(6465%) hue-rotate(350deg) brightness(103%) contrast(99%);
-          filter: brightness(0) saturate(100%) invert(54%) sepia(69%) saturate(6465%) hue-rotate(350deg) brightness(103%) contrast(99%);
+  filter: brightness(0) saturate(100%) invert(54%) sepia(69%) saturate(6465%) hue-rotate(350deg) brightness(103%) contrast(99%);
 }
 
 .wrap .top .search .button {
@@ -85,37 +69,28 @@
   border-right: 0.15rem solid #313131;
   border-bottom: 0.15rem solid #313131;
   border-radius: 0 .5rem .5rem 0;
-  -webkit-transition: .3s ease-in-out;
   transition: .3s ease-in-out;
 }
 
 .wrap .top .search .button:hover svg {
-  -webkit-transform: scale(0.8);
-          transform: scale(0.8);
-  -webkit-filter: brightness(0) saturate(100%) invert(54%) sepia(69%) saturate(6465%) hue-rotate(350deg) brightness(103%) contrast(99%);
-          filter: brightness(0) saturate(100%) invert(54%) sepia(69%) saturate(6465%) hue-rotate(350deg) brightness(103%) contrast(99%);
+  transform: scale(0.8);
+  filter: brightness(0) saturate(100%) invert(54%) sepia(69%) saturate(6465%) hue-rotate(350deg) brightness(103%) contrast(99%);
 }
 
 .wrap .top .search .button svg {
   width: 100%;
   height: 100%;
   position: relative;
-  -webkit-transition: .3s ease-in-out;
   transition: .3s ease-in-out;
-  -webkit-filter: brightness(0) saturate(100%) invert(12%) sepia(3%) saturate(15%) hue-rotate(30deg) brightness(101%) contrast(80%);
-          filter: brightness(0) saturate(100%) invert(12%) sepia(3%) saturate(15%) hue-rotate(30deg) brightness(101%) contrast(80%);
+  filter: brightness(0) saturate(100%) invert(12%) sepia(3%) saturate(15%) hue-rotate(30deg) brightness(101%) contrast(80%);
 }
 
 .wrap .top .filter {
   width: 100%;
-  height: -webkit-max-content;
-  height: -moz-max-content;
   height: max-content;
   position: relative;
   margin-top: 1rem !important;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   scrollbar-width: 0;
   overflow-y: auto;
 }
@@ -126,11 +101,7 @@
 }
 
 .wrap .top .filter select {
-  width: -webkit-max-content;
-  width: -moz-max-content;
   width: max-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   margin-right: .5rem !important;
@@ -153,34 +124,17 @@
 
 .wrap .content {
   width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   position: relative;
 }
 
-@-webkit-keyframes opacitytransform {
-  0% {
-    -webkit-transform: translateY(-1rem);
-            transform: translateY(-1rem);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 @keyframes opacitytransform {
   0% {
-    -webkit-transform: translateY(-1rem);
-            transform: translateY(-1rem);
+    transform: translateY(-1rem);
     opacity: 0;
   }
   100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }

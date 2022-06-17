@@ -10,7 +10,7 @@ export default function UserLineCard({ darkTheme, location, localid, id, src, na
 
     useEffect(
         () => {
-            if (id && darkTheme!==null) {
+            if (id!==null && darkTheme!==null) {
                 setContent(
                     <div className={ [css.wrap, className, darkTheme ? css.dark : css.light].join(" ") }>
                         <div className={ css.container }>
@@ -27,7 +27,7 @@ export default function UserLineCard({ darkTheme, location, localid, id, src, na
                             </Link>
                 
                             {
-                                +localid !== +id &&
+                                (+localid !== +id) &&
                                 <FollowBtn
                                     localId={ localid }
                                     selectedId={ id }

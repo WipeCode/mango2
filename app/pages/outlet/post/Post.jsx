@@ -28,7 +28,9 @@ export default function Post() {
     const [ articleHeader, setArticleHeader ] = useState(null);
 
     const getPeople = (score) => {
-        return score['star1']+score['star2']+score['star3']+score['star4']+score['star5'];
+        if (score) {
+            return score['star1']+score['star2']+score['star3']+score['star4']+score['star5'];
+        }
     };
 
     useEffect(
@@ -41,7 +43,7 @@ export default function Post() {
 
     useEffect(
         () => {
-            if (!loader) {
+            if (loader===false) {
                 if (article) {
                     setPageTitle( article.name );
                     setPeople( getPeople( article.score ) );
@@ -56,7 +58,7 @@ export default function Post() {
                         </div>
                     );
                 }
-            } else {
+            } else if (loader===true) {
                 setContent(
                     <div className={ noDataStyle.loader }>
                         <main></main>
@@ -69,21 +71,22 @@ export default function Post() {
 
     useEffect(
         () => {
-            if (score!==null && people!==null) {
+            if (score!==null && people!==null && article) {
+                console.log(article);
                 setArticleHeader({
-                    id: article.id,
-                    creatorId: article.user.id,
-                    src: article.img,
-                    name: article.name,
+                    articleId: article?.id,
+                    creatorId: article?.user?.id,
+                    src: article?.img,
+                    name: article?.name,
                     score: score,
                     people: people,
-                    description: article.description,
-                    difficulty: article.difficulty,
-                    ingredients: article.ingredients.length,
-                    minutes: article.minutes,
-                    calories: article.calories,
-                    isMark: article.ismark ?? false,
-                    isDraft: article.isdraft ?? false,
+                    description: article?.description,
+                    difficulty: article?.difficulty,
+                    ingredients: article?.ingredients.length,
+                    minutes: article?.minutes,
+                    calories: article?.calories,
+                    isMark: article?.ismark ?? false,
+                    isDraft: article?.isdraft ?? false,
                 });
             }
         },
@@ -92,7 +95,7 @@ export default function Post() {
     
     useEffect(
         () => {
-            if (articleHeader) {
+            if (articleHeader && article && articleId) {
                 setContent(
                     <div className={ [css.wrap, darkTheme ? css.dark : css.light].join(" ") }>
                         <Header
@@ -143,73 +146,75 @@ function Header({ darkTheme, localId, localRole, article, IconName, GetIcon }) {
     const getClassItem = (key) => keyActive == key ? [css.item, css.active].join(" ") : css.item;
     const changeKeyActive = (key) => setKeyActive(keyActive == key ? null : key);
 
-    return (
-        <div className={ css.header } id="articleHeader">
-            <ArticleSetup
-                darkTheme={ darkTheme }
-                localId={ localId }
-                localRole={ localRole }
-                creatorId={ article.creatorId }
-                isDraft={ article.isDraft }
-                localIsMark={ article.isMark }
-                articleId={ article.id }
-                IconName={ IconName }
-                GetIcon={ GetIcon }
-                className={ css.setup }
-            />
-
-            <div className={ css.img }>
-                {<img src={ article.src } alt="food"/>}
-            </div>
-
-            <div className={ css.info }>
-                <p className={ [css.title, localId ? css.top : null].join(" ") }>{ article.name }</p>
-                
-                <StaticScoreCard 
-                    score={ article.score } 
-                    people={ article.people } 
-                    IconName={ IconName } 
+    if (article) {
+        return (
+            <div className={ css.header } id="articleHeader">
+                <ArticleSetup
+                    darkTheme={ darkTheme }
+                    localId={ localId }
+                    localRole={ localRole }
+                    creatorId={ article.creatorId }
+                    isDraft={ article?.isDraft }
+                    localIsMark={ article?.isMark }
+                    articleId={ article?.articleId }
+                    IconName={ IconName }
                     GetIcon={ GetIcon }
+                    className={ css.setup }
                 />
-                
-                <p className={ css.description }>{ article.description }</p>
-                <div className={ css.statistic }>
-                    <div className={ getClassItem("calories") } onClick={ () => changeKeyActive("calories") }>
-                        <div className={ css.itemTitle }>
-                            <GetIcon name={ IconName.kkal }/>
-                            <i className={ css.name }>Calories:</i>
+    
+                <div className={ css.img }>
+                    <img src={ article?.src } alt="food"/>
+                </div>
+    
+                <div className={ css.info }>
+                    <p className={ [css.title, localId ? css.top : null].join(" ") }>{ article?.name }</p>
+                    
+                    <StaticScoreCard 
+                        score={ article?.score } 
+                        people={ article?.people } 
+                        IconName={ IconName } 
+                        GetIcon={ GetIcon }
+                    />
+                    
+                    <p className={ css.description }>{ article?.description }</p>
+                    <div className={ css.statistic }>
+                        <div className={ getClassItem("calories") } onClick={ () => changeKeyActive("calories") }>
+                            <div className={ css.itemTitle }>
+                                <GetIcon name={ IconName.kkal }/>
+                                <i className={ css.name }>Calories:</i>
+                            </div>
+                            <i>{ article?.calories }</i>
                         </div>
-                        <i>{ article.calories }</i>
-                    </div>
-
-                    <div className={ getClassItem("difficult") } onClick={ () => changeKeyActive("difficult") }>
-                        <div className={ css.itemTitle }>
-                            <GetIcon name={ IconName.difficult }/>
-                            <i className={ css.name }>Difficulty:</i>
+    
+                        <div className={ getClassItem("difficult") } onClick={ () => changeKeyActive("difficult") }>
+                            <div className={ css.itemTitle }>
+                                <GetIcon name={ IconName.difficult }/>
+                                <i className={ css.name }>Difficulty:</i>
+                            </div>
+                            <i>{ article?.difficulty }</i>
                         </div>
-                        <i>{ article.difficulty }</i>
-                    </div>
-
-                    <div className={ getClassItem("ingredients") } onClick={ () => changeKeyActive("ingredients") }>
-                        <div className={ css.itemTitle }>
-                            <GetIcon name={ IconName.ingredients }/>
-                            <i className={ css.name }>Ingredients:</i>
+    
+                        <div className={ getClassItem("ingredients") } onClick={ () => changeKeyActive("ingredients") }>
+                            <div className={ css.itemTitle }>
+                                <GetIcon name={ IconName.ingredients }/>
+                                <i className={ css.name }>Ingredients:</i>
+                            </div>
+                            <i>{ article?.ingredients }</i>
                         </div>
-                        <i>{ article.ingredients }</i>
-                    </div>
-
-
-                    <div className={ getClassItem("time") } onClick={ () => changeKeyActive("time") }>
-                        <div className={ css.itemTitle }>
-                            <GetIcon name={ IconName.time }/>
-                            <i className={ css.name }>Cooking time:</i>
+    
+    
+                        <div className={ getClassItem("time") } onClick={ () => changeKeyActive("time") }>
+                            <div className={ css.itemTitle }>
+                                <GetIcon name={ IconName.time }/>
+                                <i className={ css.name }>Cooking time:</i>
+                            </div>
+                            <i>{ `${article?.minutes}m` }</i>
                         </div>
-                        <i>{ `${article.minutes}m` }</i>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 function Steps({ steps }) {
@@ -257,34 +262,36 @@ function Ingredients({ ingredients }) {
 }
 
 function Footer({ darkTheme, localIsAuth, localId, articleId, score, article, setScore, getScore, people, setPeople, location, changePagesMath }) {
-    return (
-        <div className={ css.footer }>
-            {
-                +localId !== +article.user.id &&
-                <ToScoreCard
-                    isAuth={ localIsAuth }
-                    userId={ localId }
-                    id={ articleId }
-                    score={ score }
-                    allScore={ article.score }
-                    setScore={ setScore }
-                    getScore={ getScore }
-                    people={ people }
-                    setPeople={ setPeople }
+    if (article) {
+        return (
+            <div className={ css.footer }>
+                {
+                    +localId !== +article?.user?.id &&
+                    <ToScoreCard
+                        isAuth={ localIsAuth }
+                        userId={ localId }
+                        id={ articleId }
+                        score={ score }
+                        allScore={ article.score }
+                        setScore={ setScore }
+                        getScore={ getScore }
+                        people={ people }
+                        setPeople={ setPeople }
+                    />
+                }
+    
+                <UserLineCard
+                    darkTheme={ darkTheme }
+                    location={ location }
+                    localid={ localId }
+                    id={ article?.user?.id }
+                    src={ article?.user?.img }
+                    name={ article?.user?.name }
+                    isfollow={ article?.user?.follow }
+                    changePagesMath={ changePagesMath }
+                    className={ css.user }
                 />
-            }
-
-            <UserLineCard
-                darkTheme={ darkTheme }
-                location={ location }
-                localid={ localId }
-                id={ article.user.id }
-                src={ article.user.img }
-                name={ article.user.name }
-                isfollow={ article.user.follow }
-                changePagesMath={ changePagesMath }
-                className={ css.user }
-            />
-        </div>
-    );
+            </div>
+        );
+    }
 }
