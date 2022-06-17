@@ -75,6 +75,7 @@ $lightBackground:#ffffff;
                 padding: .1rem;
                 svg { filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%); }
             }
+
         }
 
         .setup {
@@ -106,11 +107,28 @@ $lightBackground:#ffffff;
                 li {
                     padding: .2rem .5rem !important;
 
-                    color: $text_color;
-                    mix-blend-mode: difference;
-                    font-size: 1rem;
-                    letter-spacing: .1rem;
-                    transition: .2s ease-in;
+                    button {
+                        width: 100%;
+                        cursor: pointer;
+
+                        color: $text_color;
+                        mix-blend-mode: difference;
+                        font-size: 1rem;
+                        text-align: left;
+                        letter-spacing: .15rem;
+                        transition: .2s ease-in;
+
+                        outline: none;
+                        border: none;
+                        background-color: transparent;
+
+                        &:disabled { color: gray; }
+                    }
+
+                    &:last-child button { 
+                        color: tomato; 
+                        &:disabled { color: gray; }
+                    }
                     
                     a {
                         margin: 0 !important;
@@ -119,18 +137,19 @@ $lightBackground:#ffffff;
                         color: $text_color;
                         mix-blend-mode: difference;
                         font-size: 1rem;
-                        letter-spacing: .1rem;
+                        letter-spacing: .15rem;
                         transition: .2s ease-in;
+
+                        &.disabled {
+                            color: gray;
+                            cursor: not-allowed;
+                        }
                     }
 
                     &:hover {
-                        color: $orange;
-                        font-weight: bolder;
-                        mix-blend-mode: normal;
                         background: rgba(0, 0, 0, .1);
 
-                        a {
-                            color: $orange;
+                        button, a {
                             font-weight: bolder;
                             mix-blend-mode: normal;
                         }
@@ -139,6 +158,12 @@ $lightBackground:#ffffff;
             }
         }
     }
+}
+
+@keyframes markLoader {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 @media screen and (max-width:450px) {

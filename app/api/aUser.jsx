@@ -71,13 +71,14 @@ export function getUserFollowersById(id=0, localId=0, setUsers, setLoader) {
 /*                              SETTING FUNCTION                              */
 /* -------------------------------------------------------------------------- */
 
-export function setFollow(localId, userId, isfollow, setIsFollow) {
+export function setFollow(localId, userId, isfollow, setIsFollow, setLoader) {
     // console.log(`%caUser: follow(localId=${localId}, userId=${userId}, isfollow=${isfollow})`, "background:#066BC6;color:white;padding:1rem;");
     axios.post(`https://api.ebene.ru/post/editFollow`, {localId:localId, userId:userId, isfollow:isfollow})
     .then(function(res) {
         // console.log(res);
         if (res["data"]["message"]) {
             setIsFollow(isfollow);
+            setLoader(false);
         }
     })
     .catch(error => {

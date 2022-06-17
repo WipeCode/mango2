@@ -6,31 +6,34 @@ import css from "./css/ArticleSetup.module.css";
 import { deleteArticleById, setIsMark, setStatusArticle } from "../../../../api/aPost.jsx";
 import { isAdmin } from "../../../../api/aUser.jsx";
 
-export default function ArticleSetup({ darkTheme, localId, localRole, creatorId, isDraft, localIsMark, articleId, IconName, GetIcon, className=null }) {
+export default function ArticleSetup({ darkTheme, localId, localRole, creatorId, isDraft, idMark, articleId, IconName, GetIcon, className=null }) {
     const navigate = useNavigate();
     const [ mark, setMark ] = useState(null);
     const [ content, setContent ] = useState(null);
     const [ isCreator, setIsCreator ] = useState(null);
     const [ thisIsAdmin, setThisIsAdmin ] = useState(null);
     const [ accessSetup, setAccessSetup ] = useState(null);
+    
+    const [ loaderPublic, setLoaderPublic ] = useState(false);
+    const [ loaderDelete, setLoaderDelete ] = useState(false);
 
     const onPublish = () => {
-        setStatusArticle(navigate, articleId, (!isDraft));
+        setLoaderPublic(true);
+        setStatusArticle(navigate, articleId, (!isDraft), setLoaderPublic);
     };
 
     const onDelete = () => {
-        deleteArticleById(localId, articleId);
+        setLoaderDelete(true);
+        deleteArticleById(localId, articleId, setLoaderDelete);
     };
 
     const onMark = () => {
-        let m = !mark;
-        setIsMark(localId, articleId, m);
-        setMark(m);
+        setIsMark(localId, articleId, mark??null, setMark);
     }
 
     useEffect(
         () => {
-            setMark(localIsMark);
+            setMark(idMark);
             setThisIsAdmin(isAdmin(localRole));
             setIsCreator(+localId === +creatorId);
         },
@@ -50,7 +53,7 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
                 setContent(
                     <div className={ [css.wrap, darkTheme?css.dark:css.light, className].join(" ") }>
                         <div className={ css.container }>
-                            <div className={ [css.mark,mark ? css.ismark : css.nomark].join(" ") } onClick={ () => onMark() }>
+                            <div className={ [css.mark, mark?css.ismark:css.nomark].join(" ") } onClick={ () => onMark() }>
                                 <GetIcon name={ mark ? IconName.ismark2 : IconName.mark2 }/>
                             </div>
                             {
@@ -60,9 +63,30 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
                                         <GetIcon name={ IconName.setup }/>
                                     </div>
                                     <ul>
-                                        <li onClick={ () => onPublish() }>{ isDraft ? "Publish" : "Unpublish" }</li>
-                                        { isCreator && <li><Link to={ `/editor/${articleId}` } title="edit">Edit</Link></li> }
-                                        <li onClick={ () => onDelete() }>Delete</li>
+                                        <li>
+                                            {(loaderPublic===false && loaderDelete===false) && <button onClick={ () => onPublish() }>{ isDraft ? "Publish" : "Unpublish" }</button>}
+                                            {loaderDelete===true && <button disabled>{ isDraft ? "Publish" : "Unpublish" }</button>}
+                                            {loaderPublic===true && <button className={ css.loader } disabled>{ isDraft ? "Publish" : "Unpublish" }</button>}
+                                        </li>
+
+                                        {
+                                            isCreator &&
+                                            <li>
+                                                <Link 
+                                                    title="edit"
+                                                    to={ `/editor/${articleId}` }
+                                                    className={ (loaderPublic===true || loaderDelete===true) ? css.disabled : null }
+                                                >
+                                                    Edit
+                                                </Link>
+                                            </li>
+                                        }
+
+                                        <li>
+                                            {(loaderPublic===false && loaderDelete===false) && <button onClick={ () => onDelete() }>Delete</button>}
+                                            {loaderPublic===true && <button disabled>Delete</button>}
+                                            {loaderDelete===true && <button className={ css.loader } disabled>Delete</button>}
+                                        </li>
                                     </ul>
                                 </div>
                             }
@@ -71,7 +95,7 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
                 );
             } else setContent(null);
         },
-        [ accessSetup, mark, darkTheme ]
+        [ loaderPublic, loaderDelete, accessSetup, mark, darkTheme ]
     );
 
     return content;

@@ -36,18 +36,20 @@ export default function Post() {
     useEffect(
         () => {
             setPageTitle("Post");
-            if (articleId) getArticleById(articleId, localId, setArticle, setLoader, navigate);
+
+            if (localId && article) getArticleById(articleId, localId, setArticle, setLoader, navigate);
+            else if (!article) getArticleById(articleId, localId, setArticle, setLoader, navigate);
         },
         [ localId ]
     );
 
     useEffect(
         () => {
-            if (loader===false) {
+            if (!loader) {
                 if (article) {
-                    setPageTitle( article.name );
-                    setPeople( getPeople( article.score ) );
-                    setScore( getScore( article.score ) );
+                    setPageTitle( article?.name );
+                    setPeople( getPeople( article?.score ) );
+                    setScore( getScore( article?.score ) );
                 } else {
                     setContent(
                         <div className={ noDataStyle.wrap }>
@@ -58,7 +60,7 @@ export default function Post() {
                         </div>
                     );
                 }
-            } else if (loader===true) {
+            } else {
                 setContent(
                     <div className={ noDataStyle.loader }>
                         <main></main>
@@ -72,7 +74,6 @@ export default function Post() {
     useEffect(
         () => {
             if (score!==null && people!==null && article) {
-                console.log(article);
                 setArticleHeader({
                     articleId: article?.id,
                     creatorId: article?.user?.id,
@@ -166,7 +167,7 @@ function Header({ darkTheme, localId, localRole, article, IconName, GetIcon }) {
                     <img src={ article?.src } alt="food"/>
                 </div>
     
-                <div className={ css.info }>
+                <div className={ [css.info, localId?css.topSetup:null].join(" ") }>
                     <p className={ [css.title, localId ? css.top : null].join(" ") }>{ article?.name }</p>
                     
                     <StaticScoreCard 

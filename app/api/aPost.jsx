@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+
+const serverPath = "https://api.ebene.ru";
 
 /* -------------------------------------------------------------------------- */
 /*                              GETTING FUNCTIONS                             */
@@ -313,9 +314,17 @@ export function getDraftsById(id=0) {
     return mapArticles(result);
 }
 
-export function getArticleById(id=0, localId, setArticle, setLoader, navigate=null) {
-    // console.log(`%caPost: getArticleById(id=${id}, localId=${localId})`, "background:#066BC6;color:white;padding:1rem;");
-    axios.get(`https://api.ebene.ru/get/article?id=${id}&localId=${localId}`)
+ /**
+  * Вывод статьи по ID
+  * 
+  * @param mixed id - ID статьи
+  * @param mixed localId - ID авторизованного пользователя
+  * @param mixed setArticle - react hook для присваивания переменной ответ от сервера
+  * @param mixed setLoader - react hook для редактирования состояния загрузки
+  * @param mixed navigate - функция для переадресации
+  */
+export function getArticleById(id, localId, setArticle, setLoader, navigate) {
+    axios.get(`${serverPath}/get/article?id=${id}&localId=${localId}`)
     .then(function(res) {
         // console.log(res);
         if (res["data"]["message"]) {
@@ -328,6 +337,11 @@ export function getArticleById(id=0, localId, setArticle, setLoader, navigate=nu
     });
 }
 
+ /** Вычисление средней оценки статьи
+  * 
+  * @param score массив данных о всех оценках пользователей
+  * @return среднея оценка пользователей
+  */
 export function getScore(score) {
     let star1 = score?.star1 ?? 0, 
         star2 = score?.star2 ?? 0, 
@@ -684,18 +698,37 @@ export function setScoreById(articleId=0, userId=0, scoreId=0, score=0) {
     // });
 }
 
-export function setIsMark(localId, articleId, isMark) {
-    // console.log(`%caPost: setIsMark(localId=${localId}, articleId=${articleId}, isMark=${isMark})`, "background:#066BC6;color:white;padding:1rem;");
+ /**
+  * Добавление статьи в закладки
+  * 
+  * @param mixed localId - ID авторизованного пользователя
+  * @param mixed articleId - ID статьи
+  * @param mixed idMark - 
+  * 
+  * @return [type]
+  */
+export function setIsMark(localId, articleId, idMark, setMark) {
+    setMark(true);
+    console.log(`%caPost: setIsMark(localId=${localId}, articleId=${articleId}, idMark=${idMark})`, "background:#066BC6;color:white;padding:1rem;");
 }
 
-export function setStatusArticle(articleId, isDraft, setIsPublic=null) {
+ /**
+  * Публикация/отмена публикации статьи
+  * 
+  * @param mixed articleId - ID статьи
+  * @param mixed isDraft - новый статус ('public', 'draft')
+  * @param mixed setIsPublic - react hook для изменения публикации в компоненте
+  * @param mixed setLoaderPublic - react hook для изменения статуса загрузки в компоненте
+  */
+export function setStatusArticle(articleId, isDraft, setIsPublic, setLoaderPublic) {
     // console.log(`%caPost: setStatusArticle(articleId=${articleId}, isDraft=${isDraft})`, "background:#066BC6;color:white;padding:1rem;");
-    axios.post(`https://api.ebene.ru/post/editArticleStatus`, {articleId:articleId, isDraft:isDraft})
+    axios.post(`${serverPath}/post/editArticleStatus`, {articleId:articleId, isDraft:isDraft})
     .then(function(res) {
         // console.log(res);
         if (res["data"]["message"]) {
             if (setIsPublic) {
                 setIsPublic(!isDraft);
+                setLoaderPublic(false);
             }
         }
     })
@@ -704,6 +737,14 @@ export function setStatusArticle(articleId, isDraft, setIsPublic=null) {
     });
 }
 
+ /**
+  * Редактирование статьи
+  * 
+  * @param mixed navigate - функция для переадресации
+  * @param mixed localId - ID авторизованного пользователя
+  * @param mixed articleId - ID редактируемой статьи
+  * @param mixed newArticleArray - новые данные статьи 
+  */
 export function setArticleById(navigate, localId, articleId, newArticleArray) {
     // console.log(`%caPost: setArticleById()`, "background:#066BC6;color:white;padding:1rem;");
     axios.post(`https://api.ebene.ru/post/editArticle`, {localId:localId, articleId:articleId, newArticleArray:newArticleArray})
@@ -726,7 +767,21 @@ export function setArticleById(navigate, localId, articleId, newArticleArray) {
 /*                                ADD FUNCTION                                */
 /* -------------------------------------------------------------------------- */
 
-export function addNewArticle(navigate, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients, localId) {
+ /**
+  * Добавление статьи
+  * 
+  * @param mixed navigate - функция для переадресации
+  * @param mixed img - главыное изображение
+  * @param mixed name - наименование
+  * @param mixed description - описание
+  * @param mixed difficulty - сложность приготовения
+  * @param mixed calories - калорийность
+  * @param mixed minutes - время приготовления в минутах
+  * @param mixed steps - этапы приготовления
+  * @param mixed ingredients - ингридиенты
+  * @param mixed localId - ID авторизованного пользователя
+  */
+export function addNewArticle(navigate, img, name, description, difficulty, calories, minutes, steps, ingredients, localId) {
     let data = {
         img:img, 
         name:name, 
@@ -739,7 +794,7 @@ export function addNewArticle(navigate, img, name, description, difficulty, calo
         localId:localId
     };
 
-    axios.post(`https://api.ebene.ru/post/add`, data)
+    axios.post(`${serverPath}/post/add`, data)
     .then(function(res) {
         // console.log(res);
         navigate(`../people/${localId}/drafts`);
@@ -753,15 +808,25 @@ export function addNewArticle(navigate, img, name, description, difficulty, calo
 /*                             DELETING FUNCTIONS                             */
 /* -------------------------------------------------------------------------- */
 
-export function deleteArticleById(navigate, articleId, localId=null) {
+ /**
+  * Удаление статьи
+  * 
+  * @param mixed navigate - функция для переадресации
+  * @param mixed articleId - ID статьи
+  * @param mixed localId - ID авторизованного пользователя
+  * @param mixed setLoaderDelete - react hook для изменения статуса загрузки в компоненте
+  * @param mixed setArticles - react hook для изменения выводимых статей в компоненте
+  */
+export function deleteArticleById(navigate, articleId, localId=null, setLoaderDelete, isEditor=false, setArticles=null) {
     // console.log(`%caPost: deleteArticle(localId=${localId}, articleId=${articleId})`, "background:#066BC6;color:white;padding:1rem;");
-    axios.post(`https://api.ebene.ru/post/deleteArticle`, {articleId:articleId})
+    axios.post(`${serverPath}/post/deleteArticle`, {articleId:articleId})
     .then(function(res) {
         // console.log(res);
         if (res["data"]["message"]) {
-            if (localId) {
-                navigate(`../people/${localId}/posts`);
-            }
+            setLoaderDelete(false);
+
+            if (setArticles) {}
+            else navigate(isEditor ? `../` : `../people/${localId}/posts`);
         }
     })
     .catch(error => {

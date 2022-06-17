@@ -32,8 +32,7 @@
 .wrap.dark .content .steps .step,
 .wrap.dark .content .steps .step span p,
 .wrap.dark .ingresients ul .items,
-.wrap.dark .ingresients ul .items .name,
-.wrap.dark .ingresients ul .items .unit {
+.wrap.dark .ingresients ul .items p {
   background-color: #131313;
 }
 
@@ -53,8 +52,7 @@
 .wrap.light .content .steps .step,
 .wrap.light .content .steps .step span p,
 .wrap.light .ingresients ul .items,
-.wrap.light .ingresients ul .items .name,
-.wrap.light .ingresients ul .items .unit {
+.wrap.light .ingresients ul .items p {
   background-color: #ffffff;
 }
 
@@ -92,6 +90,10 @@
   align-items: center;
   justify-content: space-evenly;
   border-radius: 0 .5rem .5rem 0;
+}
+
+.wrap .header .info.topSetup {
+  margin-top: 1rem !important;
 }
 
 .wrap .header .info .title,
@@ -328,17 +330,22 @@
   z-index: 10;
 }
 
+.wrap .content .ingresients ul .items p:first-child {
+  margin-right: 1rem !important;
+}
+
 .wrap .content .ingresients ul .items p i {
   width: fit-content;
   display: inline-block;
   font-style: normal;
+  word-wrap: normal;
 }
 
 .wrap .content .ingresients ul .items p i.name {
   width: 100%;
   height: fit-content;
   position: relative;
-  padding-right: .5rem !important;
+  display: inline;
   color: gray;
   mix-blend-mode: difference;
   word-wrap: normal;
@@ -346,7 +353,6 @@
   word-spacing: normal;
   hyphens: auto;
   overflow-wrap: break-word;
-  mix-blend-mode: difference;
   font-size: 1rem;
   font-stretch: normal;
   letter-spacing: .1rem;
@@ -361,8 +367,6 @@
   width: max-content;
   height: fit-content;
   position: relative;
-  margin-left: 1rem;
-  padding-left: .5rem !important;
   color: gray;
   mix-blend-mode: difference;
   white-space: nowrap;

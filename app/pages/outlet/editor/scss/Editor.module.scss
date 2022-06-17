@@ -38,7 +38,7 @@ $lightBackground:#ffffff;
     }
 
     &.light {
-        .form
+        .form,
         .form .difficulty select { background: $lightBackground; }
     }
 
@@ -75,7 +75,7 @@ $lightBackground:#ffffff;
         align-items: center;
         
         border-radius: .5rem;
-        box-shadow: 0 .2rem .5rem $shadow;
+        // box-shadow: 0 .2rem .5rem $shadow;
 
         input,
         textarea {

@@ -22,7 +22,8 @@
   background: #0F0F0F;
 }
 
-.wrap.light .form .form .difficulty select {
+.wrap.light .form,
+.wrap.light .form .difficulty select {
   background: #ffffff;
 }
 
@@ -61,7 +62,6 @@
   padding: 1.5rem !important;
   align-items: center;
   border-radius: .5rem;
-  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 .wrap .form input::placeholder,

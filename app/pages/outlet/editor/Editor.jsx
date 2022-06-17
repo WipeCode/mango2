@@ -23,6 +23,9 @@ export default function Editor() {
 
     const [ content, setContent ] = useState(null);
     const [ loader, setLoader ] = useState(true);
+    const [ loaderDelete, setLoaderDelete ] = useState(null);
+    const [ loaderPublic, setLoaderPublic ] = useState(null);
+    const [ loaderAdd, setLoaderAdd ] = useState(null);
 
     const [ img, setImg ] = useState("https://www.raisin.digital/wp-content/uploads/placeholder.svg");
     const [ name, setName ] = useState(null);
@@ -220,7 +223,7 @@ export default function Editor() {
                                     article && 
                                     <button 
                                         className={ css.delete } 
-                                        onClick={ () => onDeleteArticle(articleId, localId, navigate) }
+                                        onClick={ () => onDeleteArticle(articleId, localId, navigate, setLoaderDelete) }
                                     >Delete article</button> 
                                 }
                             </div>
@@ -329,9 +332,9 @@ function onEditArticle(localId, articleId, img, name, description, difficulty, c
     }
 }
 
-function onDeleteArticle(articleId, localId, navigate) {
+function onDeleteArticle(articleId, localId, navigate, setLoaderDelete) {
     if (articleId && typeof articleId === "number") {
-        deleteArticleById(navigate, articleId, localId);
+        deleteArticleById(navigate, articleId, localId, setLoaderDelete, true);
     }
 }
 

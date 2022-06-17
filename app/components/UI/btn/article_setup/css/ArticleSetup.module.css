@@ -98,11 +98,32 @@
 
 .wrap .container .setup ul li {
   padding: .2rem .5rem !important;
+}
+
+.wrap .container .setup ul li button {
+  width: 100%;
+  cursor: pointer;
   color: #f4f4f4;
   mix-blend-mode: difference;
   font-size: 1rem;
-  letter-spacing: .1rem;
+  text-align: left;
+  letter-spacing: .15rem;
   transition: .2s ease-in;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.wrap .container .setup ul li button:disabled {
+  color: gray;
+}
+
+.wrap .container .setup ul li:last-child button {
+  color: tomato;
+}
+
+.wrap .container .setup ul li:last-child button:disabled {
+  color: gray;
 }
 
 .wrap .container .setup ul li a {
@@ -111,21 +132,34 @@
   color: #f4f4f4;
   mix-blend-mode: difference;
   font-size: 1rem;
-  letter-spacing: .1rem;
+  letter-spacing: .15rem;
   transition: .2s ease-in;
 }
 
+.wrap .container .setup ul li a.disabled {
+  color: gray;
+  cursor: not-allowed;
+}
+
 .wrap .container .setup ul li:hover {
-  color: #FF4B2B;
-  font-weight: bolder;
-  mix-blend-mode: normal;
   background: rgba(0, 0, 0, 0.1);
 }
 
-.wrap .container .setup ul li:hover a {
-  color: #FF4B2B;
+.wrap .container .setup ul li:hover button, .wrap .container .setup ul li:hover a {
   font-weight: bolder;
   mix-blend-mode: normal;
+}
+
+@keyframes markLoader {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 450px) {
