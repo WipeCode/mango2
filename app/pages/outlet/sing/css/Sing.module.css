@@ -1,20 +1,35 @@
 .wrap, .wrap .container, .wrap .container .form .input .pasword span {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .wrap .container .sing, .wrap .container .form {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .wrap {
   width: 100%;
   height: 100%;
   position: relative;
-  align-items: center;
-  justify-content: center;
-  animation: opacitytransform .3s ease-in-out;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-animation: opacitytransform .3s ease-in-out;
+          animation: opacitytransform .3s ease-in-out;
 }
 
 .wrap.dark .container {
@@ -26,17 +41,26 @@
 }
 
 .wrap .container {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   overflow: hidden;
   border-radius: .5rem;
-  animation: opacity .3s 1 ease-in;
-  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
+  -webkit-animation: opacity .3s 1 ease-in;
+          animation: opacity .3s 1 ease-in;
+  -webkit-box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 .wrap .container.singin {
-  flex-direction: row-reverse;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
 }
 
 .wrap .container p,
@@ -89,9 +113,14 @@
 
 .wrap .container .sing {
   min-height: 100%;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background: #FF416C;
+  background: -webkit-gradient(linear, left top, right top, from(#FF4B2B), to(#FF416C));
   background: linear-gradient(to right, #FF4B2B, #FF416C);
   background-repeat: no-repeat;
   background-size: cover;
@@ -104,7 +133,9 @@
 
 .wrap .container .form {
   height: 100%;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .wrap .container .form .input {
@@ -146,8 +177,12 @@
 
 .wrap .container .form .input .pasword span {
   width: 100%;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   color: #4b4b4b;
   font-size: 1rem;
   font-weight: bold;
@@ -172,12 +207,16 @@
   text-align: center;
   text-transform: uppercase;
   letter-spacing: .1rem;
+  -webkit-transition: -webkit-transform 80ms ease-in;
+  transition: -webkit-transform 80ms ease-in;
   transition: transform 80ms ease-in;
+  transition: transform 80ms ease-in, -webkit-transform 80ms ease-in;
 }
 
 .wrap .container .ghost:active,
 .wrap .container button:active {
-  transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
 }
 
 .wrap .container .ghost:focus,
@@ -194,6 +233,15 @@
   border-color: whitesmoke;
 }
 
+@-webkit-keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes opacity {
   0% {
     opacity: 0;
@@ -203,13 +251,28 @@
   }
 }
 
-@keyframes opacitytransform {
+@-webkit-keyframes opacitytransform {
   0% {
-    transform: translateY(-1rem);
+    -webkit-transform: translateY(-1rem);
+            transform: translateY(-1rem);
     opacity: 0;
   }
   100% {
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes opacitytransform {
+  0% {
+    -webkit-transform: translateY(-1rem);
+            transform: translateY(-1rem);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
     opacity: 1;
   }
 }
@@ -236,7 +299,8 @@
     height: 100% !important;
     position: relative !important;
     background: transparent !important;
-    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
   }
   .wrap .container .form {
     width: 100% !important;

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useLayoutEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 /** Подключение стилей */
 import css from "./css/Nav.module.css";
 /** Подключение компонентов */
@@ -10,6 +10,7 @@ import LogOutBtn from "../btn/logout/LogOutBtn.jsx";
 import BackBtn from "../btn/back/BackBtn.jsx";
 
 export default function TopNav() {
+    const navigate = useNavigate();
     const { setLocalIsAuth, localIsAuth, setLocalId, localId, localAvatar } = useContext( LocalUserContext );
     const { isDesktop, IconName, GetIcon, setPageTitle, setPagesMath, darkTheme, setDarkTheme, onChangeTheme } = useContext( AppContext );
 
@@ -19,9 +20,9 @@ export default function TopNav() {
     const [ path, setPath ] = useState(null);
     const [ navigation, setNavigation ] = useState(null);
 
-    const onClickLink = (title) => {
-        setPageTitle(title); 
+    const onClickLink = (link) => {
         setPagesMath(null);
+        navigate(link);
     }
 
     useEffect(
@@ -94,7 +95,7 @@ function Desktop({ onClickLink, path, thisAuth, localAvatar, setLocalIsAuth, set
                 key={ path.logo.key } 
                 to={ path.logo.to } 
                 className={ css.logo } 
-                onClick={ () => onClickLink( path.logo.title ) }
+                onClick={ () => onClickLink( path.logo.to ) }
             >{ path.logo.icon }</Link>
 
             <nav>
@@ -105,7 +106,7 @@ function Desktop({ onClickLink, path, thisAuth, localAvatar, setLocalIsAuth, set
                                         key={ `key-top-${i}` } 
                                         to={ m.to } 
                                         title={ m.title } 
-                                        onClick={ () => onClickLink( m.title ) }
+                                        onClick={ () => onClickLink( m.to ) }
                                     >{ m.title }</NavLink> 
                                 : null;
                     })
@@ -139,7 +140,7 @@ function Desktop({ onClickLink, path, thisAuth, localAvatar, setLocalIsAuth, set
                                 to={ path.singin.to } 
                                 title={ path.singin.title } 
                                 className={ css.singin } 
-                                onClick={ () => onClickLink(path.singin.title) }>{ path.singin.title }
+                                onClick={ () => onClickLink(path.singin.to) }>{ path.singin.title }
                             </NavLink>
                     }
 
@@ -153,7 +154,7 @@ function Desktop({ onClickLink, path, thisAuth, localAvatar, setLocalIsAuth, set
                                                 to={ m.to } 
                                                 title={ m.title } 
                                                 className={ css.link }
-                                                onClick={ () => onClickLink(m.title) }>
+                                                onClick={ () => onClickLink(m.to) }>
                                                     { m.icon }<i className={ css.title }>{ m.title }</i>
                                             </NavLink>;
                                 })

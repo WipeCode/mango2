@@ -26,6 +26,7 @@ export default function Editor() {
     const [ loaderDelete, setLoaderDelete ] = useState(null);
     const [ loaderPublic, setLoaderPublic ] = useState(null);
     const [ loaderAdd, setLoaderAdd ] = useState(null);
+    const [ loaderEdit, setLoaderEdit ] = useState(null);
 
     const [ img, setImg ] = useState("https://www.raisin.digital/wp-content/uploads/placeholder.svg");
     const [ name, setName ] = useState(null);
@@ -101,7 +102,7 @@ export default function Editor() {
     useEffect(
         () => {
             /** Если локальный id пользователя не равен id создателя статьи */
-            if (article && +article.user.id !== +localId) {
+            if (article && localId && +article.user.id !== +localId) {
                 navigate("/");
             } else if (article) {
                 setImg( article.img );
@@ -197,34 +198,42 @@ export default function Editor() {
 
                                 <button className={ css.button } onClick={ () => addSetp() }>Add steps</button>
                             </div>
-                            
+
                             <div className={ css.save }>
                                 {
-                                    article
-                                    ?   <button 
-                                            className={ css.edit } 
-                                            onClick={ () => onEditArticle(localId, articleId, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients, navigate) }
-                                        >Edit article</button>
-                                    :   <button 
-                                            className={ css.add }
-                                            onClick={ () => onAddArticle(localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) }
-                                        >Add article</button>
+                                    !article &&
+                                    (
+                                        loaderAdd 
+                                        ? <button className={ css.add } disabled><div className={ noDataStyle.button_loader }><i></i><i></i><i></i></div></button>
+                                        : <button className={ css.add } onClick={ () => onAddArticle(setLoaderAdd, localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) }>Add article</button>
+                                    )
                                 }
 
                                 {
                                     article &&
-                                    <button 
-                                        className={ css.unpublic } 
-                                        onClick={ () => onChangeStatusArticle(articleId, isPublick, setIsPublic) }
-                                    >{ isPublick ? "Public article" : "Unpublic article" }</button>
+                                    (
+                                        loaderEdit 
+                                        ? <button className={ css.edit } disabled><div className={ noDataStyle.button_loader }><i></i><i></i><i></i></div></button>
+                                        : <button className={ css.edit } onClick={ () => onEditArticle(setLoaderEdit, localId, articleId, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients, navigate) }>Edit article</button>
+                                    )
                                 }
 
-                                { 
-                                    article && 
-                                    <button 
-                                        className={ css.delete } 
-                                        onClick={ () => onDeleteArticle(articleId, localId, navigate, setLoaderDelete) }
-                                    >Delete article</button> 
+                                {
+                                    article &&
+                                    (
+                                        loaderPublic 
+                                        ? <button className={ css.unpublic } disabled><div className={ noDataStyle.button_loader }><i></i><i></i><i></i></div></button>
+                                        : <button className={ css.unpublic } onClick={ () => onChangeStatusArticle(setLoaderPublic, articleId, isPublick, setIsPublic) }>{ isPublick ? "Public article" : "Unpublic article" }</button>
+                                    )
+                                }
+
+                                {
+                                    article &&
+                                    (
+                                        loaderDelete 
+                                        ? <button className={ css.delete } disabled><div className={ noDataStyle.button_loader }><i></i><i></i><i></i></div></button>
+                                        : <button className={ css.delete } onClick={ () => onDeleteArticle(articleId, localId, navigate, setLoaderDelete) }>Delete article</button>
+                                    )
                                 }
                             </div>
                         </div>
@@ -238,7 +247,21 @@ export default function Editor() {
                 );
             }
         },
-        [ img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients, loader, darkTheme ]
+        [   loaderDelete,
+            loaderPublic,
+            loaderAdd, 
+            loaderEdit,
+            img, 
+            name, 
+            description, 
+            difficulty, 
+            calories, 
+            minutes, 
+            steps, 
+            isDraf, 
+            ingredients, 
+            loader, 
+            darkTheme   ]
     );
 
     return content;
@@ -299,11 +322,13 @@ function GetSteps({ steps, deleteStep, changeStep }) {
 
 /* -------------------------------------------------------------------------- */
 
-function onChangeStatusArticle(id, isdraf, setIsPublic) {
-    setStatusArticle(id, isdraf, setIsPublic);
+function onChangeStatusArticle(setLoaderPublic, id, isdraf, setIsPublic) {
+    setLoaderPublic(true);
+    console.log(id, isdraf);
+    setStatusArticle(id, isdraf, setIsPublic, setLoaderPublic);
 }
 
-function onEditArticle(localId, articleId, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients, navigate) {
+function onEditArticle(setLoaderEdit, localId, articleId, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients, navigate) {
     let filterStep = steps.filter(f => !!f);
     let filterIngr = ingredients.filter(f => !!f["name"]);
 
@@ -313,7 +338,9 @@ function onEditArticle(localId, articleId, img, name, description, difficulty, c
         filterStep.length>1 && 
         filterIngr.length>1) 
     {
+        setLoaderEdit(true);
         setArticleById(
+            setLoaderEdit,
             navigate,
             localId, 
             articleId, 
@@ -334,11 +361,12 @@ function onEditArticle(localId, articleId, img, name, description, difficulty, c
 
 function onDeleteArticle(articleId, localId, navigate, setLoaderDelete) {
     if (articleId && typeof articleId === "number") {
+        setLoaderDelete(true);
         deleteArticleById(navigate, articleId, localId, setLoaderDelete, true);
     }
 }
 
-function onAddArticle(localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) {
+function onAddArticle(setLoader, localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) {
     let filterStep = steps.filter(f => !!f);
     let filterIngr = ingredients.filter(f => !!f["name"]);
 
@@ -346,6 +374,9 @@ function onAddArticle(localId, navigate, steps, ingredients, img, name, descript
         calories>0 &&
         minutes>0 && 
         filterStep.length>1 && 
-        filterIngr.length>1) addNewArticle(navigate, img, name, description, difficulty, calories, minutes, filterStep, true, filterIngr, localId);
+        filterIngr.length>1) {
+            setLoader(true);
+            addNewArticle(setLoader,navigate, img, name, description, difficulty, calories, minutes, filterStep, filterIngr, localId);
+        }
 }
 

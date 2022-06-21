@@ -58,7 +58,7 @@ $lightBackground:#ffffff;
 
     &.light {
         .form {
-            background-color: transparent;
+            background-color: $lightBackground;
         }
     }
 }

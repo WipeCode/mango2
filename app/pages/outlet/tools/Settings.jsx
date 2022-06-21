@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 /** Подключение стилей */
 import css from "./css/Setting.module.css";
+import noDataStyle from "../style/css/NoData.module.css";
 /** Подключение компонентов */
 import { AppContext, LocalUserContext } from "../../../context/Context.jsx";
 import toBase64 from "../../../components/toBase64.jsx";
@@ -12,6 +13,8 @@ export default function Settings() {
     const { setPageTitle, darkTheme } = useContext(AppContext);
     
     const [ content, setContent ] = useState(null);
+    const [ loader, setLoader ] = useState(false);
+
     const [ avatar, setAvatar ] = useState(null);
     const [ name, setName ] = useState(null);
     const [ email, setEmail ] = useState(null);
@@ -32,21 +35,25 @@ export default function Settings() {
             name !== localName || 
             email !== localEmail || 
             description !== localDescription ) {
-            // axios
-            setUserBasicDataById(localId, img, name, email, description, setLocalAvatar, setLocalName, setLocalEmail, setLocalDescription);
+                setLoader(true);
+                // axios
+                setUserBasicDataById(localId, avatar, name, email, description, setLocalAvatar, setLocalName, setLocalEmail, setLocalDescription);
         }
 
         if (oldPassword && 
             newPassword && 
             repeatPassword && 
-            (newPassword === repeatPassword)) setUserPasswordById(oldPassword, newPassword, localId);
+            (newPassword === repeatPassword)) {
+                setLoader(true);
+                setUserPasswordById(oldPassword, newPassword, localId);
+            }
     }
 
     useEffect(() => { setPageTitle("Settings"); }, []);
 
     useEffect(
         () => {
-            console.log(localAvatar);
+            console.log(localDescription);
             if (localAvatar !== avatar) setAvatar(localAvatar);
             if (localName !== name) setName(localName);
             if (localEmail !== email) setEmail(localEmail);
@@ -96,12 +103,21 @@ export default function Settings() {
                                 <input type="password" placeholder="Enter repeat password" id="repeat_new_password" onChange={ (e) => setRepeatPassword(e.target.value) }/>
                             </fieldset>
                         </div>
-                        <button className={ css.submit } onClick={ () => onChange() }>Change data</button>
+                        
+                        {loader===false && <button className={ css.submit } onClick={ () => onChange() }>Change data</button>}
+                        {
+                            loader===true && 
+                            <button className={ css.submit } disabled>
+                                <div className={ noDataStyle.button_loader }>
+                                    <i></i><i></i><i></i>
+                                </div>
+                            </button>
+                        }
                     </div>
                 </div>
             );
         },
-        [avatar, name, email, description, darkTheme]
+        [loader, avatar, name, email, description, darkTheme]
     );
 
     return content;

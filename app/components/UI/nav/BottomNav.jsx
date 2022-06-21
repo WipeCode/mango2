@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 /** Подключение стилей */
 import css from "./css/Nav.module.css";
 /** Подключение компонентов */
@@ -7,6 +7,7 @@ import { getPathByBottomNav } from "../../../router/AppPathConst.jsx";
 import { AppContext, LocalUserContext } from "../../../context/Context.jsx";
 
 export default function BottomNav() {
+    const navigate = useNavigate();
     const { localId, localIsAuth } = useContext(LocalUserContext);
     const { IconName, GetIcon, setPageTitle, setPagesMath, isDesktop } = useContext(AppContext);
     
@@ -15,6 +16,11 @@ export default function BottomNav() {
 
     const [ path, setPath ] = useState(null);
     const [ navigation, setNavigation ] = useState(null);
+
+    const onClickLink = (link) => {
+        setPagesMath(null);
+        navigate(link);
+    }
 
     useEffect(
         () => {
@@ -64,7 +70,7 @@ export default function BottomNav() {
                                         key={ `key-top-sub-${i}` } 
                                         to={ m.to } 
                                         title={ m.title } 
-                                        onClick={ () => { setPageTitle( m.title ); setPagesMath(null); } }>{ m.icon }</NavLink> 
+                                        onClick={ () => onClickLink(m.to) }>{ m.icon }</NavLink> 
                                     : null;
                                 })
                             }

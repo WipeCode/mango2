@@ -145,7 +145,7 @@ export function Sing({ path, title, description, isSingIn }) {
                                                     <i></i><i></i><i></i>
                                                 </div>
                                             </button>
-                                            }
+                                        }
                                     </div>
                                 </form>
 

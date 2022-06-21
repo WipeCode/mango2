@@ -724,7 +724,7 @@ export function setStatusArticle(articleId, isDraft, setIsPublic, setLoaderPubli
     // console.log(`%caPost: setStatusArticle(articleId=${articleId}, isDraft=${isDraft})`, "background:#066BC6;color:white;padding:1rem;");
     axios.post(`${serverPath}/post/editArticleStatus`, {articleId:articleId, isDraft:isDraft})
     .then(function(res) {
-        // console.log(res);
+        console.log(res);
         if (res["data"]["message"]) {
             if (setIsPublic) {
                 setIsPublic(!isDraft);
@@ -745,17 +745,18 @@ export function setStatusArticle(articleId, isDraft, setIsPublic, setLoaderPubli
   * @param mixed articleId - ID редактируемой статьи
   * @param mixed newArticleArray - новые данные статьи 
   */
-export function setArticleById(navigate, localId, articleId, newArticleArray) {
+export function setArticleById(setLoaderEdit, navigate, localId, articleId, newArticleArray) {
     // console.log(`%caPost: setArticleById()`, "background:#066BC6;color:white;padding:1rem;");
     axios.post(`https://api.ebene.ru/post/editArticle`, {localId:localId, articleId:articleId, newArticleArray:newArticleArray})
     .then(function(res) {
         // console.log(res);
         if (res["data"]["message"]) {
-            navigate(
+            setLoaderEdit(false);
+            /* navigate(
                 res["data"]["message"]==="draft"
                 ? `../people/${localId}/drafts` 
                 : `../people/${localId}/posts`
-            );
+            ); */
         }
     })
     .catch(error => {
@@ -781,7 +782,7 @@ export function setArticleById(navigate, localId, articleId, newArticleArray) {
   * @param mixed ingredients - ингридиенты
   * @param mixed localId - ID авторизованного пользователя
   */
-export function addNewArticle(navigate, img, name, description, difficulty, calories, minutes, steps, ingredients, localId) {
+export function addNewArticle(setLoader, navigate, img, name, description, difficulty, calories, minutes, steps, ingredients, localId) {
     let data = {
         img:img, 
         name:name, 
@@ -796,8 +797,11 @@ export function addNewArticle(navigate, img, name, description, difficulty, calo
 
     axios.post(`${serverPath}/post/add`, data)
     .then(function(res) {
-        // console.log(res);
-        navigate(`../people/${localId}/drafts`);
+        console.log(res);
+        if (res["data"]["message"]) {
+            setLoader(false);
+            navigate(`../editor/${res["data"]["message"]}`);
+        }
     })
     .catch(error => {
         console.log(error);
