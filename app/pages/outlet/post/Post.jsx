@@ -36,9 +36,7 @@ export default function Post() {
     useEffect(
         () => {
             setPageTitle("Post");
-
-            if (localId && article) getArticleById(articleId, localId, setArticle, setLoader, navigate);
-            else if (!article) getArticleById(articleId, localId, setArticle, setLoader, navigate);
+            getArticleById(articleId, localId, setArticle, setLoader, navigate);
         },
         [ localId ]
     );

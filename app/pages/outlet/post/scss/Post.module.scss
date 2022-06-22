@@ -338,9 +338,7 @@ $lightBackground:#ffffff;
                     overflow: hidden;
                     
                     p {
-                        border: 1px solid red;
                         width: fit-content;
-                        padding: 0 .1rem !important;
                         mix-blend-mode: normal;
                         z-index: 10;
 
@@ -358,6 +356,7 @@ $lightBackground:#ffffff;
                                 width: 100%;
                                 height: fit-content;
                                 position: relative;
+                                padding-right: .5rem !important;
             
                                 display: inline;
                                 color: gray;
@@ -380,6 +379,7 @@ $lightBackground:#ffffff;
                 
                             &.unit {
                                 @include wh(max-content, fit-content);
+                                padding-left: .5rem !important;
             
                                 color: gray;
                                 mix-blend-mode: difference;

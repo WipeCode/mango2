@@ -332,9 +332,7 @@ export function getArticleById(id, localId, setArticle, setLoader, navigate) {
             setLoader(false);
         } else if (res["data"]["message"] === false) navigate('../');
     })
-    .catch(error => {
-        console.log(error);
-    });
+    .catch(error => { console.log(error); });
 }
 
  /** Вычисление средней оценки статьи
@@ -684,18 +682,15 @@ export function getFilter(searchText, sordDate, sordPeople, sordTime, sordDiffic
 /*                              SETTING FUNCTIONS                             */
 /* -------------------------------------------------------------------------- */
 
-export function setScoreById(articleId=0, userId=0, scoreId=0, score=0) {
-    // console.log(`%caPost: setScore(articleId=${articleId}, userId=${userId}, scoreId=${scoreId}, score=${score})`, "background:#066BC6;color:white;padding:1rem;");
-    // return 3;
-    // console.log({articleId:articleId, userId:userId, scoreId:scoreId, score:score});
-    // axios.post(`https://api.ebene.ru/post/editScore`, { articleId:articleId, userId:userId, scoreId:scoreId, score:score})
-    // .then(function(res) {
-    //     console.log(res);
-    //     // if (res["data"]["message"]) {}
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+export function setScoreById(articleId, userId, scoreId, score) {
+    console.log(`%caPost: setScore(articleId=${articleId}, userId=${userId}, scoreId=${scoreId}, score=${score})`, "background:#066BC6;color:white;padding:1rem;");
+    axios.post(`https://api.ebene.ru/post/editScore`, {articleId:articleId, userId:userId, score:score, scoreId:scoreId})
+    .then(function(res) {
+        console.log(res);
+    })
+    .catch(error => {
+        console.log(error);
+    });
 }
 
  /**
@@ -703,33 +698,35 @@ export function setScoreById(articleId=0, userId=0, scoreId=0, score=0) {
   * 
   * @param mixed localId - ID авторизованного пользователя
   * @param mixed articleId - ID статьи
-  * @param mixed idMark - 
-  * 
-  * @return [type]
+  * @param mixed idMark - ID закладки
   */
 export function setIsMark(localId, articleId, idMark, setMark) {
-    setMark(true);
-    console.log(`%caPost: setIsMark(localId=${localId}, articleId=${articleId}, idMark=${idMark})`, "background:#066BC6;color:white;padding:1rem;");
+    // console.log(`%caPost: setIsMark(localId=${localId}, articleId=${articleId}, idMark=${idMark})`, "background:#066BC6;color:white;padding:1rem;");
+    axios.post(`https://api.ebene.ru/post/editMark`, {localId:localId, articleId:articleId, idMark:idMark})
+    .then(function(res) {
+        // console.log(res);
+        setMark(res?.data?.message ?? null);
+    })
+    .catch(error => {
+        console.log(error);
+    });
 }
 
  /**
   * Публикация/отмена публикации статьи
   * 
   * @param mixed articleId - ID статьи
-  * @param mixed isDraft - новый статус ('public', 'draft')
+  * @param mixed isPublic - новый статус (true-'public', false-'draft')
   * @param mixed setIsPublic - react hook для изменения публикации в компоненте
   * @param mixed setLoaderPublic - react hook для изменения статуса загрузки в компоненте
   */
-export function setStatusArticle(articleId, isDraft, setIsPublic, setLoaderPublic) {
-    // console.log(`%caPost: setStatusArticle(articleId=${articleId}, isDraft=${isDraft})`, "background:#066BC6;color:white;padding:1rem;");
-    axios.post(`${serverPath}/post/editArticleStatus`, {articleId:articleId, isDraft:isDraft})
+export function setStatusArticle(articleId, isPublic, setIsPublic, setLoaderPublic) {
+    // console.log(`%caPost: setStatusArticle(articleId=${articleId}, isPublic=${isPublic})`, "background:#066BC6;color:white;padding:1rem;");
+    axios.post(`${serverPath}/post/editArticleStatus`, {articleId:articleId, isDraft:isPublic})
     .then(function(res) {
-        console.log(res);
         if (res["data"]["message"]) {
-            if (setIsPublic) {
-                setIsPublic(!isDraft);
-                setLoaderPublic(false);
-            }
+            setIsPublic(!isPublic);
+            setLoaderPublic(false);
         }
     })
     .catch(error => {
@@ -740,23 +737,17 @@ export function setStatusArticle(articleId, isDraft, setIsPublic, setLoaderPubli
  /**
   * Редактирование статьи
   * 
-  * @param mixed navigate - функция для переадресации
   * @param mixed localId - ID авторизованного пользователя
   * @param mixed articleId - ID редактируемой статьи
   * @param mixed newArticleArray - новые данные статьи 
   */
-export function setArticleById(setLoaderEdit, navigate, localId, articleId, newArticleArray) {
+export function setArticleById(setLoaderEdit, localId, articleId, newArticleArray) {
     // console.log(`%caPost: setArticleById()`, "background:#066BC6;color:white;padding:1rem;");
     axios.post(`https://api.ebene.ru/post/editArticle`, {localId:localId, articleId:articleId, newArticleArray:newArticleArray})
     .then(function(res) {
         // console.log(res);
         if (res["data"]["message"]) {
             setLoaderEdit(false);
-            /* navigate(
-                res["data"]["message"]==="draft"
-                ? `../people/${localId}/drafts` 
-                : `../people/${localId}/posts`
-            ); */
         }
     })
     .catch(error => {

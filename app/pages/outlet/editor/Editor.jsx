@@ -108,6 +108,7 @@ export default function Editor() {
                 setImg( article.img );
                 setName( article.name );
                 setDescription( article.description );
+                setDifficulty( article.difficulty );
                 setIngredients( article.ingredients );
                 setMinutes( article.minutes );
                 setCalories( article.calories );
@@ -152,7 +153,7 @@ export default function Editor() {
                                 </fieldset>
                                 <fieldset className={ css.difficulty }>
                                     <label htmlFor="difficulty">Diffivulty</label>
-                                    <select name="difficulty" id="difficulty" defaultValue={ difficulty } onChange={ (e) => setDifficulty(e.target.value) }>
+                                    <select name="difficulty" id="difficulty" value={difficulty} onChange={ (e) => setDifficulty(e.target.value) }>
                                         <option value="1">Easily (1 lvl)</option>
                                         <option value="2">Medium (2 lvl)</option>
                                         <option value="3">Difficult (3 lvl)</option>
@@ -214,7 +215,7 @@ export default function Editor() {
                                     (
                                         loaderEdit 
                                         ? <button className={ css.edit } disabled><div className={ noDataStyle.button_loader }><i></i><i></i><i></i></div></button>
-                                        : <button className={ css.edit } onClick={ () => onEditArticle(setLoaderEdit, localId, articleId, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients, navigate) }>Edit article</button>
+                                        : <button className={ css.edit } onClick={ () => onEditArticle(setLoaderEdit, localId, articleId, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients) }>Edit article</button>
                                     )
                                 }
 
@@ -324,11 +325,11 @@ function GetSteps({ steps, deleteStep, changeStep }) {
 
 function onChangeStatusArticle(setLoaderPublic, id, isdraf, setIsPublic) {
     setLoaderPublic(true);
-    console.log(id, isdraf);
+    console.log("isdraf", isdraf);
     setStatusArticle(id, isdraf, setIsPublic, setLoaderPublic);
 }
 
-function onEditArticle(setLoaderEdit, localId, articleId, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients, navigate) {
+function onEditArticle(setLoaderEdit, localId, articleId, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients) {
     let filterStep = steps.filter(f => !!f);
     let filterIngr = ingredients.filter(f => !!f["name"]);
 
@@ -341,7 +342,6 @@ function onEditArticle(setLoaderEdit, localId, articleId, img, name, description
         setLoaderEdit(true);
         setArticleById(
             setLoaderEdit,
-            navigate,
             localId, 
             articleId, 
             {

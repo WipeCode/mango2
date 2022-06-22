@@ -8,18 +8,20 @@ import { isAdmin } from "../../../../api/aUser.jsx";
 
 export default function ArticleSetup({ darkTheme, localId, localRole, creatorId, isDraft, idMark, articleId, IconName, GetIcon, className=null }) {
     const navigate = useNavigate();
+
     const [ mark, setMark ] = useState(null);
     const [ content, setContent ] = useState(null);
     const [ isCreator, setIsCreator ] = useState(null);
     const [ thisIsAdmin, setThisIsAdmin ] = useState(null);
     const [ accessSetup, setAccessSetup ] = useState(null);
+    const [ thisIsPublic, setThisIsPublic ] = useState(null);
     
     const [ loaderPublic, setLoaderPublic ] = useState(false);
     const [ loaderDelete, setLoaderDelete ] = useState(false);
 
     const onPublish = () => {
         setLoaderPublic(true);
-        setStatusArticle(navigate, articleId, (!isDraft), setLoaderPublic);
+        setStatusArticle(articleId, thisIsPublic, setThisIsPublic, setLoaderPublic);
     };
 
     const onDelete = () => {
@@ -34,6 +36,7 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
     useEffect(
         () => {
             setMark(idMark);
+            setThisIsPublic(!isDraft);
             setThisIsAdmin(isAdmin(localRole));
             setIsCreator(+localId === +creatorId);
         },
@@ -64,9 +67,9 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
                                     </div>
                                     <ul>
                                         <li>
-                                            {(loaderPublic===false && loaderDelete===false) && <button onClick={ () => onPublish() }>{ isDraft ? "Publish" : "Unpublish" }</button>}
-                                            {loaderDelete===true && <button disabled>{ isDraft ? "Publish" : "Unpublish" }</button>}
-                                            {loaderPublic===true && <button className={ css.loader } disabled>{ isDraft ? "Publish" : "Unpublish" }</button>}
+                                            {(loaderPublic===false && loaderDelete===false) && <button onClick={ () => onPublish() }>{ thisIsPublic ? "Publish" : "Unpublish" }</button>}
+                                            {loaderDelete===true && <button disabled>{ thisIsPublic ? "Publish" : "Unpublish" }</button>}
+                                            {loaderPublic===true && <button className={ css.loader } disabled>{ thisIsPublic ? "Publish" : "Unpublish" }</button>}
                                         </li>
 
                                         {
@@ -95,7 +98,7 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
                 );
             } else setContent(null);
         },
-        [ loaderPublic, loaderDelete, accessSetup, mark, darkTheme ]
+        [ thisIsPublic, loaderPublic, loaderDelete, accessSetup, mark, darkTheme ]
     );
 
     return content;
