@@ -8,7 +8,6 @@ import FollowBtn from "../../btn/follow/FollowBtn.jsx";
 export default function UserLineCard({ darkTheme, location, localid, id, name, isfollow, changePagesMath, className=null }) {
     const [ content, setContent ] = useState(true);
 
-    console.log("USER IMG", `https://api.ebene.ru/userImg?userId=${id}`);
     useEffect(
         () => {
             if (id!==null && darkTheme!==null) {

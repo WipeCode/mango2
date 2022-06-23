@@ -15,6 +15,7 @@ export default function Editor() {
     const { id } = useParams();
     const { localId } = useContext(LocalUserContext);
     const { setPageTitle, darkTheme } = useContext(AppContext);
+    const [ location, setLocation ] = useState(window.location.pathname);
 
     /** Состояния для редактирования статьи */
     const [ article, setArticle ] = useState(null); // Данный статьи
@@ -102,10 +103,32 @@ export default function Editor() {
 
     useEffect(
         () => {
+            setLocation(window.location.pathname); 
+            let id = window.location.pathname.replace('/editor/','');
+            setArticleId(id==='new'?null:+id);
+        },
+        [ window.location.pathname ]
+    );
+
+    useEffect(
+        () => {
             if (articleId) {
                 setLoader(true);
                 getArticleById(articleId, localId, setArticle, setLoader, navigate);
-            } else setLoader(false);
+            } else {
+                setLoader(false);
+                setArticle(null);
+                setBase64(null);
+                setImg(null);
+                setName(null);
+                setDescription(null);
+                setDifficulty(1);
+                setCalories(null);
+                setMinutes(null);
+                setSteps([""]);
+                setIsDraf(true);
+                setIngredients([{ name:null, amount:0, unit:"kg" }]);
+            }
         },
         [ articleId, localId ]
     );
@@ -150,19 +173,19 @@ export default function Editor() {
                             <div className={ css.item }>
                                 <fieldset className={ css.input }>
                                     <label htmlFor="name">Name</label>
-                                    <input type="search" defaultValue={ name } placeholder="Enter name" id="name" onChange={ (e) => setName(e.target.value) }/>
+                                    <input type="search" value={ name??'' } placeholder="Enter name" id="name" onChange={ (e) => setName(e.target.value) }/>
                                 </fieldset>
                                 <fieldset className={ css.input }>
                                     <label htmlFor="description">Description</label>
-                                    <textarea defaultValue={ description } placeholder="Enter description" id="description" onChange={ (e) => setDescription(e.target.value) }/>
+                                    <textarea value={ description??'' } placeholder="Enter description" id="description" onChange={ (e) => setDescription(e.target.value) }/>
                                 </fieldset>
                                 <fieldset className={ [css.input, css.row].join(" ") }>
                                     <label htmlFor="calories">Calories</label>
-                                    <input type="number" defaultValue={ calories } min={0} placeholder="0" id="calories" onChange={ (e) => setCalories(e.target.value) }/>
+                                    <input type="number" value={ calories??'' } min={0} placeholder="0" id="calories" onChange={ (e) => setCalories(e.target.value) }/>
                                 </fieldset>
                                 <fieldset className={ [css.input, css.row].join(" ") }>
                                     <label htmlFor="time">Сooking time</label>
-                                    <input type="number" defaultValue={ minutes } min={0} placeholder="0" id="time" onChange={ (e) => setMinutes(e.target.value) }/>
+                                    <input type="number" value={ minutes??'' } min={0} placeholder="0" id="time" onChange={ (e) => setMinutes(e.target.value) }/>
                                     <i>min</i>
                                 </fieldset>
                                 <fieldset className={ css.difficulty }>
@@ -262,7 +285,8 @@ export default function Editor() {
                 );
             }
         },
-        [   loaderDelete,
+        [   article,
+            loaderDelete,
             loaderPublic,
             loaderAdd, 
             loaderEdit,

@@ -5,7 +5,7 @@ import css from "./css/ArticleMiniCard.module.css";
 /** Подключение компонентов */
 import ArticleSetup from "../../../btn/article_setup/ArticleSetup.jsx";
 
-export default function ArticleMiniCard({ darkTheme, localId, localRole, articleId, date, score, people, name, ismark, isDraft=false, src, creatorName, creatorId, IconName, GetIcon, changePagesMath, location }) {
+export default function ArticleMiniCard({ darkTheme, localId, localRole, articleId, date, score, people, name, ismark, isDraft=false, creatorName, creatorId, IconName, GetIcon, changePagesMath, location }) {
     const navigate = useNavigate();
     const [ content, setContent ] = useState(null);
 
@@ -32,7 +32,7 @@ export default function ArticleMiniCard({ darkTheme, localId, localRole, article
                                 GetIcon={ GetIcon }
                             />
 
-                            <img src={ src } alt={ name } onClick={ () => onClick() }/>
+                            <img src={ `https://api.ebene.ru/articleImg?articleId=${articleId}` } alt={ name } onClick={ () => onClick() }/>
 
                             <div className={ css.score }>
                                 <span className={ css.num }>{ score }</span>

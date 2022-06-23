@@ -11,39 +11,35 @@ import { getPostsById } from "../../../../api/aPost.jsx";
 
 export default function Posts() {
     const { id } = useParams();
-    const location = window.location.pathname;
 
     const { localId, localRole } = useContext(LocalUserContext);
     const { changePagesMath, IconName, GetIcon, darkTheme } = useContext(AppContext);
     
     const [ post, setPost ] = useState(null);
-    const [ article, setArticle ] = useState(null);
+    const [ location, setLocation ] = useState(window.location.pathname);
     const [ content, setContent ] = useState(true);
     const [ loader, setLoader ] = useState(true);
 
     useEffect(
         () => {
-            if (id!==null) {
-                setPost( getPostsById(+id) );
-                setLoader(false);
-            }
+            setLocation(window.location.pathname);
         },
-        [ id, localId ]
+        [ window.location.pathname ]
     );
 
     useEffect(
         () => {
-            if (post) { 
-                setPost( [...post, article] );
+            if (id!==null) {
+                getPostsById(id, localId, setPost, setLoader);
             }
         },
-        [ article ]
+        [ location, id, localId ]
     );
 
     useEffect(
         () => {
             if (!loader) {
-                if (post) {
+                if (post && post.length>0) {
                     setContent(
                         <div className={ css.wrap }>
                             <ArticleCardsWrap
@@ -77,7 +73,7 @@ export default function Posts() {
                 );
             }
         },
-        [post, loader, darkTheme]
+        [ post, loader, darkTheme ]
     )
 
     return content;

@@ -11,161 +11,25 @@ const serverPath = "https://api.ebene.ru";
 /*                              GETTING FUNCTIONS                             */
 /* -------------------------------------------------------------------------- */
 
-export function getPostsById(id=0) {
-    let lastId = 19;
-    // console.log(`%caPost: getPostsById(id=${id})`, "background:#066BC6;color:white;padding:1rem;");
-    axios.get(`https://api.ebene.ru/userPosts?id=${id}&lastId=${lastId}`)
+ /**
+  * Вывод статей, опубликованых пользователем
+  * 
+  * @param mixed id - ID просматриваемого пользователя
+  * @param mixed localId - ID авторизованного пользователя
+  * @param mixed setPost - react hook для изменения состояния публикаций (статей)
+  * @param mixed setLoader - react hook для изменения состояния загрузки
+  */
+export function getPostsById(id, localId, setPost, setLoader) {
+    axios.get(`https://api.ebene.ru/userPosts?id=${id}&localId=${localId}`)
     .then(function(res) {
-        console.log(res);
-        if (res["data"]["message"]) {
-            
-        }
+        setPost(res["data"]["message"] ? mapArticles(res["data"]["message"]) : null);
+        setLoader(false);
     })
     .catch(error => {
         console.log(error);
+        setPost(null);
+        setLoader(false);
     });
-    
-    let result = [];
-
-    if (id===7) {
-        result = [
-            {
-                id:18, 
-                user: {
-                    id:7,
-                    name:"WipeCode",
-                },
-                name:"Chicken and pineapple pizza",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:false,
-            },
-            {
-                id:19, 
-                user: {
-                    id:7,
-                    name:"WipeCode",
-                },
-                name:"Chicken and pineapple pizza",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:false,
-            },
-            {
-                id:18, 
-                user: {
-                    id:7,
-                    name:"WipeCode",
-                },
-                name:"4 Cheese Pizza at Home",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:false,
-            },
-        ];
-    } else if (id===9) {
-        result = [
-            {
-                id:21, 
-                user: {
-                    id:9,
-                    name:"Tom",
-                },
-                name:"Pan pizza",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:false,
-            },
-            {
-                id:22, 
-                user: {
-                    id:9,
-                    name:"Tom",
-                },
-                name:"Kefir pizza",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:false,
-            },
-            {
-                id:23, 
-                user: {
-                    id:9,
-                    name:"Tom",
-                },
-                name:"Berry brownie pizza",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:false,
-            },
-        ];
-    } else if (id===12) {
-        result = [
-            {
-                id:18, 
-                user: {
-                    id:12,
-                    name:"WipeCode",
-                },
-                name:"Chicken and pineapple pizza",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:false,
-            },
-        ];
-    }
-    else result = null;
-
-    return result ? mapArticles(result) : result;
 }
 
 export function getMarksById(id=0) {
@@ -331,7 +195,6 @@ export function getDraftsById(id=0) {
 export function getArticleById(id, localId, setArticle, setLoader, navigate) {
     axios.get(`${serverPath}/article?id=${id}&localId=${localId}`)
     .then(function(res) {
-        console.log(res);
         if (res["data"]["message"]) {
             setArticle(res["data"]["message"]);
             setLoader(false);

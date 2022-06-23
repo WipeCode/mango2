@@ -24,8 +24,15 @@ export default function Account() {
     const [ isClickFollow, setIsClickFollow ] = useState(false);
     
     const navigate = useNavigate();
-    const location = window.location.pathname;
+    const [ location, setLocation ] = useState(window.location.pathname);
     const path = getPathByAccount( +localId, +id );
+
+    useEffect(
+        () => {
+            setLocation(window.location.pathname);
+        },
+        [ window.location.pathname ]
+    );
 
     useEffect(
         () => {
@@ -33,7 +40,7 @@ export default function Account() {
                 getUserById(+id, +localId, setUser, navigate, setLoader);
             }
         },
-        [ id, localId ]
+        [ location, id, localId ]
     );
 
     useEffect(

@@ -26,7 +26,6 @@ export default function ArticleCardsWrap({ darkTheme, articles, location, localI
                                             people={ m.people }
                                             name={ m.name }
                                             ismark={ m.ismark }
-                                            src={ m.img }
                                             isDraft={ m.isdraft }
                                             creatorName={ m.user.name }
                                             creatorId={ m.user.id }
