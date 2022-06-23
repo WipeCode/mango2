@@ -75,7 +75,6 @@ export default function Post() {
                 setArticleHeader({
                     articleId: article?.id,
                     creatorId: article?.user?.id,
-                    src: article?.img,
                     name: article?.name,
                     score: score,
                     people: people,
@@ -84,7 +83,7 @@ export default function Post() {
                     ingredients: article?.ingredients.length,
                     minutes: article?.minutes,
                     calories: article?.calories,
-                    isMark: article?.ismark ?? false,
+                    isMark: article?.ismark,
                     isDraft: article?.isdraft ?? false,
                 });
             }
@@ -154,7 +153,7 @@ function Header({ darkTheme, localId, localRole, article, IconName, GetIcon }) {
                     localRole={ localRole }
                     creatorId={ article.creatorId }
                     isDraft={ article?.isDraft }
-                    localIsMark={ article?.isMark }
+                    idMark={ article?.isMark }
                     articleId={ article?.articleId }
                     IconName={ IconName }
                     GetIcon={ GetIcon }
@@ -162,7 +161,7 @@ function Header({ darkTheme, localId, localRole, article, IconName, GetIcon }) {
                 />
     
                 <div className={ css.img }>
-                    <img src={ article?.src } alt="food"/>
+                    <img src={ `https://api.ebene.ru/articleImg?articleId=${article?.articleId}` } alt="food"/>
                 </div>
     
                 <div className={ [css.info, localId?css.topSetup:null].join(" ") }>
@@ -284,7 +283,6 @@ function Footer({ darkTheme, localIsAuth, localId, articleId, score, article, se
                     location={ location }
                     localid={ localId }
                     id={ article?.user?.id }
-                    src={ article?.user?.img }
                     name={ article?.user?.name }
                     isfollow={ article?.user?.follow }
                     changePagesMath={ changePagesMath }

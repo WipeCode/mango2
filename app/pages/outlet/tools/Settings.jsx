@@ -9,7 +9,7 @@ import toBase64 from "../../../components/toBase64.jsx";
 import { setUserBasicDataById, setUserPasswordById } from "../../../api/aUser.jsx";
 
 export default function Settings() {
-    const { localId, localAvatar, localName, localEmail, localDescription, setLocalDescription, setLocalAvatar, setLocalName, setLocalEmail } = useContext(LocalUserContext); 
+    const { localId, localName, localEmail, localDescription, setLocalDescription, setLocalName, setLocalEmail } = useContext(LocalUserContext); 
     const { setPageTitle, darkTheme } = useContext(AppContext);
     
     const [ content, setContent ] = useState(null);
@@ -31,13 +31,12 @@ export default function Settings() {
     }
     
     const onChange = () => {
-        if (avatar !== localAvatar || 
-            name !== localName || 
+        if (name !== localName || 
             email !== localEmail || 
             description !== localDescription ) {
                 setLoader(true);
                 // axios
-                setUserBasicDataById(localId, avatar, name, email, description, setLocalAvatar, setLocalName, setLocalEmail, setLocalDescription);
+                setUserBasicDataById(localId, avatar, name, email, description, setLocalName, setLocalEmail, setLocalDescription);
         }
 
         if (oldPassword && 
@@ -53,13 +52,11 @@ export default function Settings() {
 
     useEffect(
         () => {
-            console.log(localDescription);
-            if (localAvatar !== avatar) setAvatar(localAvatar);
             if (localName !== name) setName(localName);
             if (localEmail !== email) setEmail(localEmail);
             if (localDescription !== description) setDescription(localDescription);
         },
-        [localAvatar, localName, localEmail, localDescription]
+        [localId, localName, localEmail, localDescription]
     );
 
     useEffect(
@@ -69,7 +66,7 @@ export default function Settings() {
                     <h1 className={ css.header }>Settings</h1>
                     <div className={ css.form }>
                         <fieldset className={ css.avatar }>
-                            <div className={ css.img }><img src={ avatar } alt="avatar" /></div>
+                            <div className={ css.img }><img src={ avatar ?? `https://api.ebene.ru/userImg?userId=${localId}` } alt="avatar" /></div>
                             <label htmlFor="avatar">Upload file</label>
                             <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onChange={ (e) => onAvatar(e.target) }></input>
                         </fieldset>
@@ -92,15 +89,15 @@ export default function Settings() {
                             <p className={ css.title }>Password</p>
                             <fieldset className={ css.input }>
                                 <label htmlFor="old_password">Old password</label>
-                                <input type="password" placeholder="Enter old password" id="old_password" onChange={ (e) => setOldPassword(e.target.value) }/>
+                                <input type="password" placeholder="Enter old password" id="old_password" autoComplete="new-password" onChange={ (e) => setOldPassword(e.target.value) }/>
                             </fieldset>
                             <fieldset className={ css.input }>
                                 <label htmlFor="new_password">New password</label>
-                                <input type="password" placeholder="Enter new password" id="new_password" onChange={ (e) => setNewPassword(e.target.value) }/>
+                                <input type="password" placeholder="Enter new password" id="new_password" autoComplete="new-password" onChange={ (e) => setNewPassword(e.target.value) }/>
                             </fieldset>
                             <fieldset className={ css.input }>
                                 <label htmlFor="repeat_new_password">Repeat password</label>
-                                <input type="password" placeholder="Enter repeat password" id="repeat_new_password" onChange={ (e) => setRepeatPassword(e.target.value) }/>
+                                <input type="password" placeholder="Enter repeat password" id="repeat_new_password" autoComplete="new-password" onChange={ (e) => setRepeatPassword(e.target.value) }/>
                             </fieldset>
                         </div>
                         
@@ -117,7 +114,7 @@ export default function Settings() {
                 </div>
             );
         },
-        [loader, avatar, name, email, description, darkTheme]
+        [localId, loader, name, email, description, darkTheme]
     );
 
     return content;

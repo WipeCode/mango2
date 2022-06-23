@@ -3,15 +3,9 @@
   height: 100%;
   position: relative;
   padding: 1rem !important;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-animation: opacitytransform .3s ease-in-out;
-          animation: opacitytransform .3s ease-in-out;
+  flex-direction: column;
+  animation: opacitytransform .3s ease-in-out;
 }
 
 .wrap .header {
@@ -54,43 +48,24 @@
   text-align: center;
   text-transform: uppercase;
   letter-spacing: .1rem;
-  -webkit-transition: -webkit-transform 80ms ease-in;
-  transition: -webkit-transform 80ms ease-in;
   transition: transform 80ms ease-in;
-  transition: transform 80ms ease-in, -webkit-transform 80ms ease-in;
 }
 
 .wrap .discovery:active {
-  -webkit-transform: scale(0.95);
-          transform: scale(0.95);
+  transform: scale(0.95);
 }
 
 .wrap .discovery:focus {
   outline: none;
 }
 
-@-webkit-keyframes opacitytransform {
-  0% {
-    -webkit-transform: translateY(-1rem);
-            transform: translateY(-1rem);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 @keyframes opacitytransform {
   0% {
-    -webkit-transform: translateY(-1rem);
-            transform: translateY(-1rem);
+    transform: translateY(-1rem);
     opacity: 0;
   }
   100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }
@@ -100,15 +75,9 @@
     padding-bottom: 2rem !important;
   }
   .wrap .container {
-    display: -webkit-box !important;
-    display: -ms-flexbox !important;
     display: flex !important;
-    -webkit-box-orient: horizontal !important;
-    -webkit-box-direction: normal !important;
-        -ms-flex-direction: row !important;
-            flex-direction: row !important;
-    -ms-flex-wrap: nowrap !important;
-        flex-wrap: nowrap !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
     overflow-x: auto;
   }
   .wrap .container::-webkit-scrollbar {

@@ -32,6 +32,14 @@
     }
 }
 
+@media screen and (max-width:700px) {
+    .wrap {
+        .gridrow {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
 @media screen and (max-width:450px) {
     .wrap {
         .gridrow {

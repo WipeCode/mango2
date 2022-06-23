@@ -13,13 +13,12 @@ import { singIn, singUp } from "../../../api/aUser.jsx";
 export function Sing({ path, title, description, isSingIn }) {
     const navigate = useNavigate();
     const { darkTheme } = useContext(AppContext);
-    const { setLocalId, setLocalRole, setLocalAvatar, setLocalName, setLocalEmail, setLocalIsAuth, setLocalDescription } = useContext(LocalUserContext);
+    const { setLocalId, setLocalRole, setLocalName, setLocalEmail, setLocalIsAuth, setLocalDescription } = useContext(LocalUserContext);
 
     const [ thisLocalId, setThisLocalId ] = useState(null);
     const [ thisLocalRole, setThisLocalRole ] = useState(null);
     const [ thisLocalName, setThisLocalName ] = useState(null);
     const [ thisLocalEmail, setThisLocalEmail ] = useState(null);
-    const [ thisLocalAvatar, setThisLocalAvatar ] = useState(null);
     const [ thisLocalDescription, setThisLocalDescription ] = useState(null);
 
     const [ content, setContent ] = useState(null);
@@ -43,7 +42,6 @@ export function Sing({ path, title, description, isSingIn }) {
                 setThisLocalRole, 
                 setThisLocalName, 
                 setThisLocalEmail, 
-                setThisLocalAvatar, 
                 setThisLocalDescription
             );
         } else if (!isSingIn && name && email && password) {
@@ -67,21 +65,19 @@ export function Sing({ path, title, description, isSingIn }) {
             if (thisLocalId &&
                 thisLocalRole &&
                 thisLocalName &&
-                thisLocalEmail &&
-                thisLocalAvatar) 
+                thisLocalEmail) 
             {
                 setLocalIsAuth(true);
                 setLocalId(thisLocalId);
                 setLocalRole(thisLocalRole);
                 setLocalName(thisLocalName);
                 setLocalEmail(thisLocalEmail);
-                setLocalAvatar(thisLocalAvatar);
                 setLocalDescription(thisLocalDescription);
 
                 navigate("../news");
             }
         },
-        [ thisLocalId, thisLocalRole, thisLocalName, thisLocalEmail, thisLocalAvatar ]
+        [ thisLocalId, thisLocalRole, thisLocalName, thisLocalEmail ]
     );
 
     useEffect(

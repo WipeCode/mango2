@@ -121,7 +121,7 @@ export function setFollow(localId, userId, isfollow, setIsFollow, setLoader) {
     });
 }
 
-export function setUserBasicDataById(localId, img, name, email, description, setLocalAvatar, setLocalName, setLocalEmail, setLocalDescription) {
+export function setUserBasicDataById(localId, img, name, email, description, setLocalName, setLocalEmail, setLocalDescription) {
     console.log(`%caUser: setUserBasicDataById()`, "background:#066BC6;color:white;padding:1rem;");
 
 }
@@ -175,10 +175,9 @@ export function singUp(name, email, password, setLoader, navigate) {
   * @param mixed setThisLocalRole - react hook для изменения состояния роли пользователя
   * @param mixed setThisLocalName - react hook для изменения состояния имени пользователя
   * @param mixed setThisLocalEmail - react hook для изменения состояния электронной почты пользователя
-  * @param mixed setThisLocalAvatar - react hook для изменения состояния автара пользователя
   * @param mixed setThisLocalDescription - react hook для изменения состояния описания пользователя
   */
-export function singIn(email, password, setLoader, setThisLocalId, setThisLocalRole, setThisLocalName, setThisLocalEmail, setThisLocalAvatar, setThisLocalDescription) {
+export function singIn(email, password, setLoader, setThisLocalId, setThisLocalRole, setThisLocalName, setThisLocalEmail, setThisLocalDescription) {
     axios.post(`https://api.ebene.ru/singin`, {email:email, password:password})
     .then(function(res) {
         if (res?.data?.message) {
@@ -187,7 +186,6 @@ export function singIn(email, password, setLoader, setThisLocalId, setThisLocalR
                                                 ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiCoHLktPNbzYjYcrFoYnlmxX5SfRKCIJQsA&usqp=CAU";
             }
 
-            setThisLocalAvatar(res["data"]["message"]["img"]);
             setThisLocalId(res["data"]["message"]["id"]);
             setThisLocalRole(res["data"]["message"]["role"]);
             setThisLocalName(res["data"]["message"]["name"]);
@@ -201,7 +199,7 @@ export function singIn(email, password, setLoader, setThisLocalId, setThisLocalR
                     img:res["data"]["message"]["img"],
                     name:res["data"]["message"]["name"],
                     email:res["data"]["message"]["email"],
-                    email:res["data"]["message"]["description"],
+                    description:res["data"]["message"]["description"],
                 }
             );
 

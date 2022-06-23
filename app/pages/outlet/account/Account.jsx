@@ -225,7 +225,6 @@ function ModalFollow({  darkTheme, location, changePagesMath, localId, selectedU
                                                             location={ location } 
                                                             localid={ localId } 
                                                             id={ m.id } 
-                                                            src={ m.img } 
                                                             name={ m.name } 
                                                             isfollow={ m.isfollow }
                                                             changePagesMath={ changePagesMath }

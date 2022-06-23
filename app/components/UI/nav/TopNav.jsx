@@ -11,8 +11,8 @@ import BackBtn from "../btn/back/BackBtn.jsx";
 
 export default function TopNav() {
     const navigate = useNavigate();
-    const { setLocalIsAuth, localIsAuth, setLocalId, localId, localAvatar } = useContext( LocalUserContext );
-    const { isDesktop, IconName, GetIcon, setPageTitle, setPagesMath, darkTheme, setDarkTheme, onChangeTheme } = useContext( AppContext );
+    const { setLocalIsAuth, localIsAuth, setLocalId, localId } = useContext( LocalUserContext );
+    const { isDesktop, IconName, GetIcon, setPagesMath, darkTheme, setDarkTheme, onChangeTheme } = useContext( AppContext );
 
     const [ thisDesktop, setThisDesktop ] = useState(null);
     const [ thisAuth, setThisAuth ] = useState(null);
@@ -63,8 +63,8 @@ export default function TopNav() {
                                     path={ path } 
                                     thisAuth={ thisAuth } 
                                     setLocalIsAuth={ setLocalIsAuth }
+                                    localId={ localId }
                                     setLocalId={ setLocalId }
-                                    localAvatar={ localAvatar } 
                                     IconName={ IconName } 
                                     GetIcon={ GetIcon }
                                     darkTheme={ darkTheme }
@@ -88,7 +88,7 @@ export default function TopNav() {
     }
 }
 
-function Desktop({ onClickLink, path, thisAuth, localAvatar, setLocalIsAuth, setLocalId, IconName, GetIcon, darkTheme, setDarkTheme, onChangeTheme }) {
+function Desktop({ onClickLink, path, thisAuth, setLocalIsAuth, localId, setLocalId, IconName, GetIcon, darkTheme, setDarkTheme, onChangeTheme }) {
     return (
         <div className={ [css.nav, css.desktop].join(" ") }>
             <Link 
@@ -133,7 +133,7 @@ function Desktop({ onClickLink, path, thisAuth, localAvatar, setLocalIsAuth, set
                     {
                         thisAuth
                         ?   <div className={ css.avatar }>
-                                <img alt="avatar" src={ localAvatar }/>
+                                <img alt="avatar" src={ `https://api.ebene.ru/userImg?userId=${localId}` }/>
                             </div>
                         :   <NavLink 
                                 key={ path.singin.key } 

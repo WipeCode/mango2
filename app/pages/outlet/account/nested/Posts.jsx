@@ -17,6 +17,7 @@ export default function Posts() {
     const { changePagesMath, IconName, GetIcon, darkTheme } = useContext(AppContext);
     
     const [ post, setPost ] = useState(null);
+    const [ article, setArticle ] = useState(null);
     const [ content, setContent ] = useState(true);
     const [ loader, setLoader ] = useState(true);
 
@@ -28,6 +29,15 @@ export default function Posts() {
             }
         },
         [ id, localId ]
+    );
+
+    useEffect(
+        () => {
+            if (post) { 
+                setPost( [...post, article] );
+            }
+        },
+        [ article ]
     );
 
     useEffect(
@@ -67,7 +77,7 @@ export default function Posts() {
                 );
             }
         },
-        [loader, darkTheme]
+        [post, loader, darkTheme]
     )
 
     return content;

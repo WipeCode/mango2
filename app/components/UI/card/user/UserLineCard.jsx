@@ -5,9 +5,10 @@ import css from "./css/UserLineCard.module.css";
 /** Подключение компонентов */
 import FollowBtn from "../../btn/follow/FollowBtn.jsx";
 
-export default function UserLineCard({ darkTheme, location, localid, id, src, name, isfollow, changePagesMath, className=null }) {
+export default function UserLineCard({ darkTheme, location, localid, id, name, isfollow, changePagesMath, className=null }) {
     const [ content, setContent ] = useState(true);
 
+    console.log("USER IMG", `https://api.ebene.ru/userImg?userId=${id}`);
     useEffect(
         () => {
             if (id!==null && darkTheme!==null) {
@@ -20,7 +21,7 @@ export default function UserLineCard({ darkTheme, location, localid, id, src, na
                                 onClick={ () => changePagesMath(location) }
                             >
                                 <div className={ css.avatar }>
-                                    <img src={ src??"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiCoHLktPNbzYjYcrFoYnlmxX5SfRKCIJQsA&usqp=CAU" } alt="creator_avatar"/>
+                                    <img src={ `https://api.ebene.ru/userImg?userId=${id}` } alt="creator_avatar"/>
                                 </div>
                 
                                 <p className={ css.name }>{ name }</p>
@@ -40,7 +41,7 @@ export default function UserLineCard({ darkTheme, location, localid, id, src, na
                 );
             }
         },
-        [ id, darkTheme ]
+        [ id, isfollow, darkTheme ]
     );
 
     return content;

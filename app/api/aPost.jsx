@@ -1,6 +1,10 @@
 import React from "react";
 import axios from 'axios';
 
+//LIKE - ->filterByTitle('War%')
+// = - filterByTitle('War And Peace')
+// filterById(array('min' => 123, 'max' => 456)) -  book.ID >= :p1 AND book.ID <= :p2) / :p1 => 123, :p2 => 456
+
 const serverPath = "https://api.ebene.ru";
 
 /* -------------------------------------------------------------------------- */
@@ -8,17 +12,18 @@ const serverPath = "https://api.ebene.ru";
 /* -------------------------------------------------------------------------- */
 
 export function getPostsById(id=0) {
+    let lastId = 19;
     // console.log(`%caPost: getPostsById(id=${id})`, "background:#066BC6;color:white;padding:1rem;");
-    // axios.get(`https://api.ebene.ru/userPosts?id=${id}`)
-    // .then(function(res) {
-    //     console.log(res);
-    //     if (res["data"]["message"]) {
+    axios.get(`https://api.ebene.ru/userPosts?id=${id}&lastId=${lastId}`)
+    .then(function(res) {
+        console.log(res);
+        if (res["data"]["message"]) {
             
-    //     }
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
     
     let result = [];
 
@@ -326,7 +331,7 @@ export function getDraftsById(id=0) {
 export function getArticleById(id, localId, setArticle, setLoader, navigate) {
     axios.get(`${serverPath}/article?id=${id}&localId=${localId}`)
     .then(function(res) {
-        // console.log(res);
+        console.log(res);
         if (res["data"]["message"]) {
             setArticle(res["data"]["message"]);
             setLoader(false);
@@ -788,6 +793,7 @@ export function addNewArticle(setLoader, setArticleId, navigate, img, name, desc
 
     axios.post(`${serverPath}/addArticle`, data)
     .then(function(res) {
+        console.log(res);
         if (res["data"]["message"]) {
             setLoader(false);
             setArticleId(res["data"]["message"]);
@@ -826,7 +832,7 @@ export function deleteArticleById(navigate, articleId, localId=null, setLoaderDe
 }
 
 /* -------------------------------------------------------------------------- */
-/*                               LOCAL FUNCTIONS                              */
+/*                               EXTRA FUNCTIONS                              */
 /* -------------------------------------------------------------------------- */
 
 function mapArticles(result) {

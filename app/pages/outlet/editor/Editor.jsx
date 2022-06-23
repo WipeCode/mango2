@@ -11,24 +11,27 @@ import { addNewArticle, deleteArticleById, getArticleById, setArticleById, setSt
 
 export default function Editor() {
     const navigate = useNavigate();
-    const location = window.location.pathname;
 
     const { id } = useParams();
     const { localId } = useContext(LocalUserContext);
     const { setPageTitle, darkTheme } = useContext(AppContext);
 
-    const [ article, setArticle ] = useState(null);
-    const [ articleId, setArticleId ] = useState(false);
-    const [ isPublick, setIsPublic ] = useState(true);
+    /** Состояния для редактирования статьи */
+    const [ article, setArticle ] = useState(null); // Данный статьи
+    const [ articleId, setArticleId ] = useState(false); // ID статьи
+    const [ isPublick, setIsPublic ] = useState(true); // Статус публикации
 
-    const [ content, setContent ] = useState(null);
-    const [ loader, setLoader ] = useState(true);
-    const [ loaderDelete, setLoaderDelete ] = useState(null);
-    const [ loaderPublic, setLoaderPublic ] = useState(null);
-    const [ loaderAdd, setLoaderAdd ] = useState(null);
-    const [ loaderEdit, setLoaderEdit ] = useState(null);
+    /** Состояния элементов редактора */
+    const [ content, setContent ] = useState(null); // Содержание компонента
+    const [ loader, setLoader ] = useState(true); // Состояние загрузки
+    const [ loaderDelete, setLoaderDelete ] = useState(null); // Состояние загрузки при удалении
+    const [ loaderPublic, setLoaderPublic ] = useState(null); // Состояние загрузки при изменения статуса публикации
+    const [ loaderAdd, setLoaderAdd ] = useState(null); // Состояние загрузки при добавлении статьи
+    const [ loaderEdit, setLoaderEdit ] = useState(null); // Состояние загрузки при редактировании
 
-    const [ img, setImg ] = useState("https://www.raisin.digital/wp-content/uploads/placeholder.svg");
+    /** Общие состояния содержания */
+    const [ base64, setBase64 ] = useState(null); // Загруженное изображение в base64
+    const [ img, setImg ] = useState(null); // Загруженное изображение в виде файла
     const [ name, setName ] = useState(null);
     const [ description, setDescription ] = useState(null);
     const [ difficulty, setDifficulty ] = useState(1);
@@ -38,16 +41,20 @@ export default function Editor() {
     const [ isDraf, setIsDraf ] = useState(true);
     const [ ingredients, setIngredients ] = useState([{ name:null, amount:0, unit:"kg" }]);
 
+    /** Загрузка изображения */
     const onImg = async function (target) {
         let file = target.files[0];
         let result = await toBase64(file);
-        setImg(result);
+        setImg(file);
+        setBase64(result);
     }
 
+    /** Добавление ингредиента */
     const addIngredient = () => {
         setIngredients([ ...ingredients, { name:null, amount:0, unit:"kg" } ])
     }
 
+    /** Редактирование ингредиента */
     const editIngredients = (index, key, value) => {
         let s = ingredients.map((m,i) => {
             if (i === index) m[key] = value;
@@ -56,6 +63,7 @@ export default function Editor() {
         setIngredients(s);
     }
 
+    /** Удаление ингредиента */
     const deleteIngredient = (index) => {
         if (ingredients.length !== 1) {
             let s = ingredients.filter((f,i) => i!==index);
@@ -63,15 +71,18 @@ export default function Editor() {
         }
     }
 
+    /** Добавление этапа приготовления */
     const addSetp = () => {
         setSteps([ ...steps, null ])
     }
 
+    /** Редактирование этапа приготовления */
     const changeStep = (value, index) => {
         let s = steps.map((m,i) => i===index ? value : m);
         setSteps(s);
     }
 
+    /** Удаление этапа приготовления */
     const deleteStep = (index) => {
         if (steps.length !== 1) {
             let s = steps.filter((f,i) => i!==index);
@@ -128,7 +139,10 @@ export default function Editor() {
                         <h1 className={ css.header }>{ articleId ? "Edit article" : "New article" }</h1>
                         <div className={ css.form }>
                             <fieldset className={ css.avatar }>
-                                <div className={ css.img }><img src={ img } alt="avatar" /></div>
+                                <div className={ css.img }>
+                                    <img src={ base64 ?? `https://api.ebene.ru/articleImg?articleId=${articleId}` } alt="article img"/>
+                                </div>
+
                                 <span className={ css.description }>The image will be stretched more when you view the article</span>
                                 <label htmlFor="avatar">Upload file</label>
                                 <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onChange={ (e) => onImg(e.target) }></input>
@@ -206,7 +220,7 @@ export default function Editor() {
                                     (
                                         loaderAdd 
                                         ? <button className={ css.add } disabled><div className={ noDataStyle.button_loader }><i></i><i></i><i></i></div></button>
-                                        : <button className={ css.add } onClick={ () => onAddArticle(setLoaderAdd, setArticleId, localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) }>Add article</button>
+                                        : <button className={ css.add } onClick={ () => onAddArticle(setLoaderAdd, setArticleId, localId, navigate, steps, ingredients, base64, name, description, difficulty, calories, minutes) }>Add article</button>
                                     )
                                 }
 
@@ -215,7 +229,7 @@ export default function Editor() {
                                     (
                                         loaderEdit 
                                         ? <button className={ css.edit } disabled><div className={ noDataStyle.button_loader }><i></i><i></i><i></i></div></button>
-                                        : <button className={ css.edit } onClick={ () => onEditArticle(setLoaderEdit, localId, articleId, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients) }>Edit article</button>
+                                        : <button className={ css.edit } onClick={ () => onEditArticle(setLoaderEdit, localId, articleId, base64, name, description, difficulty, calories, minutes, steps, isDraf, ingredients) }>Edit article</button>
                                     )
                                 }
 
@@ -253,6 +267,7 @@ export default function Editor() {
             loaderAdd, 
             loaderEdit,
             img, 
+            base64,
             name, 
             description, 
             difficulty, 
@@ -323,12 +338,36 @@ function GetSteps({ steps, deleteStep, changeStep }) {
 
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Редактирования статуса публикации 
+ * 
+ * @param mixed setLoaderPublic - react hook для изменения состояния загрузки
+ * @param mixed id - ID статьи
+ * @param mixed isdraf - статус публикации
+ * @param mixed setIsPublic - react hook для изменения состояния статуса публикации
+ */
 function onChangeStatusArticle(setLoaderPublic, id, isdraf, setIsPublic) {
     setLoaderPublic(true);
     console.log("isdraf", isdraf);
     setStatusArticle(id, isdraf, setIsPublic, setLoaderPublic);
 }
 
+/**
+ * Редактирование статьи в БД
+ * 
+ * @param mixed setLoaderEdit - react hook для изменения состояния загрузки
+ * @param mixed localId - ID авторизованного пользователя
+ * @param mixed articleId - ID статьи
+ * @param mixed img - файл изображения
+ * @param mixed name - наименование статьи
+ * @param mixed description - описание
+ * @param mixed difficulty - сложность приготовления
+ * @param mixed calories - калорийсность
+ * @param mixed minutes - время приготовления в минутах
+ * @param mixed steps - этапы приготовления
+ * @param mixed isDraf - статус публикации
+ * @param mixed ingredients - ингредиенты
+ */
 function onEditArticle(setLoaderEdit, localId, articleId, img, name, description, difficulty, calories, minutes, steps, isDraf, ingredients) {
     let filterStep = steps.filter(f => !!f);
     let filterIngr = ingredients.filter(f => !!f["name"]);
@@ -359,6 +398,14 @@ function onEditArticle(setLoaderEdit, localId, articleId, img, name, description
     }
 }
 
+/**
+ * Удаление статьи из БД
+ * 
+ * @param mixed articleId - ID статьи
+ * @param mixed localId - ID авторизованного пользователя
+ * @param mixed navigate - react hook для переадресации
+ * @param mixed setLoaderDelete - react hook для изменения состояния загрузки
+ */
 function onDeleteArticle(articleId, localId, navigate, setLoaderDelete) {
     if (articleId && typeof articleId === "number") {
         setLoaderDelete(true);
@@ -366,6 +413,22 @@ function onDeleteArticle(articleId, localId, navigate, setLoaderDelete) {
     }
 }
 
+/**
+ * Добавлнеие статьи в БД
+ * 
+ * @param mixed setLoader - react hook для изменения состояния загрузки
+ * @param mixed setArticleId - react hook для изменения состояния ID стаьи
+ * @param mixed localId - ID авторизованного пользователя
+ * @param mixed navigate - react hook для переадресации
+ * @param mixed steps - этапы приготовления
+ * @param mixed ingredients - ингредиенты
+ * @param mixed img - файл изображения
+ * @param mixed name - наименование статьи
+ * @param mixed description - описание
+ * @param mixed difficulty - сложность приготовления
+ * @param mixed calories - калорийсность
+ * @param mixed minutes - время приготовления в минутах
+ */
 function onAddArticle(setLoader, setArticleId, localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) {
     let filterStep = steps.filter(f => !!f);
     let filterIngr = ingredients.filter(f => !!f["name"]);

@@ -40,7 +40,7 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
             setThisIsAdmin(isAdmin(localRole));
             setIsCreator(+localId === +creatorId);
         },
-        [ localId, localRole ]
+        [ idMark, localId, localRole ]
     );
 
     useEffect(

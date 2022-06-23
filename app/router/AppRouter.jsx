@@ -15,8 +15,6 @@ export default function AppRouter() {
     const [ localId, setLocalId ] = useState(null);
     /** Роль локального пользователя */
     const [ localRole, setLocalRole ] = useState(null);
-    /** Аватар локального пользователя */
-    const [ localAvatar, setLocalAvatar ] = useState(null);
     /** Name локального пользователя */
     const [ localName, setLocalName ] = useState(null);
     /** Email локального пользователя */
@@ -48,20 +46,19 @@ export default function AppRouter() {
     useEffect(
         () => {
 
-            let ls = getLocalStorage(["id", "name", "img", "email", "role"]);
+            let ls = getLocalStorage(["id", "name", "email", "description", "role"]);
 
             if (ls && ls[0]) {
                 setLocalIsAuth(true);
                 setLocalId(+ls[0]);
                 setLocalName(ls[1]);
-                setLocalAvatar(ls[2]);
-                setLocalEmail(ls[3]);
+                setLocalEmail(ls[2]);
+                setLocalDescription(ls[3]);
                 setLocalRole(+ls[4]);
             } else {
                 setLocalIsAuth(false);
                 setLocalId(null);
                 setLocalName(null);
-                setLocalAvatar(null);
                 setLocalEmail(null);
                 setLocalRole(null);
             }
@@ -81,7 +78,6 @@ export default function AppRouter() {
             <LocalUserContext.Provider value={{
                 localId, setLocalId,
                 localRole, setLocalRole,
-                localAvatar, setLocalAvatar,
                 localName, setLocalName,
                 localEmail, setLocalEmail,
                 localDescription, setLocalDescription,

@@ -1,35 +1,15 @@
 .wrap, .form, .form .input, .form .avatar {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-@-webkit-keyframes opacitytransform {
-  0% {
-    -webkit-transform: translateY(-1rem);
-            transform: translateY(-1rem);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    opacity: 1;
-  }
+  flex-direction: column;
 }
 
 @keyframes opacitytransform {
   0% {
-    -webkit-transform: translateY(-1rem);
-            transform: translateY(-1rem);
+    transform: translateY(-1rem);
     opacity: 0;
   }
   100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }
@@ -39,11 +19,8 @@
   height: 100%;
   position: relative;
   padding: 1rem 0 !important;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-animation: opacitytransform .3s ease-in-out;
-          animation: opacitytransform .3s ease-in-out;
+  align-items: center;
+  animation: opacitytransform .3s ease-in-out;
 }
 
 .wrap .header {
@@ -65,43 +42,16 @@
 }
 
 .form {
-  width: -webkit-max-content;
-  width: -moz-max-content;
   width: max-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   position: relative;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   padding: 1.5rem !important;
   border-radius: .5rem;
 }
 
 .form fieldset {
   border: none;
-}
-
-.form input::-webkit-input-placeholder,
-.form textarea::-webkit-input-placeholder {
-  font-size: 1rem;
-  font-weight: bold;
-  letter-spacing: .15rem;
-}
-
-.form input:-ms-input-placeholder,
-.form textarea:-ms-input-placeholder {
-  font-size: 1rem;
-  font-weight: bold;
-  letter-spacing: .15rem;
-}
-
-.form input::-ms-input-placeholder,
-.form textarea::-ms-input-placeholder {
-  font-size: 1rem;
-  font-weight: bold;
-  letter-spacing: .15rem;
 }
 
 .form input::placeholder,
@@ -121,8 +71,6 @@
 
 .form textarea {
   width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   padding: .5rem .5rem !important;
@@ -141,7 +89,7 @@
 }
 
 .form .input input {
-  min-width: 20rem;
+  min-width: 25rem;
   padding: .5rem .5rem !important;
   border: none;
   border-radius: .3rem;
@@ -163,16 +111,10 @@
 
 .form .avatar {
   width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   position: relative;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .form .avatar .img {
@@ -188,8 +130,7 @@
   height: 100%;
   object-fit: cover;
   -o-object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
+  object-position: center;
 }
 
 .form .avatar label {
@@ -206,17 +147,13 @@
 
 .form .item {
   width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   position: relative;
-  margin-top: 1rem !important;
+  margin-top: 2rem !important;
 }
 
 .form .title {
   width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   color: #f4f4f4;
@@ -224,16 +161,12 @@
   font-size: 1.2rem;
   font-weight: bold;
   line-height: 2rem;
-  letter-spacing: .1rem;
+  letter-spacing: .15rem;
   border-bottom: 0.1rem solid gray;
 }
 
 .form .submit {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   margin-top: 2rem !important;
@@ -246,17 +179,13 @@
   text-align: center;
   text-transform: uppercase;
   letter-spacing: .1rem;
-  -webkit-transition: -webkit-transform 80ms ease-in;
-  transition: -webkit-transform 80ms ease-in;
   transition: transform 80ms ease-in;
-  transition: transform 80ms ease-in, -webkit-transform 80ms ease-in;
   border-color: #FF4B2B;
   background: #FF4B2B;
 }
 
 .form .submit:active {
-  -webkit-transform: scale(0.95);
-          transform: scale(0.95);
+  transform: scale(0.95);
 }
 
 .form .submit:focus {
@@ -274,8 +203,7 @@
     width: 100%;
     height: 100%;
     background: transparent;
-    -webkit-box-shadow: none;
-            box-shadow: none;
+    box-shadow: none;
   }
 }
 /*# sourceMappingURL=Setting.module.css.map */
