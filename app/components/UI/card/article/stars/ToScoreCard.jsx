@@ -12,7 +12,7 @@ export default function ToScoreCard({ isAuth, userId, id, score, allScore, setSc
     const [ star5, setStar5 ] = useState(null); // кол-во оценивших на 5
     const [ scoreId, setScoreId ] = useState(null); // ID оценки авторизованного пользователя
     const [ userScore, setUserScore ] = useState(0); // Оценка авторизованного пользователя
-    const [ localScore, setLocalScore ] = useState(0);
+    const [ localScore, setLocalScore ] = useState(0); // Новая оценка авторизованного пользователя
 
     useEffect(
         () => {
@@ -23,11 +23,24 @@ export default function ToScoreCard({ isAuth, userId, id, score, allScore, setSc
                 setStar4(allScore.star4);
                 setStar5(allScore.star5);
                 setScoreId(allScore.id);
-                setUserScore(+allScore.user);
-                setScore(localScore>0 ? localScore : +score);
+                setUserScore(allScore.user);
             }
         },
-        [ score, localScore ]
+        [ score, allScore ]
+    );
+
+    useEffect(
+        () => {
+            if (localScore) {
+                setScoreById(id, userId, scoreId, localScore, setScoreId);
+                let newScore = getScore({ star1:star1, star2:star2, star3:star3, star4:star4, star5:star5 });
+                
+                setScore(newScore);
+
+                if (!scoreId) setPeople( people+1 );
+            }
+        },
+        [ localScore ]
     );
 
     function changeStar(n) {
@@ -50,15 +63,7 @@ export default function ToScoreCard({ isAuth, userId, id, score, allScore, setSc
             default: setStar1(star1 + 1); break;
         }
 
-        // Если пользователь ранее еще не оценивал статью
-        if (!userScore) setPeople( people+1 ); 
-
-        setScore( getScore({ star1:star1, star2:star2, star3:star3, star4:star4, star5:star5 }) );
         setLocalScore(+n);
-        
-        let score_id = setScoreById(id, userId, scoreId, n);
-        setUserScore(n);
-        if (score_id) setScoreId(score_id);
     }
 
     if (isAuth && userId) {

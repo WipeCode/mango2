@@ -15,7 +15,8 @@
 
 .isfollow:active,
 .notfollow:active {
-  transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
 }
 
 .isfollow:focus,

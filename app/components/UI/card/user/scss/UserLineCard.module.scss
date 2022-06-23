@@ -38,6 +38,7 @@ $lightBackground:#ffffff;
             width: 100%;
             height: fit-content;
             position: relative;
+            // border: 1px solid red;
 
             display: grid;
             grid-template-columns: 2.5rem auto;
@@ -75,6 +76,8 @@ $lightBackground:#ffffff;
 
         .button {
             width: fit-content;
+            margin-left: 1rem !important;
+            // border: 1px solid red;
             position: relative;
             font-weight: bolder;
         }

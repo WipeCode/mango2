@@ -1,21 +1,36 @@
 .wrap, .user .top, .user .top .name, .user .top .static, .user .top .static span, .links, .modal .container .modal_name {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .container, .user, .user .top .info, .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .wrap {
   width: 100%;
   height: 100%;
   position: relative;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 1rem !important;
-  animation: opacitytransform .3s ease-in-out;
+  -webkit-animation: opacitytransform .3s ease-in-out;
+          animation: opacitytransform .3s ease-in-out;
 }
 
 .wrap.dark .user,
@@ -43,7 +58,11 @@
 }
 
 .user {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   margin: 0 auto !important;
@@ -53,6 +72,8 @@
 
 .user .top {
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
 }
@@ -70,23 +91,32 @@
   height: 100%;
   object-fit: cover;
   -o-object-fit: cover;
-  object-position: center;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .user .top .info {
   width: 100%;
   height: 100%;
   position: relative;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   padding-left: 1rem !important;
 }
 
 .user .top .name {
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   letter-spacing: .1rem;
 }
 
@@ -97,6 +127,8 @@
 
 .user .top .name i:nth-child(1) {
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   color: #f4f4f4;
@@ -108,7 +140,11 @@
 }
 
 .user .top .name i:nth-child(2) {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   color: gray;
@@ -117,14 +153,22 @@
 
 .user .top .static {
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin-top: 1rem !important;
 }
 
 .user .top .static span {
+  width: -webkit-max-content;
+  width: -moz-max-content;
   width: max-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   cursor: pointer;
@@ -132,6 +176,8 @@
 
 .user .top .static span p {
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   color: #f4f4f4;
@@ -152,13 +198,17 @@
 
 .user .description {
   max-width: 30rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   margin-top: 1.5rem !important;
   word-wrap: normal;
   word-break: keep-all;
   word-spacing: normal;
-  hyphens: auto;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
   overflow-wrap: break-word;
   color: #f4f4f4;
   mix-blend-mode: difference;
@@ -169,6 +219,8 @@
 
 .user .settings {
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   padding: .5rem !important;
@@ -201,14 +253,22 @@
 
 .links {
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   border-bottom: .05rem solid gray;
 }
 
 .links a {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   padding: .5rem 1rem !important;
@@ -224,8 +284,13 @@
   height: 100%;
   position: relative;
   margin-top: 1rem !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .click {
@@ -233,13 +298,19 @@
 }
 
 .modal {
+  width: -webkit-max-content;
+  width: -moz-max-content;
   width: max-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: fixed;
   left: 50%;
-  transform: translate(-50%, 0%);
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
   z-index: 500;
-  animation: opacity .3s 1 ease-in;
+  -webkit-animation: opacity .3s 1 ease-in;
+          animation: opacity .3s 1 ease-in;
 }
 
 .modal::after {
@@ -254,17 +325,23 @@
 }
 
 .modal div {
-  box-shadow: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .modal .container {
+  width: -webkit-max-content;
+  width: -moz-max-content;
   width: max-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   padding: 1rem !important;
   z-index: 500;
   border-radius: .5rem;
-  box-shadow: 0 0 1rem black;
+  -webkit-box-shadow: 0 0 1rem black;
+          box-shadow: 0 0 1rem black;
 }
 
 .modal .container .user {
@@ -276,7 +353,9 @@
   padding-bottom: .5rem !important;
   position: relative;
   z-index: 110;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   border: .5rem;
   border-bottom: 0.1rem solid #313131;
 }
@@ -293,6 +372,7 @@
   width: 1.5rem;
   height: 1.5rem;
   position: relative;
+  margin-left: 1rem !important;
   cursor: pointer;
 }
 
@@ -300,12 +380,15 @@
   width: 100%;
   height: 100%;
   position: relative;
+  -webkit-transition: .3s ease-in-out;
   transition: .3s ease-in-out;
-  filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
+  -webkit-filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
+          filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
 }
 
 .modal .container .modal_name .cancel:hover svg {
-  filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
+  -webkit-filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
+          filter: brightness(0) saturate(100%) invert(68%) sepia(89%) saturate(5921%) hue-rotate(342deg) brightness(98%) contrast(106%);
 }
 
 .modal .container .people {
@@ -317,6 +400,15 @@
   margin: 0 !important;
 }
 
+@-webkit-keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes opacity {
   0% {
     opacity: 0;
@@ -326,13 +418,28 @@
   }
 }
 
-@keyframes opacitytransform {
+@-webkit-keyframes opacitytransform {
   0% {
-    transform: translateY(-1rem);
+    -webkit-transform: translateY(-1rem);
+            transform: translateY(-1rem);
     opacity: 0;
   }
   100% {
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes opacitytransform {
+  0% {
+    -webkit-transform: translateY(-1rem);
+            transform: translateY(-1rem);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
     opacity: 1;
   }
 }
@@ -348,27 +455,38 @@
     width: 100%;
   }
   .user .top {
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   .user .top .avatar {
     width: 5rem;
     height: 5rem;
   }
   .user .top .info {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     height: fit-content;
     padding: 0 !important;
     margin-top: 1rem !important;
   }
   .user .top .name {
     text-align: center;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   .user .top .name i:nth-child(2) {
     margin-top: .3rem !important;
   }
   .user .top .static span {
     width: 100%;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   .user .top .static span p:nth-child(2) {
     margin-top: .2rem !important;

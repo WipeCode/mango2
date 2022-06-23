@@ -1,9 +1,13 @@
 .wrap {
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(1, minmax(100px, auto));
+  -ms-grid-columns: (minmax(100px, auto))[1];
+      grid-template-columns: repeat(1, minmax(100px, auto));
   padding: .5rem !important;
   border-radius: .5rem;
   overflow: hidden;
@@ -19,20 +23,35 @@
 
 .wrap .container {
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .wrap .container a {
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: 2.5rem auto;
-  align-items: center;
+  -ms-grid-columns: 2.5rem auto;
+      grid-template-columns: 2.5rem auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .wrap .container a .avatar {
@@ -48,7 +67,8 @@
   height: 100%;
   object-fit: cover;
   -o-object-fit: cover;
-  object-position: center;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .wrap .container a .name {
@@ -63,7 +83,10 @@
 }
 
 .wrap .container .button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  margin-left: 1rem !important;
   position: relative;
   font-weight: bolder;
 }

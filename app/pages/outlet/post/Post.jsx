@@ -20,8 +20,8 @@ export default function Post() {
     const { localIsAuth, localId, localRole } = useContext(LocalUserContext);
     const { setPageTitle, changePagesMath, IconName, GetIcon, darkTheme } = useContext(AppContext);
 
-    const [ score, setScore ] = useState(null); /** Средняя оценка статьи */
-    const [ people, setPeople ] = useState(null); /** Кол-во пользователей, оценивших статью */
+    const [ score, setScore ] = useState(null); // Средняя оценка статьи
+    const [ people, setPeople ] = useState(null); // Кол-во пользователей, оценивших статью
     const [ loader, setLoader ] = useState(true);
     const [ content, setContent ] = useState(true);
     const [ article, setArticle ] = useState(null);
@@ -89,7 +89,7 @@ export default function Post() {
                 });
             }
         },
-        [ score ]
+        [ score, article ]
     );
     
     useEffect(

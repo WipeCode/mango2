@@ -110,7 +110,7 @@ export default function Account() {
                 );
             }
         },
-        [loader, darkTheme, isClickFollow]
+        [loader, isDesktop, darkTheme, isClickFollow]
     )
 
     return content;
@@ -189,9 +189,8 @@ function ModalFollow({  darkTheme, location, changePagesMath, localId, selectedU
     useEffect(
         () => {
             if (isClickFollow) {
-                if (isFollowing) getUserFollowingById(selectedUser, localId, setFollow);
-                else getUserFollowersById(selectedUser, localId, setFollow);
-                setLoader(false);
+                if (isFollowing) getUserFollowingById(selectedUser, localId, setFollow, setLoader);
+                else getUserFollowersById(selectedUser, localId, setFollow, setLoader);
             } else {
                 setLoader(false);
                 setFollow(null);

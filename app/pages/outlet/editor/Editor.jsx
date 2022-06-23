@@ -206,7 +206,7 @@ export default function Editor() {
                                     (
                                         loaderAdd 
                                         ? <button className={ css.add } disabled><div className={ noDataStyle.button_loader }><i></i><i></i><i></i></div></button>
-                                        : <button className={ css.add } onClick={ () => onAddArticle(setLoaderAdd, localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) }>Add article</button>
+                                        : <button className={ css.add } onClick={ () => onAddArticle(setLoaderAdd, setArticleId, localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) }>Add article</button>
                                     )
                                 }
 
@@ -366,7 +366,7 @@ function onDeleteArticle(articleId, localId, navigate, setLoaderDelete) {
     }
 }
 
-function onAddArticle(setLoader, localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) {
+function onAddArticle(setLoader, setArticleId, localId, navigate, steps, ingredients, img, name, description, difficulty, calories, minutes) {
     let filterStep = steps.filter(f => !!f);
     let filterIngr = ingredients.filter(f => !!f["name"]);
 
@@ -376,7 +376,7 @@ function onAddArticle(setLoader, localId, navigate, steps, ingredients, img, nam
         filterStep.length>1 && 
         filterIngr.length>1) {
             setLoader(true);
-            addNewArticle(setLoader,navigate, img, name, description, difficulty, calories, minutes, filterStep, filterIngr, localId);
+            addNewArticle(setLoader, setArticleId, navigate, img, name, description, difficulty, calories, minutes, filterStep, filterIngr, localId);
         }
 }
 

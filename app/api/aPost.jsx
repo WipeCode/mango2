@@ -9,7 +9,7 @@ const serverPath = "https://api.ebene.ru";
 
 export function getPostsById(id=0) {
     // console.log(`%caPost: getPostsById(id=${id})`, "background:#066BC6;color:white;padding:1rem;");
-    // axios.get(`https://api.ebene.ru/get/userPosts?id=${id}`)
+    // axios.get(`https://api.ebene.ru/userPosts?id=${id}`)
     // .then(function(res) {
     //     console.log(res);
     //     if (res["data"]["message"]) {
@@ -324,7 +324,7 @@ export function getDraftsById(id=0) {
   * @param mixed navigate - функция для переадресации
   */
 export function getArticleById(id, localId, setArticle, setLoader, navigate) {
-    axios.get(`${serverPath}/get/article?id=${id}&localId=${localId}`)
+    axios.get(`${serverPath}/article?id=${id}&localId=${localId}`)
     .then(function(res) {
         // console.log(res);
         if (res["data"]["message"]) {
@@ -682,15 +682,23 @@ export function getFilter(searchText, sordDate, sordPeople, sordTime, sordDiffic
 /*                              SETTING FUNCTIONS                             */
 /* -------------------------------------------------------------------------- */
 
-export function setScoreById(articleId, userId, scoreId, score) {
-    console.log(`%caPost: setScore(articleId=${articleId}, userId=${userId}, scoreId=${scoreId}, score=${score})`, "background:#066BC6;color:white;padding:1rem;");
-    axios.post(`https://api.ebene.ru/post/editScore`, {articleId:articleId, userId:userId, score:score, scoreId:scoreId})
+ /**
+  * Оценка статьи
+  * 
+  * @param mixed articleId - ID статьи
+  * @param mixed userId - ID авторизованного пользователя
+  * @param mixed scoreId - ID предыдущей оценки пользователя
+  * @param mixed score - новая оценка пользователя
+  * @param mixed setScoreId - react hook для редактирования ID оценки в компоненте
+  */
+export function setScoreById(articleId, userId, scoreId, score, setScoreId) {
+    axios.post(`https://api.ebene.ru/editScore`, {articleId:articleId, userId:userId, score:score, scoreId:scoreId})
     .then(function(res) {
-        console.log(res);
+        if (res["data"]["message"]) {
+            setScoreId(res["data"]["message"]);
+        }
     })
-    .catch(error => {
-        console.log(error);
-    });
+    .catch(error => { console.log(error); });
 }
 
  /**
@@ -701,15 +709,11 @@ export function setScoreById(articleId, userId, scoreId, score) {
   * @param mixed idMark - ID закладки
   */
 export function setIsMark(localId, articleId, idMark, setMark) {
-    // console.log(`%caPost: setIsMark(localId=${localId}, articleId=${articleId}, idMark=${idMark})`, "background:#066BC6;color:white;padding:1rem;");
-    axios.post(`https://api.ebene.ru/post/editMark`, {localId:localId, articleId:articleId, idMark:idMark})
+    axios.post(`https://api.ebene.ru/editMark`, {localId:localId, articleId:articleId, idMark:idMark})
     .then(function(res) {
-        // console.log(res);
         setMark(res?.data?.message ?? null);
     })
-    .catch(error => {
-        console.log(error);
-    });
+    .catch(error => { console.log(error); });
 }
 
  /**
@@ -721,8 +725,7 @@ export function setIsMark(localId, articleId, idMark, setMark) {
   * @param mixed setLoaderPublic - react hook для изменения статуса загрузки в компоненте
   */
 export function setStatusArticle(articleId, isPublic, setIsPublic, setLoaderPublic) {
-    // console.log(`%caPost: setStatusArticle(articleId=${articleId}, isPublic=${isPublic})`, "background:#066BC6;color:white;padding:1rem;");
-    axios.post(`${serverPath}/post/editArticleStatus`, {articleId:articleId, isDraft:isPublic})
+    axios.post(`${serverPath}/editArticleStatus`, {articleId:articleId, isDraft:isPublic})
     .then(function(res) {
         if (res["data"]["message"]) {
             setIsPublic(!isPublic);
@@ -742,17 +745,12 @@ export function setStatusArticle(articleId, isPublic, setIsPublic, setLoaderPubl
   * @param mixed newArticleArray - новые данные статьи 
   */
 export function setArticleById(setLoaderEdit, localId, articleId, newArticleArray) {
-    // console.log(`%caPost: setArticleById()`, "background:#066BC6;color:white;padding:1rem;");
-    axios.post(`https://api.ebene.ru/post/editArticle`, {localId:localId, articleId:articleId, newArticleArray:newArticleArray})
+    axios.post(`https://api.ebene.ru/editArticle`, {localId:localId, articleId:articleId, newArticleArray:newArticleArray})
     .then(function(res) {
-        // console.log(res);
         if (res["data"]["message"]) {
             setLoaderEdit(false);
         }
-    })
-    .catch(error => {
-        console.log(error);
-    });
+    }).catch(error => { console.log(error); });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -760,9 +758,11 @@ export function setArticleById(setLoaderEdit, localId, articleId, newArticleArra
 /* -------------------------------------------------------------------------- */
 
  /**
-  * Добавление статьи
+  * Добавление статьи 
   * 
-  * @param mixed navigate - функция для переадресации
+  * @param mixed setLoader - react hook для изменения статуса загрузки в компоненте
+  * @param mixed setArticleId - react hook для изменения состояния ID статьи в компоненте 
+  * @param mixed navigate - react hook для переадресации
   * @param mixed img - главыное изображение
   * @param mixed name - наименование
   * @param mixed description - описание
@@ -771,9 +771,9 @@ export function setArticleById(setLoaderEdit, localId, articleId, newArticleArra
   * @param mixed minutes - время приготовления в минутах
   * @param mixed steps - этапы приготовления
   * @param mixed ingredients - ингридиенты
-  * @param mixed localId - ID авторизованного пользователя
+  * @param mixed localId - ID авторизованного пользователя- 
   */
-export function addNewArticle(setLoader, navigate, img, name, description, difficulty, calories, minutes, steps, ingredients, localId) {
+export function addNewArticle(setLoader, setArticleId, navigate, img, name, description, difficulty, calories, minutes, steps, ingredients, localId) {
     let data = {
         img:img, 
         name:name, 
@@ -786,17 +786,15 @@ export function addNewArticle(setLoader, navigate, img, name, description, diffi
         localId:localId
     };
 
-    axios.post(`${serverPath}/post/add`, data)
+    axios.post(`${serverPath}/addArticle`, data)
     .then(function(res) {
-        console.log(res);
         if (res["data"]["message"]) {
             setLoader(false);
+            setArticleId(res["data"]["message"]);
             navigate(`../editor/${res["data"]["message"]}`);
         }
     })
-    .catch(error => {
-        console.log(error);
-    });
+    .catch(error => { console.log(error); });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -813,10 +811,8 @@ export function addNewArticle(setLoader, navigate, img, name, description, diffi
   * @param mixed setArticles - react hook для изменения выводимых статей в компоненте
   */
 export function deleteArticleById(navigate, articleId, localId=null, setLoaderDelete, isEditor=false, setArticles=null) {
-    // console.log(`%caPost: deleteArticle(localId=${localId}, articleId=${articleId})`, "background:#066BC6;color:white;padding:1rem;");
-    axios.post(`${serverPath}/post/deleteArticle`, {articleId:articleId})
+    axios.post(`${serverPath}/deleteArticle`, {articleId:articleId})
     .then(function(res) {
-        // console.log(res);
         if (res["data"]["message"]) {
             setLoaderDelete(false);
 

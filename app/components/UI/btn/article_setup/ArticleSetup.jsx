@@ -26,7 +26,7 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
 
     const onDelete = () => {
         setLoaderDelete(true);
-        deleteArticleById(localId, articleId, setLoaderDelete);
+        deleteArticleById(navigate, articleId, localId, setLoaderDelete);
     };
 
     const onMark = () => {

@@ -1,19 +1,34 @@
 .wrap, .wrap .stars {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .wrap {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-top: 1rem !important;
 }
 
 .wrap .score,
 .wrap .people {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   color: #4b4b4b;
@@ -22,7 +37,11 @@
 }
 
 .wrap .stars {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: relative;
   margin: 0 .5rem !important;
@@ -33,7 +52,8 @@
   height: 1rem;
   position: relative;
   margin-right: .1rem !important;
-  filter: brightness(0) saturate(100%) invert(66%) sepia(72%) saturate(5943%) hue-rotate(341deg) brightness(101%) contrast(101%);
+  -webkit-filter: brightness(0) saturate(100%) invert(66%) sepia(72%) saturate(5943%) hue-rotate(341deg) brightness(101%) contrast(101%);
+          filter: brightness(0) saturate(100%) invert(66%) sepia(72%) saturate(5943%) hue-rotate(341deg) brightness(101%) contrast(101%);
 }
 
 .wrap .stars svg:last-child {
