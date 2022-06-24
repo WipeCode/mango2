@@ -27,16 +27,11 @@ export function isAdmin(role=0) { return +role === 9; }
 export function getUserById(id=0, localId=0, setUser, navigate, setLoader) {
     axios.get(`https://api.ebene.ru/user?id=${id}&localId=${localId}`)
     .then(function(res) {
-        // console.log(res);
         if (res["data"]["message"]) {
-            if (!res["data"]["message"]["img"]) {
-                res["data"]["message"]["img"] = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiCoHLktPNbzYjYcrFoYnlmxX5SfRKCIJQsA&usqp=CAU";
-            }
-
             if (res["data"]["message"]["score"]) res["data"]["message"]["score"] = getScore();
             else res["data"]["message"]["score"] = 0;
 
-            setUser( res["data"]["message"] );
+            setUser(res["data"]["message"]);
             setLoader(false);
         } else navigate('../');
     })
@@ -121,13 +116,57 @@ export function setFollow(localId, userId, isfollow, setIsFollow, setLoader) {
     });
 }
 
-export function setUserBasicDataById(localId, img, name, email, description, setLocalName, setLocalEmail, setLocalDescription) {
-    console.log(`%caUser: setUserBasicDataById()`, "background:#066BC6;color:white;padding:1rem;");
+ /**
+  * Редактирование основных данных пользователя
+  * 
+  * @param mixed localId - ID авторизованного пользователя
+  * @param mixed avatar - изображение (аватар) в base64
+  * @param mixed name - псевдоним
+  * @param mixed email - электронная почта
+  * @param mixed description - описание
+  * @param mixed setLoader - react hook для изменения состояния загрузки для кнопки
+  * @param mixed setLoaderEdit - react hook для изменения состояния загрузки для обновления данных компонента
+  */
+export function setUserBasicDataById(localId, avatar, name, email, description, setLoader, setLoaderEdit) {
+    axios.post(`https://api.ebene.ru/editBasicUser`, {localId:localId, img:avatar, name:name, email:email, description:description})
+    .then(function(res) {
+        setLocalStorage(
+            {
+                name:name,
+                email:email,
+                description:description,
+            }
+        );
 
+        setLoader(false);
+        setLoaderEdit(false);
+    })
+    .catch(error => {
+        console.log(error);
+        setLoader(false);
+        setLoaderEdit(false);
+    });
 }
 
-export function setUserPasswordById(password, newPassword, userId) {
-    console.log(`%caUser: setUserPasswordById(password=${password}, newPassword=${newPassword}, userId=${userId})`, "background:#066BC6;color:white;padding:1rem;");
+export function setUserPasswordById(oldPassword, newPassword, userId) {
+    axios.post(`https://api.ebene.ru/editBasicUser`, {localId:localId, img:avatar, name:name, email:email, description:description})
+    .then(function(res) {
+        setLocalStorage(
+            {
+                name:name,
+                email:email,
+                description:description,
+            }
+        );
+
+        setLoader(false);
+        setLoaderEdit(false);
+    })
+    .catch(error => {
+        console.log(error);
+        setLoader(false);
+        setLoaderEdit(false);
+    });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -196,15 +235,14 @@ export function singIn(email, password, setLoader, setThisLocalId, setThisLocalR
                 {
                     id:res["data"]["message"]["id"],
                     role:res["data"]["message"]["role"],
-                    img:res["data"]["message"]["img"],
                     name:res["data"]["message"]["name"],
                     email:res["data"]["message"]["email"],
                     description:res["data"]["message"]["description"],
                 }
             );
+        } else console.log(res);
 
-            setLoader(false);
-        }
+        setLoader(false);
     })
     .catch(error => {
         console.log(error);

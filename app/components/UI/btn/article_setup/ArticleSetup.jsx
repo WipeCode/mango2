@@ -6,7 +6,7 @@ import css from "./css/ArticleSetup.module.css";
 import { deleteArticleById, setIsMark, setStatusArticle } from "../../../../api/aPost.jsx";
 import { isAdmin } from "../../../../api/aUser.jsx";
 
-export default function ArticleSetup({ darkTheme, localId, localRole, creatorId, isDraft, idMark, articleId, IconName, GetIcon, className=null }) {
+export default function ArticleSetup({ darkTheme, localId, localRole, creatorId, isDraft, idMark, articleId, IconName, GetIcon, callback=null, className=null }) {
     const navigate = useNavigate();
 
     const [ mark, setMark ] = useState(null);
@@ -21,12 +21,12 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
 
     const onPublish = () => {
         setLoaderPublic(true);
-        setStatusArticle(articleId, thisIsPublic, setThisIsPublic, setLoaderPublic);
+        setStatusArticle(articleId, thisIsPublic, setThisIsPublic, setLoaderPublic, callback);
     };
 
     const onDelete = () => {
         setLoaderDelete(true);
-        deleteArticleById(navigate, articleId, localId, setLoaderDelete);
+        deleteArticleById(navigate, articleId, localId, setLoaderDelete, callback);
     };
 
     const onMark = () => {
@@ -36,7 +36,7 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
     useEffect(
         () => {
             setMark(idMark);
-            setThisIsPublic(!isDraft);
+            setThisIsPublic(isDraft);
             setThisIsAdmin(isAdmin(localRole));
             setIsCreator(+localId === +creatorId);
         },
@@ -56,9 +56,13 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
                 setContent(
                     <div className={ [css.wrap, darkTheme?css.dark:css.light, className].join(" ") }>
                         <div className={ css.container }>
-                            <div className={ [css.mark, mark?css.ismark:css.nomark].join(" ") } onClick={ () => onMark() }>
-                                <GetIcon name={ mark ? IconName.ismark2 : IconName.mark2 }/>
-                            </div>
+                            {
+                                !thisIsPublic &&
+                                <div className={ [css.mark, mark?css.ismark:css.nomark].join(" ") } onClick={ () => onMark() }>
+                                    <GetIcon name={ mark ? IconName.ismark2 : IconName.mark2 }/>
+                                </div>
+                            }
+                            
                             {
                                 accessSetup &&
                                 <div className={ css.setup }>

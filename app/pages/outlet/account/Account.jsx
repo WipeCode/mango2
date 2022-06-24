@@ -141,7 +141,7 @@ function Header({ navigate, isDesktop, id, localId, path, selectedUser, changePa
         <div className={ css.user }>
             <div className={ css.top }>
                 <div className={ css.avatar }>
-                    <img src={ selectedUser.img } alt="avatar"/>
+                    <img src={ `https://api.ebene.ru/userImg?userId=${id}` } alt="avatar"/>
                 </div>
                 <div className={ css.info }>
                     <p className={ css.name }> 

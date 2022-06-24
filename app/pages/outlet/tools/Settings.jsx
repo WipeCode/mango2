@@ -14,6 +14,7 @@ export default function Settings() {
     
     const [ content, setContent ] = useState(null);
     const [ loader, setLoader ] = useState(false);
+    const [ loaderEdit, setLoaderEdit ] = useState(null);
 
     const [ avatar, setAvatar ] = useState(null);
     const [ name, setName ] = useState(null);
@@ -33,10 +34,10 @@ export default function Settings() {
     const onChange = () => {
         if (name !== localName || 
             email !== localEmail || 
-            description !== localDescription ) {
+            description !== localDescription ||
+            avatar ) {
                 setLoader(true);
-                // axios
-                setUserBasicDataById(localId, avatar, name, email, description, setLocalName, setLocalEmail, setLocalDescription);
+                setUserBasicDataById(localId, avatar, name, email, description, setLoader, setLoaderEdit);
         }
 
         if (oldPassword && 
@@ -49,6 +50,17 @@ export default function Settings() {
     }
 
     useEffect(() => { setPageTitle("Settings"); }, []);
+
+    useEffect(
+        () => {
+            if (loaderEdit === false) {
+                setLocalName(name);
+                setLocalEmail(email);
+                setLocalDescription(description);
+            }
+        },
+        [ loaderEdit ]
+    );
 
     useEffect(
         () => {
@@ -114,7 +126,7 @@ export default function Settings() {
                 </div>
             );
         },
-        [localId, loader, name, email, description, darkTheme]
+        [localId, loader, avatar, name, email, description, darkTheme]
     );
 
     return content;

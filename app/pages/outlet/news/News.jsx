@@ -15,19 +15,28 @@ export default function News() {
     const [ posts, setPosts ] = useState(null);
     const [ content, setContent ] = useState(null);
     const [ loader, setLoader ] = useState(true);
+    const [ location, setLocation ] = useState(window.location.pathname);
 
-    // const news = getNewsByUserId(localId);
-    const location = window.location.pathname;
+    const callback = () => {
+        setLoader(true);
+        getNewsByUserId(localId, setPosts, setLoader);
+    }
+
+    useEffect(
+        () => {
+            setLocation(window.location.pathname);
+        },
+        [ window.location.pathname ]
+    );
 
     useEffect(
         () => {
             setPageTitle("News");
-            setPosts( getNewsByUserId(localId) );
-            setLoader(false);
+            getNewsByUserId(localId, setPosts, setLoader);
         },
-        []
+        [ location ]
     );
-
+        
     useEffect(
         () => {
             if (!loader) {
@@ -43,6 +52,7 @@ export default function News() {
                                 changePagesMath={ changePagesMath }
                                 IconName={ IconName }
                                 GetIcon={ GetIcon }
+                                callback={ callback }
                             />
                         </div>
                     );
@@ -64,7 +74,7 @@ export default function News() {
                 );
             }
         },
-        [ loader, darkTheme ]
+        [ posts, loader, darkTheme ]
     );
 
     return content;

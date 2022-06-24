@@ -20,6 +20,11 @@ export default function Posts() {
     const [ content, setContent ] = useState(true);
     const [ loader, setLoader ] = useState(true);
 
+    const callback = () => {
+        setLoader(true);
+        getPostsById(id, localId, setPost, setLoader);
+    }
+
     useEffect(
         () => {
             setLocation(window.location.pathname);
@@ -52,6 +57,7 @@ export default function Posts() {
                                 IconName={ IconName }
                                 GetIcon={ GetIcon }
                                 className={ css.postGrid }
+                                callback={ callback }
                             />
                         </div>
                     );
@@ -59,7 +65,7 @@ export default function Posts() {
                     setContent(
                         <div className={ noDataStyle.wrap }>
                             <div className={ noDataStyle.content }>
-                                <h1>Articles</h1>
+                                <h1>Posts</h1>
                                 <p>No data available</p>
                             </div>
                         </div>

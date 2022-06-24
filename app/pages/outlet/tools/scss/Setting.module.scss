@@ -214,5 +214,13 @@ $lightBackground:#ffffff;
         height: 100%; 
         background: transparent; 
         box-shadow: none;
+
+        .input {
+            // max-width: 10rem !important;
+            // min-width: 10rem !important;
+            input {
+                min-width: fit-content !important;
+            }
+        }
     }
 }

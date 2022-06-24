@@ -18,13 +18,17 @@ export default function Articles() {
     const [ newArticles, setNewArticles ] = useState(null);
     const location = window.location.pathname;
 
+    const callback = () => {
+        setLoader(true);
+        getNewArticles(localId, setNewArticles, setLoader);
+    }
+
     useEffect(
         () => {
             setPageTitle("Articles");
-            setNewArticles( getNewArticles() );
-            setLoader(false);
+            getNewArticles(localId, setNewArticles, setLoader);
         },
-        []
+        [ localId ]
     );
 
     useEffect(
@@ -45,6 +49,7 @@ export default function Articles() {
                                 GetIcon={ GetIcon }
                                 className={ css.articles }
                                 classContainer={ css.container }
+                                callback={ callback }
                             />
                             <p className={ css.description }>See more articles you might like</p>
                             <Link to="/discovery" className={ css.discovery } title="discovery">Discovery</Link>

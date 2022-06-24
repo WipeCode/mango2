@@ -4,7 +4,7 @@ import css from "./css/ArticleCardsWrap.module.css";
 /** Подключение компонентов */
 import ArticleMiniCard from "./ArticleMiniCard.jsx";
 
-export default function ArticleCardsWrap({ darkTheme, articles, location, localId, localRole, changePagesMath, IconName, GetIcon, className=null, classContainer=null }) {
+export default function ArticleCardsWrap({ darkTheme, articles, location, localId, localRole, changePagesMath, IconName, GetIcon, className=null, classContainer=null, callback=null }) {
     const [ content, setContent ] = useState(null);
     
     useEffect(
@@ -33,6 +33,7 @@ export default function ArticleCardsWrap({ darkTheme, articles, location, localI
                                             GetIcon={ GetIcon }
                                             changePagesMath={ changePagesMath }
                                             location={ location }
+                                            callback={ callback }
                                         />
                                     </div>
                                 );
@@ -42,7 +43,7 @@ export default function ArticleCardsWrap({ darkTheme, articles, location, localI
                 </div>
             );
         },
-        [ darkTheme ]
+        [ articles, darkTheme ]
     );
     
     return content;

@@ -11,7 +11,7 @@ import { getMarksById } from "../../../../api/aPost.jsx";
 
 export default function Marks() {
     const { id } = useParams();
-    const location = window.location.pathname;
+    const [ location, setLocation ] = useState(window.location.pathname);
 
     const { localId, localRole } = useContext(LocalUserContext);
     const { changePagesMath, IconName, GetIcon, darkTheme } = useContext(AppContext);
@@ -20,14 +20,25 @@ export default function Marks() {
     const [ content, setContent ] = useState(true);
     const [ loader, setLoader ] = useState(true);
 
+    const callback = () => {
+        setLoader(true);
+        getMarksById(id, localId, setPost, setLoader);
+    }
+
+    useEffect(
+        () => {
+            setLocation(window.location.pathname);
+        },
+        [ window.location.pathname ]
+    );
+
     useEffect(
         () => {
             if (id!==null) {
-                setPost( getMarksById(+id) );
-                setLoader(false);
+                getMarksById(id, localId, setPost, setLoader);
             }
         },
-        [ id, localId ]
+        [ location, id, localId ]
     );
 
     useEffect(
@@ -45,6 +56,7 @@ export default function Marks() {
                                 changePagesMath={ changePagesMath }
                                 IconName={ IconName }
                                 GetIcon={ GetIcon }
+                                callback={ callback }
                             />
                         </div>
                     );
@@ -52,7 +64,7 @@ export default function Marks() {
                     setContent(
                         <div className={ noDataStyle.wrap }>
                             <div className={ noDataStyle.content }>
-                                <h1>Articles</h1>
+                                <h1>Marks</h1>
                                 <p>No data available</p>
                             </div>
                         </div>

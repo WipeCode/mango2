@@ -5,7 +5,7 @@ import css from "./css/ArticleMiniCard.module.css";
 /** Подключение компонентов */
 import ArticleSetup from "../../../btn/article_setup/ArticleSetup.jsx";
 
-export default function ArticleMiniCard({ darkTheme, localId, localRole, articleId, date, score, people, name, ismark, isDraft=false, creatorName, creatorId, IconName, GetIcon, changePagesMath, location }) {
+export default function ArticleMiniCard({ darkTheme, localId, localRole, articleId, date, score, people, name, ismark, isDraft=false, creatorName, creatorId, IconName, GetIcon, changePagesMath, location, callback=null }) {
     const navigate = useNavigate();
     const [ content, setContent ] = useState(null);
 
@@ -26,10 +26,11 @@ export default function ArticleMiniCard({ darkTheme, localId, localRole, article
                                 localRole={ localRole }
                                 creatorId={ creatorId }
                                 isDraft={ isDraft }
-                                localIsMark={ ismark }
+                                idMark={ ismark }
                                 articleId={ articleId }
                                 IconName={ IconName }
                                 GetIcon={ GetIcon }
+                                callback={ callback }
                             />
 
                             <img src={ `https://api.ebene.ru/articleImg?articleId=${articleId}` } alt={ name } onClick={ () => onClick() }/>
@@ -50,7 +51,7 @@ export default function ArticleMiniCard({ darkTheme, localId, localRole, article
                 );
             }
         },
-        [ darkTheme, localId, localRole ]
+        [ darkTheme, localId, localRole, ismark ]
     );
 
     return content ? content : null;

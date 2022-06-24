@@ -1,10 +1,6 @@
 import React from "react";
 import axios from 'axios';
 
-//LIKE - ->filterByTitle('War%')
-// = - filterByTitle('War And Peace')
-// filterById(array('min' => 123, 'max' => 456)) -  book.ID >= :p1 AND book.ID <= :p2) / :p1 => 123, :p2 => 456
-
 const serverPath = "https://api.ebene.ru";
 
 /* -------------------------------------------------------------------------- */
@@ -12,17 +8,20 @@ const serverPath = "https://api.ebene.ru";
 /* -------------------------------------------------------------------------- */
 
  /**
-  * Вывод статей, опубликованых пользователем
+  * Вывод статей, опубликованых пользователем по ID
   * 
   * @param mixed id - ID просматриваемого пользователя
   * @param mixed localId - ID авторизованного пользователя
-  * @param mixed setPost - react hook для изменения состояния публикаций (статей)
+  * @param mixed setPost - react hook для изменения состояния массива публикаций (статей)
   * @param mixed setLoader - react hook для изменения состояния загрузки
   */
 export function getPostsById(id, localId, setPost, setLoader) {
     axios.get(`https://api.ebene.ru/userPosts?id=${id}&localId=${localId}`)
     .then(function(res) {
-        setPost(res["data"]["message"] ? mapArticles(res["data"]["message"]) : null);
+        if (res["data"]["message"] && res["data"]["message"]?.length>0) {
+            setPost( mapArticles(res["data"]["message"]) );
+        } else setPost(null);
+
         setLoader(false);
     })
     .catch(error => {
@@ -32,155 +31,51 @@ export function getPostsById(id, localId, setPost, setLoader) {
     });
 }
 
-export function getMarksById(id=0) {
-    // console.log(`%caPost: getMarksById(id=${id})`, "background:#066BC6;color:white;padding:1rem;");
-    
-    let result = [];
+ /**
+  * Вывод статей, добавленные в закладки пользователя по ID
+  * 
+  * @param mixed id - ID просматриваемого пользователя
+  * @param mixed localId - ID авторизованного пользователя
+  * @param mixed setPost - react hook для изменения состояния массива публикаций (статей)
+  * @param mixed setLoader - react hook для изменения состояния загрузки
+  */
+export function getMarksById(id, localId, setPost, setLoader) {
+    axios.get(`https://api.ebene.ru/userMarks?id=${id}&localId=${localId}`)
+    .then(function(res) {
+        if (res["data"]["message"] && res["data"]["message"]?.length>0) {
+            setPost( mapArticles(res["data"]["message"]) );
+        } else setPost(null);
 
-    if (id===7) {
-        result = [
-            {
-                id:21, 
-                user: {
-                    id:9,
-                    name:"Tom",
-                },
-                name:"Pan pizza",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:true,
-            },
-            {
-                id:22, 
-                user: {
-                    id:9,
-                    name:"Tom",
-                },
-                name:"Kefir pizza",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:true,
-            },
-            {
-                id:23, 
-                user: {
-                    id:9,
-                    name:"Tom",
-                },
-                name:"Berry brownie pizza",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:true,
-            },
-        ];
-    } else if (id===9) {
-        result = [
-            {
-                id:18, 
-                user: {
-                    id:7,
-                    name:"WipeCode",
-                },
-                name:"Chicken and pineapple pizza",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:true,
-            },
-            {
-                id:19, 
-                user: {
-                    id:7,
-                    name:"WipeCode",
-                },
-                name:"Chicken and pineapple pizza",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:true,
-            },
-            {
-                id:18, 
-                user: {
-                    id:7,
-                    name:"WipeCode",
-                },
-                name:"4 Cheese Pizza at Home",
-                img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-                score: {
-                    star1:0,
-                    star2:0,
-                    star3:0,
-                    star4:0,
-                    star5:0,
-                },
-                date:"12/12/2022 18:00",
-                ismark:true,
-            },
-        ];
-    } else result = null;
-
-    return result ? mapArticles(result) : result;
+        setLoader(false);
+    })
+    .catch(error => {
+        console.log(error);
+        setPost(null);
+        setLoader(false);
+    });
 }
 
-export function getDraftsById(id=0) {
-    // console.log(`%caPost: getDraftsById(id=${id})`, "background:#066BC6;color:white;padding:1rem;");
-    let result = [
-        {
-            id:24, 
-            user: {
-                id:7,
-                name:"WipeCode",
-            },
-            name:"Closed pizza with chicken",
-            img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-            score: {
-                star1:1,
-                star2:3,
-                star3:7,
-                star4:10,
-                star5:100,
-            },
-            date:"12/12/2022 18:00",
-            ismark:false,
-            isdraf:true
-        },
-    ];
+ /**
+  * Вывод черновиков пользователя по ID
+  * 
+  * @param mixed id - ID пользователя
+  * @param mixed setPost - react hook для изменения состояния массива публикаций (статей)
+  * @param mixed setLoader - react hook для изменения состояния загрузки
+  */
+export function getDraftsById(id, setPost, setLoader) {
+    axios.get(`https://api.ebene.ru/userDrafts?id=${id}`)
+    .then(function(res) {
+        if (res["data"]["message"] && res["data"]["message"]?.length>0) {
+            setPost( mapArticles(res["data"]["message"]) );
+        } else setPost(null);
 
-    return mapArticles(result);
+        setLoader(false);
+    })
+    .catch(error => {
+        console.log(error);
+        setPost(null);
+        setLoader(false);
+    });
 }
 
  /**
@@ -200,350 +95,114 @@ export function getArticleById(id, localId, setArticle, setLoader, navigate) {
             setLoader(false);
         } else if (res["data"]["message"] === false) navigate('../');
     })
-    .catch(error => { console.log(error); });
+    .catch(error => { 
+        console.log(error);
+        setLoader(false);
+        navigate('../');
+    });
 }
 
- /** Вычисление средней оценки статьи
+ /**
+  * Вывод новых статей, которыйе были опубликованы пользователя, на которых подписан авторизованный пользователь
   * 
-  * @param score массив данных о всех оценках пользователей
-  * @return среднея оценка пользователей
+  * @param mixed localId - ID авыторизованного пользователя
+  * @param mixed setPost - react hook для изменения состояния массива публикаций (статей)
+  * @param mixed setLoader - react hook для изменения состояния загрузки
   */
-export function getScore(score) {
-    let star1 = score?.star1 ?? 0, 
-        star2 = score?.star2 ?? 0, 
-        star3 = score?.star3 ?? 0, 
-        star4 = score?.star4 ?? 0, 
-        star5 = score?.star5 ?? 0;
+export function getNewsByUserId(localId, setPost, setLoader) {
+    axios.get(`${serverPath}/userNews?localId=${localId}`)
+    .then(function(res) {
+        if (res["data"]["message"] && res["data"]["message"]?.length>0) {
+            setPost( mapArticles(res["data"]["message"]) );
+        } else setPost(null);
 
-    if (star1 === 0 &&
-        star2 === 0 &&
-        star3 === 0 &&
-        star4 === 0 &&
-        star5 === 0 ) return 0;
-
-    let s1 = +star1 ? star1 * 1 : 0,
-        s2 = +star2 ? star2 * 2 : 0,
-        s3 = +star3 ? star3 * 3 : 0,
-        s4 = +star4 ? star4 * 4 : 0,
-        s5 = +star5 ? star5 * 5 : 0;
-
-    return ((s1 + s2 + s3+ s4+ s5) / ( star1 + star2 + star3 + star4 + star5 )).toFixed(1);
+        setLoader(false);
+    })
+    .catch(error => { 
+        console.log(error);
+        setLoader(false);
+        setPost(null);
+    });
 }
 
-export function getNewsByUserId(id=0) {
-    console.log(`%caPost: getNewsByUserId(id=${id})`, "background:#066BC6;color:white;padding:1rem;");
+ /**
+  * Вывод новых опубликованных статей на сайте 
+  * 
+  * @param mixed localId - ID авторизованного пользователя
+  * @param mixed setPost - react hook для изменения состояния массива публикаций (статей)
+  * @param mixed setLoader - react hook для изменения состояния загрузки
+  */
+export function getNewArticles(localId, setPost, setLoader) {
+    axios.get(`https://api.ebene.ru/newArticles?localId=${localId}`)
+    .then(function(res) {
+        if (res["data"]["message"] && res["data"]["message"]?.length>0) {
+            setPost( mapArticles(res["data"]["message"]) );
+        } else setPost(null);
 
-    let result = [
-        {
-            id:21, 
-            user: {
-                id:9,
-                name:"Tom",
-            },
-            name:"Pan pizza",
-            img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:false,
-        },
-        {
-            id:22, 
-            user: {
-                id:9,
-                name:"Tom",
-            },
-            name:"Kefir pizza",
-            img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:false,
-        },
-        {
-            id:23, 
-            user: {
-                id:9,
-                name:"Tom",
-            },
-            name:"Berry brownie pizza",
-            img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:false,
-        },
-    ];
-
-    return mapArticles(result);
+        setLoader(false);
+    })
+    .catch(error => {
+        console.log(error);
+        setPost(null);
+        setLoader(false);
+    });
 }
 
-export function getNewArticles() {
-    // console.log(`%caPost: getNewArticles()`, "background:#066BC6;color:white;padding:1rem;");
+ /**
+  * Вывод опубликованных статей для поиска 
+  * 
+  * @param mixed localId - ID авторизованного пользователя
+  * @param mixed setPost - react hook для изменения состояния массива публикаций (статей)
+  * @param mixed setLoader - react hook для изменения состояния загрузки
+  */
+export function getDiscovery(localId, setPost, setLoader) {
+    axios.get(`https://api.ebene.ru/discovery?localId=${localId}`)
+    .then(function(res) {
+        if (res["data"]["message"] && res["data"]["message"]?.length>0) {
+            setPost( mapArticles(res["data"]["message"]) );
+        } else setPost(null);
 
-    let result = [
-        {
-            id:21, 
-            user: {
-                id:9,
-                name:"Tom",
-            },
-            name:"Pan pizza",
-            img:"https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&w=1000&q=80",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:true,
-        },
-        {
-            id:22, 
-            user: {
-                id:9,
-                name:"Tom",
-            },
-            name:"Kefir pizza",
-            img:"https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8&w=1000&q=80",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:true,
-        },
-        {
-            id:23, 
-            user: {
-                id:9,
-                name:"Tom",
-            },
-            name:"Berry brownie pizza",
-            img:"https://weeattogether.com/wp-content/uploads/2018/02/6-Amazing-Food-Photography-Tricks-You-Need-To-Know-Pancakes.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:true,
-        },
-        {
-            id:18, 
-            user: {
-                id:7,
-                name:"WipeCode",
-            },
-            name:"Chicken and pineapple pizza",
-            img:"https://i.pinimg.com/originals/bd/ff/16/bdff16ac26af19f45669e6a137ab5914.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:false,
-        },
-        {
-            id:19, 
-            user: {
-                id:7,
-                name:"WipeCode",
-            },
-            name:"Chicken and pineapple pizza",
-            img:"http://papers.co/wallpaper/papers.co-nu10-food-art-dessert-nature-34-iphone6-plus-wallpaper.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:false,
-        },
-    ];
-
-    return mapArticles(result);
+        setLoader(false);
+    })
+    .catch(error => {
+        console.log(error);
+        setPost(null);
+        setLoader(false);
+    });
 }
 
-export function getDiscovery(localId=0, setPosts, setLoader) {
-    // console.log(`%caPost: getDiscovery(localId=${localId})`, "background:#066BC6;color:white;padding:1rem;");
-
-    let result = [
-        {
-            id:21, 
-            user: {
-                id:9,
-                name:"Tom",
-            },
-            name:"Pan pizza",
-            img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:true,
-        },
-        {
-            id:22, 
-            user: {
-                id:9,
-                name:"Tom",
-            },
-            name:"Kefir pizza",
-            img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:true,
-        },
-        {
-            id:23, 
-            user: {
-                id:9,
-                name:"Tom",
-            },
-            name:"Berry brownie pizza",
-            img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:true,
-        },
-        {
-            id:18, 
-            user: {
-                id:7,
-                name:"WipeCode",
-            },
-            name:"Chicken and pineapple pizza",
-            img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:false,
-        },
-        {
-            id:19, 
-            user: {
-                id:7,
-                name:"WipeCode",
-            },
-            name:"Chicken and pineapple pizza",
-            img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:false,
-        },
-    ];
-
-    result = mapArticles(result);
-
-    setPosts(result);
-    setLoader(false);
-}
-
-export function getFilter(searchText, sordDate, sordPeople, sordTime, sordDifficulty, sordIsMore4, localId=0, setPosts, setLoader) {
+ /**
+  * Фильтрация данных
+  * 
+  * @param mixed searchText - наименование
+  * @param mixed sordDate - свежесть даты редактирования
+  * @param mixed sordTime - время приготовления
+  * @param mixed sordDifficulty - уровень сложности приготовления
+  * @param mixed localId - ID авторизованного пользователя
+  * @param mixed setPost - react hook для изменения состояния массива публикаций (статей)
+  * @param mixed setLoader - react hook для изменения состояния загрузки
+  */
+export function getFilter(searchText, sordDate, sordTime, sordDifficulty, localId, setPost, setLoader) {
     if (sordDate === "none") sordDate = null;
     if (sordTime === "none") sordTime = null;
-    if (sordPeople === "none") sordPeople = null;
     if (sordDifficulty === "none") sordDifficulty = null;
-    // console.log(`%caPost: getFilter(searchText=${searchText}, sordDate=${sordDate}, sordPeople=${sordPeople}, sordTime=${sordTime}, sordDifficulty=${sordDifficulty}, sordIsMore4=${sordIsMore4}, localId=${localId})`, "background:#066BC6;color:white;padding:1rem;");
 
-    let result = [
-        {
-            id:21, 
-            user: {
-                id:9,
-                name:"Tom",
-            },
-            name:"Pan pizza",
-            img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:true,
-        },
-        {
-            id:22, 
-            user: {
-                id:9,
-                name:"Tom",
-            },
-            name:"Kefir pizza",
-            img:"https://mir-s3-cdn-cf.behance.net/project_modules/1400/a83e9e121106883.60bf5311772e8.jpg",
-            score: {
-                star1:0,
-                star2:0,
-                star3:0,
-                star4:0,
-                star5:0,
-            },
-            date:"12/12/2022 18:00",
-            ismark:true,
-        }
-    ];
-
-    result = mapArticles(result);
-
-    setPosts(result);
-    setLoader(false);
+    if (searchText || sordDate || sordTime || sordDifficulty) {
+        axios.get(`https://api.ebene.ru/filter?searchText=${searchText}&sordDate=${sordDate}&sordTime=${sordTime}&sordDifficulty=${sordDifficulty}&localId=${localId}`)
+        .then(function(res) {
+            console.log(res);
+            if (res["data"]["message"] && res["data"]["message"]?.length>0) {
+                setPost( mapArticles(res["data"]["message"]) );
+            } else setPost(null);
+    
+            setLoader(false);
+        })
+        .catch(error => {
+            console.log(error);
+            setPost(null);
+            setLoader(false);
+        });
+    } else getDiscovery(localId, setPost, setLoader);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -591,17 +250,20 @@ export function setIsMark(localId, articleId, idMark, setMark) {
   * @param mixed isPublic - новый статус (true-'public', false-'draft')
   * @param mixed setIsPublic - react hook для изменения публикации в компоненте
   * @param mixed setLoaderPublic - react hook для изменения статуса загрузки в компоненте
+  * @param mixed callback - дополнительная функция, которая будет выполнена после получения ответа с сервера
   */
-export function setStatusArticle(articleId, isPublic, setIsPublic, setLoaderPublic) {
+export function setStatusArticle(articleId, isPublic, setIsPublic, setLoaderPublic, callback=null) {
     axios.post(`${serverPath}/editArticleStatus`, {articleId:articleId, isDraft:isPublic})
     .then(function(res) {
         if (res["data"]["message"]) {
             setIsPublic(!isPublic);
             setLoaderPublic(false);
+            if (callback) callback();
         }
     })
     .catch(error => {
         console.log(error);
+        setLoaderPublic(false);
     });
 }
 
@@ -618,7 +280,10 @@ export function setArticleById(setLoaderEdit, localId, articleId, newArticleArra
         if (res["data"]["message"]) {
             setLoaderEdit(false);
         }
-    }).catch(error => { console.log(error); });
+    }).catch(error => { 
+        console.log(error); 
+        setLoaderEdit(false);
+    });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -663,7 +328,10 @@ export function addNewArticle(setLoader, setArticleId, navigate, img, name, desc
             navigate(`../editor/${res["data"]["message"]}`);
         }
     })
-    .catch(error => { console.log(error); });
+    .catch(error => { 
+        console.log(error); 
+        setLoader(false);
+    });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -678,19 +346,21 @@ export function addNewArticle(setLoader, setArticleId, navigate, img, name, desc
   * @param mixed localId - ID авторизованного пользователя
   * @param mixed setLoaderDelete - react hook для изменения статуса загрузки в компоненте
   * @param mixed setArticles - react hook для изменения выводимых статей в компоненте
+  * @param mixed callback - дополнительная функция, которая будет выполнена после получения ответа с сервера
   */
-export function deleteArticleById(navigate, articleId, localId=null, setLoaderDelete, isEditor=false, setArticles=null) {
+export function deleteArticleById(navigate, articleId, localId=null, setLoaderDelete, isEditor=false, setArticles=null, callback=null) {
     axios.post(`${serverPath}/deleteArticle`, {articleId:articleId})
     .then(function(res) {
         if (res["data"]["message"]) {
             setLoaderDelete(false);
 
-            if (setArticles) {}
-            else navigate(isEditor ? `../` : `../people/${localId}/posts`);
+            if (isEditor) navigate(isEditor ? `../` : `../people/${localId}/posts`);
+            else if (callback) callback();
         }
     })
     .catch(error => {
         console.log(error);
+        setLoaderDelete(false);
     });
 }
 
@@ -706,4 +376,31 @@ function mapArticles(result) {
     });
 
     return result;
+}
+
+ /** Вычисление средней оценки статьи
+  * 
+  * @param score массив данных о всех оценках пользователей
+  * @return среднея оценка пользователей
+  */
+export function getScore(score) {
+    let star1 = score?.star1 ?? 0, 
+        star2 = score?.star2 ?? 0, 
+        star3 = score?.star3 ?? 0, 
+        star4 = score?.star4 ?? 0, 
+        star5 = score?.star5 ?? 0;
+
+    if (star1 === 0 &&
+        star2 === 0 &&
+        star3 === 0 &&
+        star4 === 0 &&
+        star5 === 0 ) return 0;
+
+    let s1 = +star1 ? star1 * 1 : 0,
+        s2 = +star2 ? star2 * 2 : 0,
+        s3 = +star3 ? star3 * 3 : 0,
+        s4 = +star4 ? star4 * 4 : 0,
+        s5 = +star5 ? star5 * 5 : 0;
+
+    return ((s1 + s2 + s3+ s4+ s5) / ( star1 + star2 + star3 + star4 + star5 )).toFixed(1);
 }

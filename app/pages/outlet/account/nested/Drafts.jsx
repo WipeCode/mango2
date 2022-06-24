@@ -11,7 +11,7 @@ import { getDraftsById } from "../../../../api/aPost.jsx";
 
 export default function Drafts() {
     const { id } = useParams();
-    const location = window.location.pathname;
+    const [ location, setLocation ] = useState(window.location.pathname);
 
     const { localId, localRole } = useContext(LocalUserContext);
     const { changePagesMath, IconName, GetIcon, darkTheme } = useContext(AppContext);
@@ -20,14 +20,25 @@ export default function Drafts() {
     const [ content, setContent ] = useState(true);
     const [ loader, setLoader ] = useState(true);
 
+    const callback = () => {
+        setLoader(true);
+        getDraftsById(id, setPost, setLoader);
+    }
+
+    useEffect(
+        () => {
+            setLocation(window.location.pathname);
+        },
+        [ window.location.pathname ]
+    );
+
     useEffect(
         () => {
             if (id!==null) {
-                setPost( getDraftsById(+id) );
-                setLoader(false);
+                getDraftsById(id, setPost, setLoader);
             }
         },
-        [ id ]
+        [ location, id ]
     );
 
     useEffect(
@@ -45,6 +56,7 @@ export default function Drafts() {
                                 changePagesMath={ changePagesMath }
                                 IconName={ IconName }
                                 GetIcon={ GetIcon }
+                                callback={ callback }
                             />
                         </div>
                     );
@@ -52,7 +64,7 @@ export default function Drafts() {
                     setContent(
                         <div className={ noDataStyle.wrap }>
                             <div className={ noDataStyle.content }>
-                                <h1>Articles</h1>
+                                <h1>Drafts</h1>
                                 <p>No data available</p>
                             </div>
                         </div>
