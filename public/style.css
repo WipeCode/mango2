@@ -89,6 +89,8 @@ input:-webkit-autofill:focus {
     -webkit-text-fill-color: whitesmoke;
 }
 
+select option { color:black; }
+
 .active {
     color: #FF5A30 !important;
     mix-blend-mode: normal !important;
