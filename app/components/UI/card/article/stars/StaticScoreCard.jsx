@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 /** Подключение стилей */
 import css from "./css/StaticScoreCard.module.css";
 
-export default function StaticScoreCard({ score=null, people=null, IconName=null, GetIcon=null }) {
+export default function StaticScoreCard({ score=null, people=null, IconName=null, GetIcon=null, ClassName=null }) {
     const [ stars, setStars ] = useState(null);
     const [ thisScore, setThisScore ] = useState(null);
 
@@ -16,7 +16,7 @@ export default function StaticScoreCard({ score=null, people=null, IconName=null
 
     if (thisScore !== null) {
         return (
-            <div className={ css.wrap }>
+            <div className={ [css.wrap, ClassName].join(' ') }>
                 <p className={ css.score }>{ thisScore }</p>
                 <div className={ css.stars }>
                     {

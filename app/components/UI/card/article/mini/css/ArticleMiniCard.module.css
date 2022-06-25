@@ -28,7 +28,7 @@
 }
 
 .wrap.dark {
-  background: #131313;
+  background: #212121;
 }
 
 .wrap.dark .img img {
@@ -148,13 +148,30 @@
   }
 }
 
+@media screen and (max-width: 800px) {
+  .img img:hover {
+    transform: none !important;
+  }
+}
+
 @media screen and (max-width: 450px) {
   .img {
     min-height: 25rem !important;
     max-height: 25rem !important;
   }
-  .img img:hover {
-    transform: none;
+}
+
+@media screen and (max-width: 380px) {
+  .img {
+    min-height: 20rem !important;
+    max-height: 20rem !important;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .img {
+    min-height: 14rem !important;
+    max-height: 14rem !important;
   }
 }
 /*# sourceMappingURL=ArticleMiniCard.module.css.map */

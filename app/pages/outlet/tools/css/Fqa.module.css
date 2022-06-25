@@ -14,7 +14,7 @@
 }
 
 .wrap.dark .accordion .item .text p {
-  color: gray;
+  color: whitesmoke;
 }
 
 .wrap.light .accordion {
@@ -105,13 +105,14 @@
 }
 
 .wrap .accordion .item button .title {
-  color: #f4f4f4;
+  color: lightgrey;
   mix-blend-mode: difference;
   font-size: 1rem;
   font-weight: bold;
   text-align: left;
   line-height: 1.3rem;
   letter-spacing: .15rem;
+  transition: .3s ease-in-out;
 }
 
 .wrap .accordion .item button .icon svg {
@@ -121,6 +122,10 @@
   transition: .2s linear;
   transform: rotate(-90deg);
   filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
+}
+
+.wrap .accordion .item button:hover .title {
+  color: #FF4B2B;
 }
 
 .wrap .accordion .item button[aria-expanded='true'] .title {
@@ -162,7 +167,6 @@
   word-break: keep-all;
   word-spacing: normal;
   font-size: 1rem;
-  font-weight: bold;
   text-align: left;
   line-height: 1.5rem;
   letter-spacing: .15rem;

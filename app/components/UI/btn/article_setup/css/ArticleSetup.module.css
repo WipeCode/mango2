@@ -118,6 +118,10 @@
   color: gray;
 }
 
+.wrap .container .setup ul li button.delete {
+  mix-blend-mode: normal;
+}
+
 .wrap .container .setup ul li:last-child button {
   color: tomato;
 }
@@ -133,7 +137,7 @@
   mix-blend-mode: difference;
   font-size: 1rem;
   letter-spacing: .15rem;
-  transition: .2s ease-in;
+  transition: .2s ease-in-out;
 }
 
 .wrap .container .setup ul li a.disabled {
@@ -147,7 +151,6 @@
 
 .wrap .container .setup ul li:hover button, .wrap .container .setup ul li:hover a {
   font-weight: bolder;
-  mix-blend-mode: normal;
 }
 
 @keyframes markLoader {

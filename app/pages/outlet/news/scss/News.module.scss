@@ -16,3 +16,9 @@
         opacity: 1; 
     }
 }
+
+@media screen and (max-width:350px) {
+    .wrap {
+        padding: .5rem !important;
+    }
+}

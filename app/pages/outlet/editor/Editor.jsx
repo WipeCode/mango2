@@ -372,7 +372,6 @@ function GetSteps({ steps, deleteStep, changeStep }) {
  */
 function onChangeStatusArticle(setLoaderPublic, id, isdraf, setIsPublic) {
     setLoaderPublic(true);
-    console.log("isdraf", isdraf);
     setStatusArticle(id, isdraf, setIsPublic, setLoaderPublic);
 }
 

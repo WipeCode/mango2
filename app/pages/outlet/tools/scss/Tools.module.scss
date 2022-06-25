@@ -1,6 +1,6 @@
 $border:rgb(49, 49, 49);
 $text_color:#f4f4f4;
-$darkBackground:#1a1a1e;
+$darkBackground:#212121;
 $lightBackground:#ffffff;
 
 @keyframes opacitytransform {
@@ -52,6 +52,7 @@ $lightBackground:#ffffff;
 
             color: $text_color;
             mix-blend-mode: difference;
+            letter-spacing: .15rem;
 
             svg { filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%); }
         }
@@ -75,6 +76,7 @@ $lightBackground:#ffffff;
             color: gray;
             font-size: 1rem;
             font-weight: bolder;
+            letter-spacing: .15rem;
 
             border: none;
             outline: none;
@@ -90,14 +92,15 @@ $lightBackground:#ffffff;
         }
     }
 
-    button { border-top: .1rem solid $border; }
+    button { 
+        border-top: .1rem solid $border; 
+    }
 
     .links a,
     button {
         padding: .5rem !important;
 
         font-size: 1.1rem;
-        font-weight: bold;
         letter-spacing: .15rem;
     }
 

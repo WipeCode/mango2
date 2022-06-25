@@ -22,7 +22,8 @@ export default function AppRouter() {
     /** Описание локального пользователя */
     const [ localDescription, setLocalDescription ] = useState(null);
     /** Является ли локального пользователь авторизованным */
-    const [ localIsAuth, setLocalIsAuth ] = useState(null); 
+    const [ localIsAuth, setLocalIsAuth ] = useState(null);
+    const [ localAvatar, setLocalAvatar] = useState(null);
 
     /** Наименование открытой страницы */
     const [ pageTitle, setPageTitle ] = useState(null);
@@ -82,6 +83,7 @@ export default function AppRouter() {
                 localEmail, setLocalEmail,
                 localDescription, setLocalDescription,
                 localIsAuth, setLocalIsAuth,
+                localAvatar, setLocalAvatar,
             }}>
                 <Router history={ history }>
                     <UserRouter isDesktop={ isDesktop } localId={ localId }/>

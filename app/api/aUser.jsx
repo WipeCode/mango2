@@ -27,6 +27,7 @@ export function isAdmin(role=0) { return +role === 9; }
 export function getUserById(id=0, localId=0, setUser, navigate, setLoader) {
     axios.get(`https://api.ebene.ru/user?id=${id}&localId=${localId}`)
     .then(function(res) {
+        // console.log(res);
         if (res["data"]["message"]) {
             if (res["data"]["message"]["score"]) res["data"]["message"]["score"] = getScore();
             else res["data"]["message"]["score"] = 0;
@@ -51,7 +52,7 @@ export function getUserById(id=0, localId=0, setUser, navigate, setLoader) {
   * @param mixed setUsers - react hook для изменения состояния пользователей (подписок) компонента
   * @param mixed setLoader - react hook для изменения состояния загрузки компонента
   */
-export function getUserFollowingById(id=0, localId=0, setUsers, setLoader) {
+export function getUserFollowingById(id, localId, setUsers, setLoader) {
     axios.get(`https://api.ebene.ru/followings?id=${id}&localId=${localId}`)
     .then(function(res) {
         if (res["data"]["message"]) {

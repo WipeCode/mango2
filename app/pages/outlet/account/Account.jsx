@@ -13,7 +13,7 @@ import { getUserById, getUserFollowingById, getUserFollowersById } from "../../.
 
 export default function Account() {
     const { id } = useParams();
-    const { localId } = useContext(LocalUserContext);
+    const { localId, localAvatar } = useContext(LocalUserContext);
     const { setPageTitle, isDesktop, changePagesMath, IconName, GetIcon, darkTheme } = useContext(AppContext);
 
     const [ content, setContent ] = useState(null);
@@ -40,7 +40,7 @@ export default function Account() {
                 getUserById(+id, +localId, setUser, navigate, setLoader);
             }
         },
-        [ location, id, localId ]
+        [ location, id, localId, localAvatar ]
     );
 
     useEffect(
@@ -117,7 +117,7 @@ export default function Account() {
                 );
             }
         },
-        [loader, isDesktop, darkTheme, isClickFollow]
+        [loader, user, isDesktop, darkTheme, isClickFollow]
     )
 
     return content;

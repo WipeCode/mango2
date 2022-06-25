@@ -11,7 +11,7 @@ import BackBtn from "../btn/back/BackBtn.jsx";
 
 export default function TopNav() {
     const navigate = useNavigate();
-    const { setLocalIsAuth, localIsAuth, setLocalId, localId } = useContext( LocalUserContext );
+    const { setLocalIsAuth, localIsAuth, localAvatar, setLocalId, localId } = useContext( LocalUserContext );
     const { isDesktop, IconName, GetIcon, setPagesMath, darkTheme, setDarkTheme, onChangeTheme } = useContext( AppContext );
 
     const [ thisDesktop, setThisDesktop ] = useState(null);
@@ -80,7 +80,7 @@ export default function TopNav() {
                 );
             }
         },
-        [ thisDesktop, path ]
+        [ localAvatar, thisDesktop, path ]
     );
 
     if (navigation) {

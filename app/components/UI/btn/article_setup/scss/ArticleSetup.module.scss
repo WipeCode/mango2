@@ -123,6 +123,8 @@ $lightBackground:#ffffff;
                         background-color: transparent;
 
                         &:disabled { color: gray; }
+
+                        &.delete { mix-blend-mode: normal; }
                     }
 
                     &:last-child button { 
@@ -138,7 +140,7 @@ $lightBackground:#ffffff;
                         mix-blend-mode: difference;
                         font-size: 1rem;
                         letter-spacing: .15rem;
-                        transition: .2s ease-in;
+                        transition: .2s ease-in-out;
 
                         &.disabled {
                             color: gray;
@@ -151,7 +153,7 @@ $lightBackground:#ffffff;
 
                         button, a {
                             font-weight: bolder;
-                            mix-blend-mode: normal;
+                            // mix-blend-mode: normal;
                         }
                     }
                 }

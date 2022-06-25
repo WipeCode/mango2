@@ -8,7 +8,6 @@
   height: fit-content;
   position: relative;
   align-items: center;
-  margin-top: 1rem !important;
 }
 
 .wrap .score,
@@ -16,9 +15,10 @@
   width: fit-content;
   height: fit-content;
   position: relative;
-  color: #4b4b4b;
+  color: gray;
   font-size: 1rem;
   font-family: sans-serif;
+  letter-spacing: .1rem;
 }
 
 .wrap .stars {

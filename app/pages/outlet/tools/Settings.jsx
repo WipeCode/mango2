@@ -9,7 +9,7 @@ import toBase64 from "../../../components/toBase64.jsx";
 import { setUserBasicDataById, setUserPasswordById } from "../../../api/aUser.jsx";
 
 export default function Settings() {
-    const { localId, localName, localEmail, localDescription, setLocalDescription, setLocalName, setLocalEmail } = useContext(LocalUserContext); 
+    const { localId, localName, localEmail, localDescription, localAvatar, setLocalAvatar, setLocalDescription, setLocalName, setLocalEmail } = useContext(LocalUserContext); 
     const { setPageTitle, darkTheme } = useContext(AppContext);
     
     const [ content, setContent ] = useState(null);
@@ -64,11 +64,18 @@ export default function Settings() {
 
     useEffect(
         () => {
+            setLocalAvatar(!localAvatar);
+        },
+        [ avatar ]
+    );
+
+    useEffect(
+        () => {
             if (localName !== name) setName(localName);
             if (localEmail !== email) setEmail(localEmail);
             if (localDescription !== description) setDescription(localDescription);
         },
-        [localId, localName, localEmail, localDescription]
+        [ localId, localName, localEmail, localDescription ]
     );
 
     useEffect(

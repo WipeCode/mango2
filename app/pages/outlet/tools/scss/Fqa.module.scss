@@ -20,7 +20,7 @@ $lightBackground:#ffffff;
     &.dark {
         .accordion { 
             background-color: $darkBackground; 
-            .item .text p { color: gray; }
+            .item .text p { color: whitesmoke; }
         }
     }
 
@@ -118,13 +118,14 @@ $lightBackground:#ffffff;
                 background: transparent;
                 
                 .title {
-                    color: $text_color;
+                    color: lightgrey;
                     mix-blend-mode: difference;
                     font-size: 1rem;
                     font-weight: bold;
                     text-align: left;
                     line-height: 1.3rem;
                     letter-spacing: .15rem;
+                    transition: .3s ease-in-out;
                 }
 
                 .icon {
@@ -138,6 +139,8 @@ $lightBackground:#ffffff;
                         filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(2631%) hue-rotate(314deg) brightness(107%) contrast(82%);
                     }
                 }
+
+                &:hover .title { color: $orange; }
             }
 
             button[aria-expanded='true'] {
@@ -184,7 +187,6 @@ $lightBackground:#ffffff;
                     word-spacing: normal;
                     
                     font-size: 1rem;
-                    font-weight: bold;
                     
                     text-align: left;
                     line-height: 1.5rem;

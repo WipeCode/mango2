@@ -20,7 +20,7 @@
 }
 
 .wrap.dark .extra .theme {
-  background-color: #1a1a1e;
+  background-color: #212121;
 }
 
 .wrap.dark .extra .theme option {
@@ -48,6 +48,7 @@
   align-items: center;
   color: #f4f4f4;
   mix-blend-mode: difference;
+  letter-spacing: .15rem;
 }
 
 .wrap .links a svg {
@@ -71,6 +72,7 @@
   color: gray;
   font-size: 1rem;
   font-weight: bolder;
+  letter-spacing: .15rem;
   border: none;
   outline: none;
   border-radius: .3rem;
@@ -92,7 +94,6 @@
 .wrap button {
   padding: .5rem !important;
   font-size: 1.1rem;
-  font-weight: bold;
   letter-spacing: .15rem;
 }
 
