@@ -17,7 +17,7 @@ export default function Layout() {
     useEffect(
         () => {
             if (darkTheme===null) {
-                let theme = getLocalStorage(['theme'])[0] ?? window.matchMedia("(prefers-color-scheme: dark)").matches;
+                let theme = getLocalStorage(['theme'])[0];
                 
                 if (theme===null || theme==="true" || theme===true) setDarkTheme(true);
                 else setDarkTheme(false);

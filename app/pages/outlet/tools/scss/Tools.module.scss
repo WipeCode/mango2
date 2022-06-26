@@ -26,15 +26,19 @@ $lightBackground:#ffffff;
 
     &.dark {
         .extra .theme { 
-            background-color: $darkBackground; 
-            option { color: $text_color; }
+            &, option {
+                color: $text_color;
+                background-color: $darkBackground;  
+            }
         }
     }
 
     &.light {
         .extra .theme { 
-            background-color: $lightBackground;
-            option { color: black; }
+            &, option {
+                color: black;
+                background-color: $lightBackground;  
+            }
         }
     }
 
@@ -68,25 +72,6 @@ $lightBackground:#ffffff;
 
         .theme {
             width: 100%;
-            height: max-content;
-            padding: .5rem !important;
-            margin-right: 1rem !important;
-
-            color: gray;
-            font-size: 1rem;
-            font-weight: bolder;
-
-            border: none;
-            outline: none;
-            border-radius: .3rem;
-            border: .1rem solid $border;
-
-            option {
-                color: $text_color;
-                mix-blend-mode: difference;
-                font-size: 1rem;
-                font-weight: bolder;
-            }
         }
     }
 

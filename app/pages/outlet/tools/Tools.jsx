@@ -6,6 +6,7 @@ import css from "./css/Tools.module.css";
 import { AppContext, LocalUserContext } from "../../../context/Context.jsx";
 import { getPathByTools } from "../../../router/AppPathConst.jsx";
 import LogOutBtn from "../../../components/UI/btn/logout/LogOutBtn.jsx";
+import Theme from "../../../components/UI/btn/theme/Theme.jsx";
 
 export default function Tools() {
     const [ content, setContent ] = useState(null);
@@ -37,20 +38,7 @@ export default function Tools() {
                         </div>
 
                         <div className={ css.extra }>
-                            <select 
-                                name="theme" 
-                                id="theme" 
-                                className={ css.theme }
-                                defaultValue={ darkTheme ? "dark" : "light" }
-                                onChange={ (e) => {
-                                    let flag = e.target.value==="dark";
-                                    setDarkTheme(flag);
-                                    onChangeTheme(flag);
-                                } }
-                            >
-                                <option value="dark">Dark theme</option>
-                                <option value="light">Light theme</option>
-                            </select>
+                            <Theme className={ css.theme }/>
                         </div>
         
                         { 

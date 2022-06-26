@@ -220,11 +220,6 @@ export function singIn(email, password, setLoader, setThisLocalId, setThisLocalR
     axios.post(`https://api.ebene.ru/singin`, {email:email, password:password})
     .then(function(res) {
         if (res?.data?.message) {
-            if (!res["data"]["message"]["img"]) {
-                res["data"]["message"]["img"] = res["data"]["message"]["img"] 
-                                                ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiCoHLktPNbzYjYcrFoYnlmxX5SfRKCIJQsA&usqp=CAU";
-            }
-
             setThisLocalId(res["data"]["message"]["id"]);
             setThisLocalRole(res["data"]["message"]["role"]);
             setThisLocalName(res["data"]["message"]["name"]);

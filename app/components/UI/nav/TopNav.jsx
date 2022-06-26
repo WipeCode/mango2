@@ -8,6 +8,7 @@ import { AppContext, LocalUserContext } from "../../../context/Context.jsx";
 /** Подключение UI компонентов */
 import LogOutBtn from "../btn/logout/LogOutBtn.jsx";
 import BackBtn from "../btn/back/BackBtn.jsx";
+import Theme from "../btn/theme/Theme.jsx";
 
 export default function TopNav() {
     const navigate = useNavigate();
@@ -114,20 +115,7 @@ function Desktop({ onClickLink, path, thisAuth, setLocalIsAuth, localId, setLoca
             </nav>
 
             <div className={ css.account }>
-                <select 
-                    name="theme" 
-                    id="theme" 
-                    className={ css.theme }
-                    defaultValue={ darkTheme ? "dark" : "light" }
-                    onChange={ (e) => {
-                        let flag = e.target.value==="dark";
-                        setDarkTheme(flag);
-                        onChangeTheme(flag);
-                    } }
-                >
-                    <option value="dark">Dark theme</option>
-                    <option value="light">Light theme</option>
-                </select>
+                <Theme className={ css.theme }/>
 
                 <div className={ css.user }>
                     {

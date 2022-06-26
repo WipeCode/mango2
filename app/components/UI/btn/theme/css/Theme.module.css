@@ -1,0 +1,30 @@
+.wrap {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: .5rem !important;
+  position: relative;
+  color: #f4f4f4;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .15rem;
+  border: none;
+  outline: none;
+  border-radius: .3rem;
+  border: 0.1rem solid #414141;
+  background-color: #0F0F0F;
+}
+
+.wrap option {
+  width: 100%;
+  position: relative;
+  color: #f4f4f4;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: .15rem;
+  background-color: #0F0F0F;
+}
+/*# sourceMappingURL=Theme.module.css.map */

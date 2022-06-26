@@ -36,7 +36,7 @@ export default function Articles() {
             if (!loader) {
                 if (newArticles) {
                     setContent(
-                        <div className={ css.wrap }>
+                        <div className={ [css.wrap, darkTheme ? css.dark : css.light].join(" ") }>
                             <h1 className={ css.header }>New articles</h1>
                             <ArticleCardsWrap
                                 darkTheme={ darkTheme }

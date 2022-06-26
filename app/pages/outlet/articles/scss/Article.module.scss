@@ -15,13 +15,24 @@ $darkBackground: #080808;
     flex-direction: column;
 
     animation: opacitytransform .3s ease-in-out;
+    
+    &.dark {
+        .header {
+            color: $text_color;
+        }
+    }
+
+    &.light {
+        .header {
+            color: black;
+        }
+    }
 
     .header {
         width: 100%;
         margin: .5rem 0 1.5rem 0 !important;
         
         color: $text_color;
-        mix-blend-mode: difference;
         font-size: 2rem;
         text-align: center;
         letter-spacing: .15rem;
