@@ -17,8 +17,8 @@
   height: fit-content;
   position: relative;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin-top: 1rem !important;
 }
 
@@ -31,9 +31,10 @@
   height: -moz-fit-content;
   height: fit-content;
   position: relative;
-  color: #4b4b4b;
+  color: gray;
   font-size: 1rem;
   font-family: sans-serif;
+  letter-spacing: .1rem;
 }
 
 .wrap .stars {

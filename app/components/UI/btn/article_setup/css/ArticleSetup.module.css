@@ -164,6 +164,10 @@
   color: gray;
 }
 
+.wrap .container .setup ul li button.delete {
+  mix-blend-mode: normal;
+}
+
 .wrap .container .setup ul li:last-child button {
   color: tomato;
 }
@@ -179,8 +183,12 @@
   mix-blend-mode: difference;
   font-size: 1rem;
   letter-spacing: .15rem;
+<<<<<<< HEAD
   -webkit-transition: .2s ease-in;
   transition: .2s ease-in;
+=======
+  transition: .2s ease-in-out;
+>>>>>>> 42521ac0a432fcd8bd9e574de1b21e9b87e68f46
 }
 
 .wrap .container .setup ul li a.disabled {
@@ -194,7 +202,6 @@
 
 .wrap .container .setup ul li:hover button, .wrap .container .setup ul li:hover a {
   font-weight: bolder;
-  mix-blend-mode: normal;
 }
 
 @-webkit-keyframes markLoader {

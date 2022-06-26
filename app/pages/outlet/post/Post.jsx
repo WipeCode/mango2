@@ -164,7 +164,7 @@ function Header({ darkTheme, localId, localRole, article, IconName, GetIcon }) {
                     <img src={ `https://api.ebene.ru/articleImg?articleId=${article?.articleId}` } alt="food"/>
                 </div>
     
-                <div className={ [css.info, localId?css.topSetup:null].join(" ") }>
+                <div className={ [css.info, localId ? css.topSetup : null].join(" ") }>
                     <p className={ [css.title, localId ? css.top : null].join(" ") }>{ article?.name }</p>
                     
                     <StaticScoreCard 
@@ -172,6 +172,7 @@ function Header({ darkTheme, localId, localRole, article, IconName, GetIcon }) {
                         people={ article?.people } 
                         IconName={ IconName } 
                         GetIcon={ GetIcon }
+                        ClassName={ css.stars }
                     />
                     
                     <p className={ css.description }>{ article?.description }</p>

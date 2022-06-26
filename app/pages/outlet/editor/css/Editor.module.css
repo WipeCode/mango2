@@ -31,13 +31,22 @@
 }
 
 .wrap.dark .form,
-.wrap.dark .form .difficulty select {
-  background: #0F0F0F;
+.wrap.dark .form .difficulty select,
+.wrap.dark .form select option {
+  background: #212121;
+}
+
+.wrap.dark .form select option {
+  color: whitesmoke;
 }
 
 .wrap.light .form,
 .wrap.light .form .difficulty select {
   background: #ffffff;
+}
+
+.wrap.light .form select option {
+  color: black;
 }
 
 .wrap fieldset {
@@ -123,8 +132,7 @@
   margin-top: 1rem;
   color: gray;
   font-size: 1rem;
-  font-weight: bold;
-  letter-spacing: .1rem;
+  letter-spacing: .15rem;
 }
 
 .wrap .difficulty select {
@@ -132,15 +140,14 @@
   padding: .5rem !important;
   border-radius: .3rem;
   border: 0.1rem solid gray;
-  color: gray;
+  color: whitesmoke;
   font-size: 1rem;
-  font-weight: bold;
-  letter-spacing: .1rem;
+  letter-spacing: .15rem;
+  mix-blend-mode: normal;
 }
 
 .wrap .difficulty select option {
   font-size: 1rem;
-  font-weight: bold;
   letter-spacing: .15rem;
 }
 
@@ -229,7 +236,7 @@
   color: #f4f4f4;
   mix-blend-mode: difference;
   font-size: 1rem;
-  letter-spacing: .1rem;
+  letter-spacing: .15rem;
 }
 
 .wrap .item .input input:invalid:not(:placeholder-shown) {
@@ -259,9 +266,9 @@
   margin-left: .5rem !important;
   color: gray;
   font-size: 1rem;
-  font-weight: bold;
   font-style: normal;
-  letter-spacing: .1rem;
+  font-weight: bold;
+  letter-spacing: .15rem;
 }
 
 .wrap .item textarea {

@@ -77,9 +77,10 @@
   mix-blend-mode: difference;
   font-size: 1rem;
   font-weight: bolder;
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
+  letter-spacing: .1rem;
 }
 
 .wrap .container .button {

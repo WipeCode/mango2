@@ -4,7 +4,7 @@ $shadow:rgba(0, 0, 0, 0.5);
 $orange: #FF4B29;
 
 $text_color:#f4f4f4;
-$darkBackground:#0F0F0F;
+$darkBackground:#212121;
 $lightBackground:#ffffff;
 
 %flex-row {
@@ -34,12 +34,17 @@ $lightBackground:#ffffff;
 
     &.dark {
         .form,
-        .form .difficulty select { background: $darkBackground; }
+        .form .difficulty select,
+        .form select option { background: $darkBackground; }
+
+        .form select option { color: whitesmoke; }
     }
 
     &.light {
         .form,
         .form .difficulty select { background: $lightBackground; }
+        
+        .form select option { color: black; }
     }
 
     fieldset { border: none; }
@@ -95,8 +100,7 @@ $lightBackground:#ffffff;
 
         color: gray;
         font-size: 1rem;
-        font-weight: bold;
-        letter-spacing: .1rem;
+        letter-spacing: .15rem;
 
         select {
             margin-left: 1rem !important;
@@ -105,14 +109,13 @@ $lightBackground:#ffffff;
             border-radius: .3rem;
             border: .1rem solid $border;
 
-            color: gray;
+            color: whitesmoke;
             font-size: 1rem;
-            font-weight: bold;
-            letter-spacing: .1rem;
+            letter-spacing: .15rem;
+            mix-blend-mode: normal;
 
             option {
                 font-size: 1rem;
-                font-weight: bold;
                 letter-spacing: .15rem;
             }
         }
@@ -191,7 +194,7 @@ $lightBackground:#ffffff;
                 color: $text_color;
                 mix-blend-mode: difference;
                 font-size: 1rem;
-                letter-spacing: .1rem;
+                letter-spacing: .15rem;
 
                 &:invalid:not(:placeholder-shown) { outline-color: $orange; }
                 &:invalid:not(:placeholder-shown) ~ span i { color: $orange; }
@@ -212,9 +215,9 @@ $lightBackground:#ffffff;
 
                 color: gray;
                 font-size: 1rem;
-                font-weight: bold;
                 font-style: normal;
-                letter-spacing: .1rem;
+                font-weight: bold;
+                letter-spacing: .15rem;
             }
         }
 

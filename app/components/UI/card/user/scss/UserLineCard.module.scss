@@ -66,11 +66,14 @@ $lightBackground:#ffffff;
 
                 color: $text_color;
                 mix-blend-mode: difference;
+
                 font-size: 1rem;
                 font-weight: bolder;
+
+                overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
-                overflow: hidden;
+                letter-spacing: .1rem;
             }
         }
 

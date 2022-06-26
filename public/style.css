@@ -89,6 +89,17 @@ input:-webkit-autofill:focus {
     -webkit-text-fill-color: whitesmoke;
 }
 
+<<<<<<< HEAD
+input {
+    -webkit-user-select: text; /* Chrome, Opera, Safari */
+    -moz-user-select: text; /* Firefox 2+ */
+    -ms-user-select: text; /* IE 10+ */
+    user-select: text; /* Standard syntax */
+}
+=======
+select option { color:black; }
+>>>>>>> 67a166dede95846f6b86797075d314ef7d3df87c
+
 .active {
     color: #FF5A30 !important;
     mix-blend-mode: normal !important;

@@ -90,8 +90,8 @@ export default function ArticleSetup({ darkTheme, localId, localRole, creatorId,
                                         }
 
                                         <li>
-                                            {(loaderPublic===false && loaderDelete===false) && <button onClick={ () => onDelete() }>Delete</button>}
-                                            {loaderPublic===true && <button disabled>Delete</button>}
+                                            {(loaderPublic===false && loaderDelete===false) && <button className={ css.delete } onClick={ () => onDelete() }>Delete</button>}
+                                            {loaderPublic===true && <button className={ css.delete } disabled>Delete</button>}
                                             {loaderDelete===true && <button className={ css.loader } disabled>Delete</button>}
                                         </li>
                                     </ul>
